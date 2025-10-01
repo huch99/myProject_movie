@@ -32,3 +32,162 @@
 2025-10-01T09:40:08.790+09:00  INFO 3884 --- [mysite] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
 2025-10-01T09:40:08.810+09:00  INFO 3884 --- [mysite] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
 2025-10-01T09:40:08.816+09:00  INFO 3884 --- [mysite] [restartedMain] com.moviesite.mysite.MysiteApplication   : Started MysiteApplication in 3.833 seconds (process running for 4.142)
+2025-10-01T15:30:04.343+09:00  INFO 4636 --- [mysite] [restartedMain] com.moviesite.mysite.MysiteApplication   : Starting MysiteApplication using Java 21.0.8 with PID 4636 (D:\my-project\myProject_movie\mysite\bin\main started by YONSAI in D:\my-project\myProject_movie\mysite)
+2025-10-01T15:30:04.345+09:00  INFO 4636 --- [mysite] [restartedMain] com.moviesite.mysite.MysiteApplication   : No active profile set, falling back to 1 default profile: "default"
+2025-10-01T15:30:04.375+09:00  INFO 4636 --- [mysite] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-10-01T15:30:04.375+09:00  INFO 4636 --- [mysite] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-10-01T15:30:04.970+09:00  INFO 4636 --- [mysite] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-10-01T15:30:05.034+09:00  INFO 4636 --- [mysite] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 58 ms. Found 14 JPA repository interfaces.
+2025-10-01T15:30:05.538+09:00  INFO 4636 --- [mysite] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-10-01T15:30:05.550+09:00  INFO 4636 --- [mysite] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-10-01T15:30:05.550+09:00  INFO 4636 --- [mysite] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.46]
+2025-10-01T15:30:05.589+09:00  INFO 4636 --- [mysite] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-10-01T15:30:05.589+09:00  INFO 4636 --- [mysite] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1214 ms
+2025-10-01T15:30:05.718+09:00  INFO 4636 --- [mysite] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-10-01T15:30:05.753+09:00  INFO 4636 --- [mysite] [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.29.Final
+2025-10-01T15:30:05.778+09:00  INFO 4636 --- [mysite] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-10-01T15:30:05.973+09:00  INFO 4636 --- [mysite] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-10-01T15:30:05.993+09:00  INFO 4636 --- [mysite] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-10-01T15:30:06.058+09:00  INFO 4636 --- [mysite] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.mariadb.jdbc.Connection@161b4ee1
+2025-10-01T15:30:06.060+09:00  INFO 4636 --- [mysite] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-10-01T15:30:06.078+09:00  WARN 4636 --- [mysite] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: MariaDBDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-10-01T15:30:06.090+09:00  INFO 4636 --- [mysite] [restartedMain] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 11.4.8
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-10-01T15:30:06.776+09:00  INFO 4636 --- [mysite] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-10-01T15:30:06.824+09:00  INFO 4636 --- [mysite] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-10-01T15:30:07.287+09:00  WARN 4636 --- [mysite] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-10-01T15:30:07.456+09:00  INFO 4636 --- [mysite] [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name customUserDetailsService
+2025-10-01T15:30:07.764+09:00  INFO 4636 --- [mysite] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-10-01T15:30:07.789+09:00  INFO 4636 --- [mysite] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-10-01T15:30:07.795+09:00  INFO 4636 --- [mysite] [restartedMain] com.moviesite.mysite.MysiteApplication   : Started MysiteApplication in 3.761 seconds (process running for 4.098)
+2025-10-01T15:32:07.282+09:00  INFO 4636 --- [mysite] [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+2025-10-01T15:32:07.285+09:00  INFO 4636 --- [mysite] [Thread-5] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-10-01T15:32:07.288+09:00  INFO 4636 --- [mysite] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-10-01T15:32:07.291+09:00  INFO 4636 --- [mysite] [Thread-5] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-10-01T15:32:07.293+09:00  INFO 4636 --- [mysite] [Thread-5] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-10-01T15:32:07.295+09:00  INFO 4636 --- [mysite] [Thread-5] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2025-10-01T15:32:07.368+09:00  INFO 4636 --- [mysite] [restartedMain] com.moviesite.mysite.MysiteApplication   : Starting MysiteApplication using Java 21.0.8 with PID 4636 (D:\my-project\myProject_movie\mysite\bin\main started by YONSAI in D:\my-project\myProject_movie\mysite)
+2025-10-01T15:32:07.369+09:00  INFO 4636 --- [mysite] [restartedMain] com.moviesite.mysite.MysiteApplication   : No active profile set, falling back to 1 default profile: "default"
+2025-10-01T15:32:07.578+09:00  INFO 4636 --- [mysite] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-10-01T15:32:07.598+09:00  INFO 5872 --- [mysite] [restartedMain] com.moviesite.mysite.MysiteApplication   : Starting MysiteApplication using Java 21.0.8 with PID 5872 (D:\my-project\myProject_movie\mysite\bin\main started by YONSAI in D:\my-project\myProject_movie\mysite)
+2025-10-01T15:32:07.601+09:00  INFO 5872 --- [mysite] [restartedMain] com.moviesite.mysite.MysiteApplication   : No active profile set, falling back to 1 default profile: "default"
+2025-10-01T15:32:07.612+09:00  INFO 4636 --- [mysite] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 32 ms. Found 14 JPA repository interfaces.
+2025-10-01T15:32:07.639+09:00  INFO 5872 --- [mysite] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-10-01T15:32:07.639+09:00  INFO 5872 --- [mysite] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-10-01T15:32:07.710+09:00  INFO 4636 --- [mysite] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-10-01T15:32:07.711+09:00  INFO 4636 --- [mysite] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-10-01T15:32:07.711+09:00  INFO 4636 --- [mysite] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.46]
+2025-10-01T15:32:07.739+09:00  INFO 4636 --- [mysite] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-10-01T15:32:07.739+09:00  INFO 4636 --- [mysite] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 369 ms
+2025-10-01T15:32:07.775+09:00  INFO 4636 --- [mysite] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-10-01T15:32:07.778+09:00  INFO 4636 --- [mysite] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-10-01T15:32:07.784+09:00  INFO 4636 --- [mysite] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-10-01T15:32:07.785+09:00  INFO 4636 --- [mysite] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Starting...
+2025-10-01T15:32:07.788+09:00  INFO 4636 --- [mysite] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-2 - Added connection org.mariadb.jdbc.Connection@575b90a3
+2025-10-01T15:32:07.789+09:00  INFO 4636 --- [mysite] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Start completed.
+2025-10-01T15:32:07.790+09:00  WARN 4636 --- [mysite] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: MariaDBDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-10-01T15:32:07.790+09:00  INFO 4636 --- [mysite] [restartedMain] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-2)']
+	Database driver: undefined/unknown
+	Database version: 11.4.8
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-10-01T15:32:07.985+09:00  INFO 4636 --- [mysite] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-10-01T15:32:08.007+09:00  INFO 4636 --- [mysite] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-10-01T15:32:08.188+09:00  WARN 4636 --- [mysite] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-10-01T15:32:08.245+09:00  INFO 4636 --- [mysite] [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name customUserDetailsService
+2025-10-01T15:32:08.391+09:00  INFO 4636 --- [mysite] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-10-01T15:32:08.396+09:00  INFO 5872 --- [mysite] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-10-01T15:32:08.400+09:00  INFO 4636 --- [mysite] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-10-01T15:32:08.404+09:00  INFO 4636 --- [mysite] [restartedMain] com.moviesite.mysite.MysiteApplication   : Started MysiteApplication in 1.055 seconds (process running for 124.706)
+2025-10-01T15:32:08.405+09:00  INFO 4636 --- [mysite] [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2025-10-01T15:32:08.471+09:00  INFO 5872 --- [mysite] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 68 ms. Found 14 JPA repository interfaces.
+2025-10-01T15:32:08.975+09:00  INFO 5872 --- [mysite] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-10-01T15:32:08.987+09:00  INFO 5872 --- [mysite] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-10-01T15:32:08.987+09:00  INFO 5872 --- [mysite] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.46]
+2025-10-01T15:32:09.024+09:00  INFO 5872 --- [mysite] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-10-01T15:32:09.024+09:00  INFO 5872 --- [mysite] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1385 ms
+2025-10-01T15:32:09.151+09:00  INFO 5872 --- [mysite] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-10-01T15:32:09.186+09:00  INFO 5872 --- [mysite] [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.29.Final
+2025-10-01T15:32:09.206+09:00  INFO 5872 --- [mysite] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-10-01T15:32:09.391+09:00  INFO 5872 --- [mysite] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-10-01T15:32:09.411+09:00  INFO 5872 --- [mysite] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-10-01T15:32:09.474+09:00  INFO 5872 --- [mysite] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.mariadb.jdbc.Connection@453f80ae
+2025-10-01T15:32:09.475+09:00  INFO 5872 --- [mysite] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-10-01T15:32:09.494+09:00  WARN 5872 --- [mysite] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: MariaDBDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-10-01T15:32:09.505+09:00  INFO 5872 --- [mysite] [restartedMain] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 11.4.8
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-10-01T15:32:10.186+09:00  INFO 5872 --- [mysite] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-10-01T15:32:10.235+09:00  INFO 5872 --- [mysite] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-10-01T15:32:10.658+09:00  WARN 5872 --- [mysite] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-10-01T15:32:10.832+09:00  INFO 5872 --- [mysite] [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name customUserDetailsService
+2025-10-01T15:32:11.140+09:00  WARN 5872 --- [mysite] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : Unable to start LiveReload server
+2025-10-01T15:32:11.154+09:00  WARN 5872 --- [mysite] [restartedMain] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'
+2025-10-01T15:32:11.157+09:00  INFO 5872 --- [mysite] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-10-01T15:32:11.160+09:00  INFO 5872 --- [mysite] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-10-01T15:32:11.162+09:00  INFO 5872 --- [mysite] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2025-10-01T15:32:11.171+09:00  INFO 5872 --- [mysite] [restartedMain] .s.b.a.l.ConditionEvaluationReportLogger : 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2025-10-01T15:32:11.185+09:00 ERROR 5872 --- [mysite] [restartedMain] o.s.b.d.LoggingFailureAnalysisReporter   : 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 8080 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 8080 or configure this application to listen on another port.
+
+2025-10-01T15:32:31.166+09:00  INFO 3972 --- [mysite] [restartedMain] com.moviesite.mysite.MysiteApplication   : Starting MysiteApplication using Java 21.0.8 with PID 3972 (D:\my-project\myProject_movie\mysite\bin\main started by YONSAI in D:\my-project\myProject_movie\mysite)
+2025-10-01T15:32:31.168+09:00  INFO 3972 --- [mysite] [restartedMain] com.moviesite.mysite.MysiteApplication   : No active profile set, falling back to 1 default profile: "default"
+2025-10-01T15:32:31.198+09:00  INFO 3972 --- [mysite] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-10-01T15:32:31.198+09:00  INFO 3972 --- [mysite] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-10-01T15:32:31.784+09:00  INFO 3972 --- [mysite] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-10-01T15:32:31.850+09:00  INFO 3972 --- [mysite] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 60 ms. Found 14 JPA repository interfaces.
+2025-10-01T15:32:32.338+09:00  INFO 3972 --- [mysite] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-10-01T15:32:32.355+09:00  INFO 3972 --- [mysite] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-10-01T15:32:32.355+09:00  INFO 3972 --- [mysite] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.46]
+2025-10-01T15:32:32.393+09:00  INFO 3972 --- [mysite] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-10-01T15:32:32.393+09:00  INFO 3972 --- [mysite] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1195 ms
+2025-10-01T15:32:32.513+09:00  INFO 3972 --- [mysite] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-10-01T15:32:32.547+09:00  INFO 3972 --- [mysite] [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.29.Final
+2025-10-01T15:32:32.568+09:00  INFO 3972 --- [mysite] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-10-01T15:32:32.756+09:00  INFO 3972 --- [mysite] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-10-01T15:32:32.775+09:00  INFO 3972 --- [mysite] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-10-01T15:32:32.842+09:00  INFO 3972 --- [mysite] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.mariadb.jdbc.Connection@161b4ee1
+2025-10-01T15:32:32.843+09:00  INFO 3972 --- [mysite] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-10-01T15:32:32.860+09:00  WARN 3972 --- [mysite] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: MariaDBDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-10-01T15:32:32.871+09:00  INFO 3972 --- [mysite] [restartedMain] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 11.4.8
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-10-01T15:32:33.543+09:00  INFO 3972 --- [mysite] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-10-01T15:32:33.591+09:00  INFO 3972 --- [mysite] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-10-01T15:32:34.017+09:00  WARN 3972 --- [mysite] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-10-01T15:32:34.179+09:00  INFO 3972 --- [mysite] [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name customUserDetailsService
+2025-10-01T15:32:34.474+09:00  INFO 3972 --- [mysite] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-10-01T15:32:34.495+09:00  INFO 3972 --- [mysite] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-10-01T15:32:34.502+09:00  INFO 3972 --- [mysite] [restartedMain] com.moviesite.mysite.MysiteApplication   : Started MysiteApplication in 3.636 seconds (process running for 3.943)

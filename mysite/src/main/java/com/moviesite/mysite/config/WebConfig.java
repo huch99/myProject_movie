@@ -10,7 +10,7 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedOrigins("http://localhost:3000", "https://yourmoviebookingsite.com")
+                .allowedOrigins("http://localhost:5173", "https://yourmoviebookingsite.com")
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                 .allowedHeaders("Authorization", "Content-Type", "X-Requested-With")
                 .exposedHeaders("Authorization")
