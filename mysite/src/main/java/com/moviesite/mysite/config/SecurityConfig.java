@@ -15,6 +15,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.reactive.UrlBasedCorsConfigurationSource;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -55,6 +58,37 @@ public class SecurityConfig {
 
 	    return http.build();
 	}
+	
+	// CORS 설정을 위한 Bean 추가
+		@Bean
+	    public CorsConfigurationSource corsConfigurationSource() {
+	        CorsConfiguration configuration = new CorsConfiguration();
+	        configuration.setAllowedOrigins(Arrays.asList("http://localhost:5173", "http://localhost:5173", "https://your-domain.com")); // 여기에 프론트엔드 주소 추가
+	        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+	        configuration.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type", "X-Requested-With"));
+	        configuration.setExposedHeaders(Arrays.asList("Authorization"));
+	        configuration.setAllowCredentials(true);
+	        
+	        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+	        source.registerCorsConfiguration("/**", configuration);
+	        return source;
+	    }
+		
+		// WebMvcConfigurer는 별도 클래스로 분리하거나 제거해도 됩니다
+		@Bean
+	    public WebMvcConfigurer corsConfigurer() {
+	        return new WebMvcConfigurer() {
+	            @Override
+	            public void addCorsMappings(CorsRegistry registry) {
+	                registry.addMapping("/**")
+	                    .allowedOrigins("http://localhost:5173", "http://localhost:3000", "https://your-domain.com")
+	                    .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
+	                    .allowedHeaders("Authorization", "Content-Type", "X-Requested-With")
+	                    .exposedHeaders("Authorization")
+	                    .allowCredentials(true);
+	            }
+	        };
+	    }
 	
 	@Configuration
 	public class WebConfig implements WebMvcConfigurer {
