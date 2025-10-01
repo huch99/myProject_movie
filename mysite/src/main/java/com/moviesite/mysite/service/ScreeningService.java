@@ -59,13 +59,13 @@ public class ScreeningService {
             throw new BadRequestException("Overlapping screening times in the same screen.");
         }
 
-        Screening screening = Screening.builder()
-                .movie(movie)
-                .screen(screen)
-                .startTime(request.getStartTime())
-                .endTime(request.getEndTime())
-                .basePrice(request.getBasePrice())
-                .build();
+     // Builder 패턴 대신 일반 객체 생성 방식 사용
+        Screening screening = new Screening();
+        screening.setMovie(movie);
+        screening.setScreen(screen);
+        screening.setStartTime(request.getStartTime());
+        screening.setEndTime(request.getEndTime());
+        screening.setBasePrice(request.getBasePrice());
         Screening savedScreening = screeningRepository.save(screening);
         return ScreeningResponse.fromEntity(savedScreening);
     }

@@ -20,15 +20,15 @@ private final PasswordEncoder passwordEncoder;
     }
     
     public UserResponse toResponse(User user) {
-        return UserResponse.builder()
-                .id(user.getId())
-                .username(user.getUsername())
-                .email(user.getEmail())
-                .name(user.getName())
-                .phone(user.getPhone())
-                .birthDate(user.getBirthDate())
-                .role(user.getRole().name())
-                .build();
+        UserResponse response = new UserResponse();
+        response.setId(user.getId());
+        response.setUsername(user.getUsername());
+        response.setEmail(user.getEmail());
+        response.setName(user.getName());
+        response.setPhone(user.getPhone());
+        response.setBirthDate(user.getBirthDate());
+        response.setRole(user.getRole().name());
+        return response;
     }
     
     public List<UserResponse> toResponseList(List<User> users) {
@@ -38,15 +38,15 @@ private final PasswordEncoder passwordEncoder;
     }
     
     public User toEntity(RegisterRequest request) {
-        return User.builder()
-                .username(request.getUsername())
-                .email(request.getEmail())
-                .password(passwordEncoder.encode(request.getPassword()))
-                .name(request.getName())
-                .phone(request.getPhone())
-                .birthDate(request.getBirthDate())
-                .role(User.Role.USER) // 기본 역할은 USER
-                .build();
+        User user = new User();
+        user.setUsername(request.getUsername());
+        user.setEmail(request.getEmail());
+        user.setPassword(passwordEncoder.encode(request.getPassword()));
+        user.setName(request.getName());
+        user.setPhone(request.getPhone());
+        user.setBirthDate(request.getBirthDate());
+        user.setRole(User.Role.USER); // 기본 역할은 USER
+        return user;
     }
     
     public void updateEntityFromRequest(User user, UserUpdateRequest request) {

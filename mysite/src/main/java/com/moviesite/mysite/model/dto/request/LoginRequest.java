@@ -12,4 +12,22 @@ import lombok.NoArgsConstructor;
 public class LoginRequest {
 	 private String username;
 	 private String password;
+	 
+	// Getter 메서드
+	 public String getUsername() {
+	     return username;
+	 }
+
+	 public String getPassword() {
+	     return password;
+	 }
+
+	 // Setter 메서드
+	 public void setUsername(String username) {
+	     this.username = username;
+	 }
+
+	 public void setPassword(String password) {
+	     this.password = password;
+	 }
 }

@@ -19,15 +19,14 @@ private final ScreenMapper screenMapper;
     }
     
     public TheaterResponse toResponse(Theater theater) {
-        TheaterResponse response = TheaterResponse.builder()
-                .id(theater.getId())
-                .name(theater.getName())
-                .location(theater.getLocation())
-                .address(theater.getAddress())
-                .phone(theater.getPhone())
-                .totalScreens(theater.getTotalScreens())
-                .build();
-                
+        TheaterResponse response = new TheaterResponse();
+        response.setId(theater.getId());
+        response.setName(theater.getName());
+        response.setLocation(theater.getLocation());
+        response.setAddress(theater.getAddress());
+        response.setPhone(theater.getPhone());
+        response.setTotalScreens(theater.getTotalScreens());
+        
         if (theater.getScreens() != null && !theater.getScreens().isEmpty()) {
             response.setScreens(screenMapper.toResponseList(theater.getScreens()));
         }
@@ -42,13 +41,13 @@ private final ScreenMapper screenMapper;
     }
     
     public Theater toEntity(TheaterRequest request) {
-        return Theater.builder()
-                .name(request.getName())
-                .location(request.getLocation())
-                .address(request.getAddress())
-                .phone(request.getPhone())
-                .totalScreens(request.getTotalScreens())
-                .build();
+        Theater theater = new Theater();
+        theater.setName(request.getName());
+        theater.setLocation(request.getLocation());
+        theater.setAddress(request.getAddress());
+        theater.setPhone(request.getPhone());
+        theater.setTotalScreens(request.getTotalScreens());
+        return theater;
     }
     
     public void updateEntityFromRequest(Theater theater, TheaterRequest request) {

@@ -76,16 +76,14 @@ public class PaymentService {
         // PG사 연동 결과에 따라 PaymentStatus를 COMPLETED 또는 FAILED로 설정
         PaymentStatus paymentStatus = PaymentStatus.COMPLETED; // 가상으로 성공
 
-        Payment payment = Payment.builder()
-                .booking(booking)
-                .paymentNumber(generatePaymentNumber())
-                .paymentMethod(request.getPaymentMethod())
-                .amount(request.getAmount())
-                .status(paymentStatus)
-                .paymentDate(LocalDateTime.now())
-                .build();
+        Payment payment = new Payment();
+        payment.setBooking(booking);
+        payment.setPaymentNumber(generatePaymentNumber());
+        payment.setPaymentMethod(request.getPaymentMethod());
+        payment.setAmount(request.getAmount());
+        payment.setStatus(paymentStatus);
+        payment.setPaymentDate(LocalDateTime.now());
         Payment savedPayment = paymentRepository.save(payment);
-
         // 결제 성공 시 예약 상태 변경
         if (paymentStatus == PaymentStatus.COMPLETED) {
             booking.setStatus(BookingStatus.CONFIRMED);

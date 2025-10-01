@@ -39,13 +39,14 @@ public class TheaterService {
 
 	    @Transactional
 	    public TheaterResponse createTheater(TheaterRequest request) {
-	        Theater theater = Theater.builder()
-	                .name(request.getName())
-	                .location(request.getLocation())
-	                .address(request.getAddress())
-	                .phone(request.getPhone())
-	                .totalScreens(request.getTotalScreens() != null ? request.getTotalScreens() : 0)
-	                .build();
+	        // Builder 패턴 대신 일반 객체 생성 방식 사용
+	        Theater theater = new Theater();
+	        theater.setName(request.getName());
+	        theater.setLocation(request.getLocation());
+	        theater.setAddress(request.getAddress());
+	        theater.setPhone(request.getPhone());
+	        theater.setTotalScreens(request.getTotalScreens() != null ? request.getTotalScreens() : 0);
+	        
 	        Theater savedTheater = theaterRepository.save(theater);
 	        return TheaterResponse.fromEntity(savedTheater);
 	    }
@@ -86,14 +87,15 @@ public class TheaterService {
 	                .map(ScreenResponse::fromEntity)
 	                .collect(Collectors.toList());
 	        
-	        return TheaterResponse.builder()
-	                .id(theater.getId())
-	                .name(theater.getName())
-	                .location(theater.getLocation())
-	                .address(theater.getAddress())
-	                .phone(theater.getPhone())
-	                .totalScreens(theater.getTotalScreens())
-	                .screens(screens)
-	                .build();
+	        // Builder 패턴 대신 일반 객체 생성 방식 사용
+	        TheaterResponse response = new TheaterResponse();
+	        response.setId(theater.getId());
+	        response.setName(theater.getName());
+	        response.setLocation(theater.getLocation());
+	        response.setAddress(theater.getAddress());
+	        response.setPhone(theater.getPhone());
+	        response.setTotalScreens(theater.getTotalScreens());
+	        response.setScreens(screens);
+	        return response;
 	    }
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,6 +23,7 @@ import com.moviesite.mysite.model.entity.Booking;
 import com.moviesite.mysite.model.entity.Booking.BookingStatus;
 import com.moviesite.mysite.model.entity.BookingSeat;
 import com.moviesite.mysite.model.entity.Screening;
+import com.moviesite.mysite.model.entity.Seat;
 import com.moviesite.mysite.model.entity.User;
 
 import lombok.RequiredArgsConstructor;
@@ -29,11 +31,12 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class BookingService {
-	private final BookingRepository bookingRepository;
-    private final BookingSeatRepository bookingSeatRepository;
-    private final UserRepository userRepository;
-    private final ScreeningRepository screeningRepository;
-    private final SeatRepository seatRepository;
+	@Autowired
+	private BookingRepository bookingRepository;
+    private BookingSeatRepository bookingSeatRepository;
+    private UserRepository userRepository;
+    private ScreeningRepository screeningRepository;
+    private SeatRepository seatRepository;
 
     @Transactional(readOnly = true)
     public List<BookingResponse> getAllBookings() {
@@ -93,24 +96,24 @@ public class BookingService {
 
         String bookingNumber = generateBookingNumber();
 
-        Booking booking = Booking.builder()
-                .bookingNumber(bookingNumber)
-                .user(user)
-                .screening(screening)
-                .totalSeats(request.getSeatIds().size())
-                .totalPrice(totalCalculatedPrice)
-                .status(BookingStatus.PENDING) // 초기에는 결제 대기 상태
-                .bookingDate(LocalDateTime.now())
-                .build();
+     // Builder 패턴 대신 일반 객체 생성 방식 사용
+        Booking booking = new Booking();
+        booking.setBookingNumber(bookingNumber);
+        booking.setUser(user);
+        booking.setScreening(screening);
+        booking.setTotalSeats(request.getSeatIds().size());
+        booking.setTotalPrice(totalCalculatedPrice);
+        booking.setStatus(BookingStatus.PENDING); // 초기에는 결제 대기 상태
+        booking.setBookingDate(LocalDateTime.now());
         Booking savedBooking = bookingRepository.save(booking);
 
-        List<BookingSeat> bookingSeats = selectedSeats.stream().map(seat ->
-                BookingSeat.builder()
-                        .booking(savedBooking)
-                        .seat(seat)
-                        .price(screening.getBasePrice() + seat.getSeatType().getPriceAdditional())
-                        .build()
-        ).collect(Collectors.toList());
+        List<BookingSeat> bookingSeats = selectedSeats.stream().map(seat -> {
+            BookingSeat bookingSeat = new BookingSeat();
+            bookingSeat.setBooking(savedBooking);
+            bookingSeat.setSeat(seat);
+            bookingSeat.setPrice(screening.getBasePrice() + seat.getSeatType().getPriceAdditional());
+            return bookingSeat;
+        }).collect(Collectors.toList());
         bookingSeatRepository.saveAll(bookingSeats);
 
         // TODO: 여기에서 PaymentService 호출하여 결제 처리 유도 (현재는 PENDING 상태로만 만듦)

@@ -36,68 +36,71 @@ public class AuthService {
 			throw new BadRequestException("Email already exists.");
 		}
 		
-		User user = user.builder()
-				.username(request.getUsername())
-				.email(request.getEmail())
-				.password(passwordEncoder.encode(request.getPassword()))
-				.name(request.getName())
-				.phone(request.getPhone())
-				.birthDate(request.getBirthDate())
-				.role(Role.USER)
-				.createdAt(LocalDateTime.now())
-				.updatedAt(LocalDateTime.now())
-				.build();
+		// User 객체 생성 - Builder 패턴 없이 수정
+		User user = new User();
+		user.setUsername(request.getUsername());
+		user.setEmail(request.getEmail());
+		user.setPassword(passwordEncoder.encode(request.getPassword()));
+		user.setName(request.getName());
+		user.setPhone(request.getPhone());
+		user.setBirthDate(request.getBirthDate());
+		user.setRole(Role.USER);
+		user.setCreatedAt(LocalDateTime.now());
+		user.setUpdatedAt(LocalDateTime.now());
 		userRepository.save(user);
-		
+
 		String accessToken = jwtUtil.generateAccessToken(user.getUsername(), user.getRole().name());
 		String refreshToken = jwtUtil.generateRefreshToken(user.getUsername());
-		
-		return AuthResponse.builder()
-				.accessToken(accessToken)
-				.refreshToken(refreshToken)
-				.userId(user.getId())
-				.username(user.getUsername())
-				.role(user.getRole().name())
-				.build();
+
+		// AuthResponse 객체 생성 - Builder 패턴 없이 수정
+		AuthResponse response = new AuthResponse();
+		response.setAccessToken(accessToken);
+		response.setRefreshToken(refreshToken);
+		response.setUserId(user.getId());
+		response.setUsername(user.getUsername());
+		response.setRole(user.getRole().name());
+		return response;
 	}
 	
 	public AuthResponse login(LoginRequest request) {
-		User user = userRepository.findByUsername(request.getUsername())
-				.orElseThrow(() -> new AuthenticationException("Invalid username or password."));
-		
-		if (!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
-			throw new AuthenticationException("Invalid username or password.");
-		}
-		
-		String accessToken = jwtUtil.generateAccessToken(user.getUsername(), user.getRole().name());
-		String refreshToken = jwtUtil.generateRefreshToken(user.getUsername());
-		
-		return AuthResponse.builder()
-                .accessToken(accessToken)
-                .refreshToken(refreshToken)
-                .userId(user.getId())
-                .username(user.getUsername())
-                .role(user.getRole().name())
-                .build();
+	    User user = userRepository.findByUsername(request.getUsername())
+	            .orElseThrow(() -> new AuthenticationException("Invalid username or password."));
+	    
+	    if (!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
+	        throw new AuthenticationException("Invalid username or password.");
+	    }
+	    
+	    String accessToken = jwtUtil.generateAccessToken(user.getUsername(), user.getRole().name());
+	    String refreshToken = jwtUtil.generateRefreshToken(user.getUsername());
+	    
+	    // Builder 패턴 대신 일반 객체 생성 방식 사용
+	    AuthResponse response = new AuthResponse();
+	    response.setAccessToken(accessToken);
+	    response.setRefreshToken(refreshToken);
+	    response.setUserId(user.getId());
+	    response.setUsername(user.getUsername());
+	    response.setRole(user.getRole().name());
+	    return response;
 	}
-	
+
 	public AuthResponse refreshToken(String refreshToken) {
-        if (!jwtUtil.validateToken(refreshToken)) {
-            throw new AuthenticationException("Invalid or expired refresh token.");
-        }
-        String username = jwtUtil.extractUsername(refreshToken);
-        User user = userRepository.findByUsername(username)
-                .orElseThrow(() -> new AuthenticationException("User not found for refresh token."));
+	    if (!jwtUtil.validateToken(refreshToken)) {
+	        throw new AuthenticationException("Invalid or expired refresh token.");
+	    }
+	    String username = jwtUtil.extractUsername(refreshToken);
+	    User user = userRepository.findByUsername(username)
+	            .orElseThrow(() -> new AuthenticationException("User not found for refresh token."));
 
-        String newAccessToken = jwtUtil.generateAccessToken(user.getUsername(), user.getRole().name());
-        String newRefreshToken = jwtUtil.generateRefreshToken(user.getUsername()); // 리프레시 토큰도 재발급
+	    String newAccessToken = jwtUtil.generateAccessToken(user.getUsername(), user.getRole().name());
+	    String newRefreshToken = jwtUtil.generateRefreshToken(user.getUsername()); // 리프레시 토큰도 재발급
 
-        return AuthResponse.builder()
-                .accessToken(newAccessToken)
-                .refreshToken(newRefreshToken)
-                .userId(user.getId())
-                .username(user.getUsername())
-                .role(user.getRole().name())
-                .build();
-    }
+	    // Builder 패턴 대신 일반 객체 생성 방식 사용
+	    AuthResponse response = new AuthResponse();
+	    response.setAccessToken(newAccessToken);
+	    response.setRefreshToken(newRefreshToken);
+	    response.setUserId(user.getId());
+	    response.setUsername(user.getUsername());
+	    response.setRole(user.getRole().name());
+	    return response;
+	}
 }

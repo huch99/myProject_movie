@@ -14,4 +14,22 @@ import java.util.List;
 public class BookingRequest {
     private Long screeningId;
     private List<Long> seatIds;
+    
+ // Getter 메서드
+    public Long getScreeningId() {
+        return screeningId;
+    }
+
+    public List<Long> getSeatIds() {
+        return seatIds;
+    }
+
+    // Setter 메서드
+    public void setScreeningId(Long screeningId) {
+        this.screeningId = screeningId;
+    }
+
+    public void setSeatIds(List<Long> seatIds) {
+        this.seatIds = seatIds;
+    }
 }
