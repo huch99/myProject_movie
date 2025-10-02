@@ -154,7 +154,7 @@ const Footer: React.FC = () => {
                     <Column>
                         <FooterLogo to="/">
                             <img src="/assets/images/logo-white.png" alt="Movie Booking" />
-                            Movie Booking
+                            MovieFlix
                         </FooterLogo>
                         <p>최고의 영화 예매 서비스를 제공합니다. 편리한 예매 시스템과 다양한 혜택을 경험해 보세요.</p>
                         <SocialLinks>
