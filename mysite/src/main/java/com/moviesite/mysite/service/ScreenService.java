@@ -1,20 +1,21 @@
 package com.moviesite.mysite.service;
 
+import com.moviesite.mysite.model.dto.request.ScreenRequest;
+import com.moviesite.mysite.exception.BadRequestException;
+import com.moviesite.mysite.exception.ResourceNotFoundException;
+import com.moviesite.mysite.model.dto.response.ScreenResponse;
+import com.moviesite.mysite.model.entity.Screen;
+import com.moviesite.mysite.model.entity.Theater;
+import com.moviesite.mysite.model.entity.User;
+import com.moviesite.mysite.repository.ScreenRepository;
+import com.moviesite.mysite.repository.TheaterRepository;
+import com.moviesite.mysite.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.moviesite.mysite.dto.ScheduleDTO;
-import com.moviesite.mysite.dto.ScreenDTO;
-import com.moviesite.mysite.dto.SeatDTO;
-import com.moviesite.mysite.model.entity.Schedule;
-import com.moviesite.mysite.model.entity.Screen;
-import com.moviesite.mysite.model.entity.Seat;
-import com.moviesite.mysite.repository.ScheduleRepository;
-import com.moviesite.mysite.repository.ScreenRepository;
-import com.moviesite.mysite.repository.SeatRepository;
-
-import jakarta.persistence.EntityNotFoundException;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -24,106 +25,120 @@ import java.util.stream.Collectors;
 @Transactional(readOnly = true)
 public class ScreenService {
 
-	private final ScreenRepository screenRepository;
-    private final SeatRepository seatRepository;
-    private final ScheduleRepository scheduleRepository;
+    private final ScreenRepository screenRepository;
+    private final TheaterRepository theaterRepository;
+    private final UserRepository userRepository;
 
-    // 모든 상영관 목록 조회
-    public List<ScreenDTO> getAllScreens() {
-        return screenRepository.findAll().stream()
-                .map(ScreenDTO::fromEntity)
+    // 특정 극장의 모든 상영관 조회
+    public List<ScreenResponse> getScreensByTheaterId(Long theaterId) {
+        List<Screen> screens = screenRepository.findByTheaterId(theaterId);
+        return screens.stream()
+                .map(ScreenResponse::fromEntity)
                 .collect(Collectors.toList());
     }
 
-    // 특정 상영관 정보 조회
-    public ScreenDTO getScreenById(Long id) {
-        Screen screen = screenRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Screen not found with id: " + id));
-        return ScreenDTO.fromEntity(screen);
+    // 특정 상영관 상세 조회
+    public ScreenResponse getScreenById(Long id) {
+        Screen screen = findScreenById(id);
+        return ScreenResponse.fromEntity(screen);
     }
 
-    // 특정 극장의 상영관 목록 조회
-    public List<ScreenDTO> getScreensByTheaterId(Long theaterId) {
-        return screenRepository.findByTheaterId(theaterId).stream()
-                .map(ScreenDTO::fromEntity)
-                .collect(Collectors.toList());
-    }
-
-    // 특정 상영관의 좌석 목록 조회
-    public List<SeatDTO> getSeatsByScreenId(Long screenId) {
-        List<Seat> seats = seatRepository.findByScreenId(screenId);
-        return seats.stream()
-                .map(SeatDTO::fromEntity)
-                .collect(Collectors.toList());
-    }
-
-    // 특정 타입의 상영관 조회
-    public List<ScreenDTO> getScreensByType(String type) {
-        return screenRepository.findByType(type).stream()
-                .map(ScreenDTO::fromEntity)
-                .collect(Collectors.toList());
-    }
-
-    // 새 상영관 등록
+    // 상영관 생성 (관리자용)
     @Transactional
-    public ScreenDTO createScreen(ScreenDTO screenDTO) {
-        // Theater 엔티티 참조 설정 필요
-        Screen screen = screenDTO.toEntity();
+    public ScreenResponse createScreen(ScreenRequest request) {
+        // 관리자 권한 확인
+        User currentUser = getAuthenticatedUser();
+        if (!currentUser.isAdmin()) {
+            throw new BadRequestException("관리자만 접근 가능합니다");
+        }
+        
+        // 극장 존재 여부 확인
+        Theater theater = theaterRepository.findById(request.getTheaterId())
+                .orElseThrow(() -> new ResourceNotFoundException("Theater not found with id: " + request.getTheaterId()));
+        
+        // 행과 열 수가 좌석 수와 일치하는지 확인
+        if (request.getRowCount() * request.getColumnCount() != request.getSeatsCount()) {
+            throw new BadRequestException("행 수와 열 수의 곱은 좌석 수와 일치해야 합니다");
+        }
+        
+        // 상영관 생성
+        Screen screen = Screen.builder()
+                .theater(theater)
+                .name(request.getName())
+                .type(request.getType())
+                .seatsCount(request.getSeatsCount())
+                .rowCount(request.getRowCount())
+                .columnCount(request.getColumnCount())
+                .screenSize(request.getScreenSize())
+                .audioSystem(request.getAudioSystem())
+                .isAccessible(request.getIsAccessible())
+                .build();
+        
         Screen savedScreen = screenRepository.save(screen);
-        return ScreenDTO.fromEntity(savedScreen);
+        return ScreenResponse.fromEntity(savedScreen);
     }
 
-    // 상영관 정보 수정
+    // 상영관 수정 (관리자용)
     @Transactional
-    public ScreenDTO updateScreen(Long id, ScreenDTO screenDTO) {
-        Screen existingScreen = screenRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Screen not found with id: " + id));
+    public ScreenResponse updateScreen(Long id, ScreenRequest request) {
+        // 관리자 권한 확인
+        User currentUser = getAuthenticatedUser();
+        if (!currentUser.isAdmin()) {
+            throw new BadRequestException("관리자만 접근 가능합니다");
+        }
         
-        // 기존 상영관 정보 업데이트
-        Screen updatedScreen = screenDTO.toEntity();
-        updatedScreen.setId(id);
-        updatedScreen.setTheater(existingScreen.getTheater());
+        Screen screen = findScreenById(id);
         
-        // 생성일자 유지
-        updatedScreen.setCreatedAt(existingScreen.getCreatedAt());
+        // 극장 존재 여부 확인
+        Theater theater = theaterRepository.findById(request.getTheaterId())
+                .orElseThrow(() -> new ResourceNotFoundException("Theater not found with id: " + request.getTheaterId()));
         
-        Screen savedScreen = screenRepository.save(updatedScreen);
-        return ScreenDTO.fromEntity(savedScreen);
+        // 행과 열 수가 좌석 수와 일치하는지 확인
+        if (request.getRowCount() * request.getColumnCount() != request.getSeatsCount()) {
+            throw new BadRequestException("행 수와 열 수의 곱은 좌석 수와 일치해야 합니다");
+        }
+        
+        // 상영관 정보 업데이트
+        screen.setTheater(theater);
+        screen.setName(request.getName());
+        screen.setType(request.getType());
+        screen.setSeatsCount(request.getSeatsCount());
+        screen.setRowCount(request.getRowCount());
+        screen.setColumnCount(request.getColumnCount());
+        screen.setScreenSize(request.getScreenSize());
+        screen.setAudioSystem(request.getAudioSystem());
+        screen.setIsAccessible(request.getIsAccessible());
+        screen.setUpdatedAt(LocalDateTime.now());
+        
+        Screen updatedScreen = screenRepository.save(screen);
+        return ScreenResponse.fromEntity(updatedScreen);
     }
-
-    // 상영관 삭제
+    
+    // 상영관 삭제 (관리자용)
     @Transactional
     public void deleteScreen(Long id) {
-        if (!screenRepository.existsById(id)) {
-            throw new EntityNotFoundException("Screen not found with id: " + id);
+        // 관리자 권한 확인
+        User currentUser = getAuthenticatedUser();
+        if (!currentUser.isAdmin()) {
+            throw new BadRequestException("관리자만 접근 가능합니다");
         }
-        screenRepository.deleteById(id);
+        
+        Screen screen = findScreenById(id);
+        screenRepository.delete(screen);
     }
-
-    // 특정 상영관의 수용 인원 조회
-    public Integer getScreenCapacity(Long id) {
-        Screen screen = screenRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Screen not found with id: " + id));
-        return screen.getSeatsCount();
+    
+    // 상영관 엔티티 조회 (내부 메서드)
+    private Screen findScreenById(Long id) {
+        return screenRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Screen not found with id: " + id));
     }
-
-    // 특정 상영관의 현재 상영 중인 영화 일정 조회
-    public List<ScheduleDTO> getCurrentSchedulesByScreenId(Long screenId) {
-        LocalDateTime now = LocalDateTime.now();
-        List<Schedule> currentSchedules = scheduleRepository.findByScreenIdAndStartTimeLessThanEqualAndEndTimeGreaterThanEqual(
-                screenId, now, now);
-        return currentSchedules.stream()
-                .map(ScheduleDTO::fromEntity)
-                .collect(Collectors.toList());
-    }
-
-    // 특정 상영관의 향후 상영 일정 조회
-    public List<ScheduleDTO> getUpcomingSchedulesByScreenId(Long screenId) {
-        LocalDateTime now = LocalDateTime.now();
-        List<Schedule> upcomingSchedules = scheduleRepository.findByScreenIdAndStartTimeAfterOrderByStartTime(
-                screenId, now);
-        return upcomingSchedules.stream()
-                .map(ScheduleDTO::fromEntity)
-                .collect(Collectors.toList());
+    
+    // 현재 로그인한 사용자 조회
+    private User getAuthenticatedUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String email = authentication.getName();
+        
+        return userRepository.findByEmail(email)
+                .orElseThrow(() -> new ResourceNotFoundException("User not found with email: " + email));
     }
 }
