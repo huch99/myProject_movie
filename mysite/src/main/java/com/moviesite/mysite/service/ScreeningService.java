@@ -1,23 +1,29 @@
 package com.moviesite.mysite.service;
 
+import com.moviesite.mysite.model.dto.request.ScreeningRequest;
+import com.moviesite.mysite.exception.BadRequestException;
+import com.moviesite.mysite.exception.ResourceNotFoundException;
+import com.moviesite.mysite.model.dto.response.ScreeningResponse;
+import com.moviesite.mysite.model.entity.Movie;
+import com.moviesite.mysite.model.entity.Schedule;
+import com.moviesite.mysite.model.entity.Screen;
+import com.moviesite.mysite.model.entity.Screening;
+import com.moviesite.mysite.model.entity.User;
+import com.moviesite.mysite.repository.MovieRepository;
+import com.moviesite.mysite.repository.ScheduleRepository;
+import com.moviesite.mysite.repository.ScreenRepository;
+import com.moviesite.mysite.repository.ScreeningRepository;
+import com.moviesite.mysite.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.moviesite.mysite.dto.MovieDTO;
-import com.moviesite.mysite.dto.ScreeningDTO;
-import com.moviesite.mysite.model.entity.Movie;
-import com.moviesite.mysite.model.entity.Screening;
-import com.moviesite.mysite.repository.MovieRepository;
-import com.moviesite.mysite.repository.ScreeningRepository;
-import com.moviesite.mysite.repository.SeatRepository;
-
-import jakarta.persistence.EntityNotFoundException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.HashMap;
+import java.time.LocalTime;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -25,208 +31,214 @@ import java.util.stream.Collectors;
 @Transactional(readOnly = true)
 public class ScreeningService {
 
-	private final ScreeningRepository screeningRepository;
+    private final ScreeningRepository screeningRepository;
     private final MovieRepository movieRepository;
-    private final SeatRepository seatRepository;
-
-    // 모든 상영 정보 조회
-    public List<ScreeningDTO> getAllScreenings() {
-        return screeningRepository.findAll().stream()
-                .map(ScreeningDTO::fromEntity)
-                .collect(Collectors.toList());
-    }
-
-    // 특정 상영 정보 조회
-    public ScreeningDTO getScreeningById(Long id) {
-        Screening screening = screeningRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Screening not found with id: " + id));
-        return ScreeningDTO.fromEntity(screening);
-    }
+    private final ScreenRepository screenRepository;
+    private final ScheduleRepository scheduleRepository;
+    private final UserRepository userRepository;
 
     // 특정 영화의 상영 정보 조회
-    public List<ScreeningDTO> getScreeningsByMovieId(Long movieId) {
-        return screeningRepository.findByMovieId(movieId).stream()
-                .map(ScreeningDTO::fromEntity)
+    public List<ScreeningResponse> getScreeningsByMovie(Long movieId) {
+        List<Screening> screenings = screeningRepository.findByMovieIdAndStatusAndScreeningDateAfterOrderByScreeningDateAscScreeningTimeAsc(
+                movieId, Screening.ScreeningStatus.ACTIVE, LocalDate.now());
+
+        return screenings.stream()
+                .map(ScreeningResponse::fromEntity)
                 .collect(Collectors.toList());
     }
 
     // 특정 상영관의 상영 정보 조회
-    public List<ScreeningDTO> getScreeningsByScreenId(Long screenId) {
-        return screeningRepository.findByScreenId(screenId).stream()
-                .map(ScreeningDTO::fromEntity)
-                .collect(Collectors.toList());
-    }
+    public List<ScreeningResponse> getScreeningsByScreen(Long screenId) {
+        List<Screening> screenings = screeningRepository.findByScreenIdAndStatusAndScreeningDateAfterOrderByScreeningDateAscScreeningTimeAsc(
+                screenId, Screening.ScreeningStatus.ACTIVE, LocalDate.now());
 
-    // 특정 날짜의 상영 정보 조회
-    public List<ScreeningDTO> getScreeningsByDate(LocalDate date) {
-        return screeningRepository.findByScreeningDate(date).stream()
-                .map(ScreeningDTO::fromEntity)
-                .collect(Collectors.toList());
-    }
-
-    // 특정 영화, 특정 날짜의 상영 정보 조회
-    public List<ScreeningDTO> getScreeningsByMovieAndDate(Long movieId, LocalDate date) {
-        return screeningRepository.findByMovieIdAndScreeningDate(movieId, date).stream()
-                .map(ScreeningDTO::fromEntity)
+        return screenings.stream()
+                .map(ScreeningResponse::fromEntity)
                 .collect(Collectors.toList());
     }
 
     // 특정 극장의 상영 정보 조회
-    public List<ScreeningDTO> getScreeningsByTheaterId(Long theaterId) {
-        return screeningRepository.findByScreenTheaterId(theaterId).stream()
-                .map(ScreeningDTO::fromEntity)
+    public List<ScreeningResponse> getScreeningsByTheater(Long theaterId, LocalDate date) {
+        List<Screening> screenings = screeningRepository.findByScreenTheaterIdAndStatusAndScreeningDateOrderByScreeningTimeAsc(
+                theaterId, Screening.ScreeningStatus.ACTIVE, date);
+
+        return screenings.stream()
+                .map(ScreeningResponse::fromEntity)
                 .collect(Collectors.toList());
     }
 
-    // 특정 극장, 특정 날짜의 상영 정보 조회
-    public List<ScreeningDTO> getScreeningsByTheaterAndDate(Long theaterId, LocalDate date) {
-        return screeningRepository.findByScreenTheaterIdAndScreeningDate(theaterId, date).stream()
-                .map(ScreeningDTO::fromEntity)
+    // 특정 스케줄의 상영 정보 조회
+    public List<ScreeningResponse> getScreeningsBySchedule(Long scheduleId) {
+        List<Screening> screenings = screeningRepository.findByScheduleIdAndStatusOrderByScreeningDateAscScreeningTimeAsc(
+                scheduleId, Screening.ScreeningStatus.ACTIVE);
+
+        return screenings.stream()
+                .map(ScreeningResponse::fromEntity)
                 .collect(Collectors.toList());
     }
 
-    // 특정 극장, 특정 영화의 상영 정보 조회
-    public List<ScreeningDTO> getScreeningsByTheaterAndMovie(Long theaterId, Long movieId) {
-        return screeningRepository.findByScreenTheaterIdAndMovieId(theaterId, movieId).stream()
-                .map(ScreeningDTO::fromEntity)
-                .collect(Collectors.toList());
+    // 특정 상영 정보 상세 조회
+    public ScreeningResponse getScreeningById(Long id) {
+        Screening screening = findScreeningById(id);
+        return ScreeningResponse.fromEntity(screening);
     }
 
-    // 새 상영 정보 등록
+    // 상영 정보 생성 (관리자용)
     @Transactional
-    public ScreeningDTO createScreening(ScreeningDTO screeningDTO) {
-        Screening screening = screeningDTO.toEntity();
+    public ScreeningResponse createScreening(ScreeningRequest request) {
+        // 관리자 권한 확인
+        User currentUser = getAuthenticatedUser();
+        if (!currentUser.isAdmin()) {
+            throw new BadRequestException("관리자만 접근 가능합니다");
+        }
+
+        // 영화 존재 여부 확인
+        Movie movie = movieRepository.findById(request.getMovieId())
+                .orElseThrow(() -> new ResourceNotFoundException("Movie not found with id: " + request.getMovieId()));
+
+        // 상영관 존재 여부 확인
+        Screen screen = screenRepository.findById(request.getScreenId())
+                .orElseThrow(() -> new ResourceNotFoundException("Screen not found with id: " + request.getScreenId()));
+
+        // 스케줄 존재 여부 확인
+        Schedule schedule = scheduleRepository.findById(request.getScheduleId())
+                .orElseThrow(() -> new ResourceNotFoundException("Schedule not found with id: " + request.getScheduleId()));
+
+        // 시간 유효성 검사
+        validateScreeningTime(request.getScreeningDate(), request.getScreeningTime(), request.getEndTime(), screen.getId(), null);
+
+        // 상영 정보 생성
+        Screening screening = Screening.builder()
+                .movie(movie)
+                .screen(screen)
+                .schedule(schedule)
+                .screeningDate(request.getScreeningDate())
+                .screeningTime(request.getScreeningTime())
+                .endTime(request.getEndTime())
+                .isFull(request.getIsFull())
+                .availableSeats(request.getAvailableSeats())
+                .status(request.getStatus() != null ?
+                        Screening.ScreeningStatus.valueOf(request.getStatus()) : Screening.ScreeningStatus.ACTIVE)
+                .build();
+
         Screening savedScreening = screeningRepository.save(screening);
-        return ScreeningDTO.fromEntity(savedScreening);
+        return ScreeningResponse.fromEntity(savedScreening);
     }
 
-    // 상영 정보 수정
+    // 상영 정보 수정 (관리자용)
     @Transactional
-    public ScreeningDTO updateScreening(Long id, ScreeningDTO screeningDTO) {
-        Screening existingScreening = screeningRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Screening not found with id: " + id));
-        
-        // 기존 상영 정보 업데이트
-        Screening updatedScreening = screeningDTO.toEntity();
-        updatedScreening.setId(id);
-        
-        // 참조 엔티티 설정
-        updatedScreening.setMovie(existingScreening.getMovie());
-        updatedScreening.setScreen(existingScreening.getScreen());
-        updatedScreening.setSchedule(existingScreening.getSchedule());
-        
-        // 생성일자 유지
-        updatedScreening.setCreatedAt(existingScreening.getCreatedAt());
-        
-        Screening savedScreening = screeningRepository.save(updatedScreening);
-        return ScreeningDTO.fromEntity(savedScreening);
+    public ScreeningResponse updateScreening(Long id, ScreeningRequest request) {
+        // 관리자 권한 확인
+        User currentUser = getAuthenticatedUser();
+        if (!currentUser.isAdmin()) {
+            throw new BadRequestException("관리자만 접근 가능합니다");
+        }
+
+        Screening screening = findScreeningById(id);
+
+        // 영화 존재 여부 확인
+        Movie movie = movieRepository.findById(request.getMovieId())
+                .orElseThrow(() -> new ResourceNotFoundException("Movie not found with id: " + request.getMovieId()));
+
+        // 상영관 존재 여부 확인
+        Screen screen = screenRepository.findById(request.getScreenId())
+                .orElseThrow(() -> new ResourceNotFoundException("Screen not found with id: " + request.getScreenId()));
+
+        // 스케줄 존재 여부 확인
+        Schedule schedule = scheduleRepository.findById(request.getScheduleId())
+                .orElseThrow(() -> new ResourceNotFoundException("Schedule not found with id: " + request.getScheduleId()));
+
+        // 시간 유효성 검사
+        validateScreeningTime(request.getScreeningDate(), request.getScreeningTime(), request.getEndTime(), screen.getId(), id);
+
+        // 상영 정보 업데이트
+        screening.setMovie(movie);
+        screening.setScreen(screen);
+        screening.setSchedule(schedule);
+        screening.setScreeningDate(request.getScreeningDate());
+        screening.setScreeningTime(request.getScreeningTime());
+        screening.setEndTime(request.getEndTime());
+        screening.setIsFull(request.getIsFull());
+        screening.setAvailableSeats(request.getAvailableSeats());
+
+        if (request.getStatus() != null) {
+            screening.setStatus(Screening.ScreeningStatus.valueOf(request.getStatus()));
+        }
+
+        screening.setUpdatedAt(LocalDateTime.now());
+
+        Screening updatedScreening = screeningRepository.save(screening);
+        return ScreeningResponse.fromEntity(updatedScreening);
     }
 
-    // 상영 정보 삭제
+    // 상영 정보 상태 변경 (관리자용)
+    @Transactional
+    public ScreeningResponse updateScreeningStatus(Long id, String status) {
+        // 관리자 권한 확인
+        User currentUser = getAuthenticatedUser();
+        if (!currentUser.isAdmin()) {
+            throw new BadRequestException("관리자만 접근 가능합니다");
+        }
+
+        Screening screening = findScreeningById(id);
+        screening.setStatus(Screening.ScreeningStatus.valueOf(status));
+        screening.setUpdatedAt(LocalDateTime.now());
+
+        Screening updatedScreening = screeningRepository.save(screening);
+        return ScreeningResponse.fromEntity(updatedScreening);
+    }
+
+    // 상영 정보 삭제 (관리자용)
     @Transactional
     public void deleteScreening(Long id) {
-        if (!screeningRepository.existsById(id)) {
-            throw new EntityNotFoundException("Screening not found with id: " + id);
+        // 관리자 권한 확인
+        User currentUser = getAuthenticatedUser();
+        if (!currentUser.isAdmin()) {
+            throw new BadRequestException("관리자만 접근 가능합니다");
         }
-        screeningRepository.deleteById(id);
+
+        Screening screening = findScreeningById(id);
+        screeningRepository.delete(screening);
     }
-    
-    // 상영 정보 상태 변경
-    @Transactional
-    public ScreeningDTO updateScreeningStatus(Long id, String status) {
-        Screening screening = screeningRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Screening not found with id: " + id));
-        
-        screening.setStatus(Screening.ScreeningStatus.valueOf(status));
-        Screening savedScreening = screeningRepository.save(screening);
-        return ScreeningDTO.fromEntity(savedScreening);
-    }
-    
-    // 특정 날짜 범위의 상영 정보 조회
-    public List<ScreeningDTO> getScreeningsByDateRange(LocalDate startDate, LocalDate endDate) {
-        return screeningRepository.findByScreeningDateBetween(startDate, endDate).stream()
-                .map(ScreeningDTO::fromEntity)
-                .collect(Collectors.toList());
-    }
-    
-    // 특정 날짜에 상영하는 영화 목록 조회
-    public List<MovieDTO> getMoviesByScreeningDate(LocalDate date) {
-        List<Movie> movies = screeningRepository.findMoviesByScreeningDate(date);
-        return movies.stream()
-                .map(MovieDTO::fromEntity)
-                .collect(Collectors.toList());
-    }
-    
- // 특정 상영의 좌석 가용 상태 조회
-    public Map<String, Object> getScreeningSeatsStatus(Long screeningId) {
-        Screening screening = screeningRepository.findById(screeningId)
-                .orElseThrow(() -> new EntityNotFoundException("Screening not found with id: " + screeningId));
-        
-        Map<String, Object> result = new HashMap<>();
-        result.put("screeningId", screeningId);
-        result.put("movieTitle", screening.getMovie().getTitle());
-        result.put("screenName", screening.getScreen().getName());
-        result.put("theaterName", screening.getScreen().getTheater().getName());
-        result.put("screeningDate", screening.getScreeningDate());
-        result.put("screeningTime", screening.getScreeningTime());
-        result.put("endTime", screening.getEndTime());
-        result.put("totalSeats", screening.getScreen().getSeatsCount());
-        result.put("availableSeats", screening.getAvailableSeats());
-        result.put("isFull", screening.getIsFull());
-        
-        // 예약된 좌석 목록 조회
-        List<String> reservedSeats = screeningRepository.findReservedSeatsByScreeningId(screeningId);
-        result.put("reservedSeats", reservedSeats);
-        
-        return result;
-    }
-    
-    // 예매 가능한 상영 정보 조회
-    public List<ScreeningDTO> getBookableScreenings() {
-        LocalDateTime now = LocalDateTime.now();
-        LocalDate today = LocalDate.now();
-        
-        return screeningRepository.findByScreeningDateGreaterThanEqualAndStatusOrderByScreeningDate(
-                today, Screening.ScreeningStatus.ACTIVE).stream()
-                .filter(screening -> 
-                    LocalDateTime.of(screening.getScreeningDate(), screening.getScreeningTime()).isAfter(now))
-                .filter(screening -> !screening.getIsFull())
-                .map(ScreeningDTO::fromEntity)
-                .collect(Collectors.toList());
-    }
-    
-    // 좌석 예약 처리
-    @Transactional
-    public boolean reserveSeats(Long screeningId, List<Long> seatIds) {
-        Screening screening = screeningRepository.findById(screeningId)
-                .orElseThrow(() -> new EntityNotFoundException("Screening not found with id: " + screeningId));
-        
-        // 이미 만석이거나 취소된 상영인지 확인
-        if (screening.getIsFull() || screening.getStatus() != Screening.ScreeningStatus.ACTIVE) {
-            return false;
+
+    // 상영 시간 유효성 검사 (내부 메서드)
+    private void validateScreeningTime(LocalDate date, LocalTime startTime, LocalTime endTime, Long screenId, Long excludeScreeningId) {
+        // 시작 시간이 종료 시간보다 이후인지 확인
+        if (startTime.isAfter(endTime)) {
+            throw new BadRequestException("시작 시간은 종료 시간보다 이전이어야 합니다");
         }
-        
-        // 좌석 예약 가능 여부 확인
-        boolean allSeatsAvailable = seatIds.stream()
-                .noneMatch(seatId -> screeningRepository.isSeatReserved(screeningId, seatId));
-        
-        if (!allSeatsAvailable) {
-            return false;
+
+        // 상영 시간 중복 확인
+        LocalDateTime screeningStart = LocalDateTime.of(date, startTime);
+        LocalDateTime screeningEnd = LocalDateTime.of(date, endTime);
+
+        List<Screening> overlappingScreenings;
+
+        if (excludeScreeningId != null) {
+            overlappingScreenings = screeningRepository.findOverlappingScreeningsExcluding(
+                    screenId, date, startTime, endTime, excludeScreeningId);
+        } else {
+            overlappingScreenings = screeningRepository.findOverlappingScreenings(
+                    screenId, date, startTime, endTime);
         }
-        
-        // 좌석 예약 처리 및 가용 좌석 수 업데이트
-        int reservedCount = seatIds.size();
-        screening.setAvailableSeats(screening.getAvailableSeats() - reservedCount);
-        
-        // 만석 여부 확인 및 업데이트
-        if (screening.getAvailableSeats() <= 0) {
-            screening.setIsFull(true);
+
+        if (!overlappingScreenings.isEmpty()) {
+            throw new BadRequestException("해당 상영관에 이미 같은 시간대에 예정된 상영이 있습니다");
         }
-        
-        screeningRepository.save(screening);
-        
-        // 예약된 좌석 정보 저장 (별도 테이블에 저장하는 로직 필요)
-        
-        return true;
+    }
+
+    // 상영 엔티티 조회 (내부 메서드)
+    private Screening findScreeningById(Long id) {
+        return screeningRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Screening not found with id: " + id));
+    }
+
+    // 현재 로그인한 사용자 조회
+    private User getAuthenticatedUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String email = authentication.getName();
+
+        return userRepository.findByEmail(email)
+                .orElseThrow(() -> new ResourceNotFoundException("User not found with email: " + email));
     }
 }

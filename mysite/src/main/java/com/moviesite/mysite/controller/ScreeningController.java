@@ -1,134 +1,97 @@
 package com.moviesite.mysite.controller;
 
+import com.moviesite.mysite.model.dto.request.ScreeningRequest;
+import com.moviesite.mysite.model.dto.response.ApiResponse;
+import com.moviesite.mysite.model.dto.response.ScreeningResponse;
+import com.moviesite.mysite.service.ScreeningService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import com.moviesite.mysite.dto.MovieDTO;
-import com.moviesite.mysite.dto.ScreeningDTO;
-import com.moviesite.mysite.service.ScreeningService;
-
+import jakarta.validation.Valid;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/api/screenings")
 @RequiredArgsConstructor
 public class ScreeningController {
 
-	private final ScreeningService screeningService;
-
-    // 모든 상영 정보 조회
-    @GetMapping
-    public ResponseEntity<List<ScreeningDTO>> getAllScreenings() {
-        return ResponseEntity.ok(screeningService.getAllScreenings());
-    }
-
-    // 특정 상영 정보 조회
-    @GetMapping("/{id}")
-    public ResponseEntity<ScreeningDTO> getScreeningById(@PathVariable Long id) {
-        return ResponseEntity.ok(screeningService.getScreeningById(id));
-    }
+    private final ScreeningService screeningService;
 
     // 특정 영화의 상영 정보 조회
     @GetMapping("/movie/{movieId}")
-    public ResponseEntity<List<ScreeningDTO>> getScreeningsByMovieId(@PathVariable Long movieId) {
-        return ResponseEntity.ok(screeningService.getScreeningsByMovieId(movieId));
+    public ResponseEntity<ApiResponse<List<ScreeningResponse>>> getScreeningsByMovie(@PathVariable Long movieId) {
+        List<ScreeningResponse> screenings = screeningService.getScreeningsByMovie(movieId);
+        return ResponseEntity.ok(ApiResponse.success(screenings));
     }
 
     // 특정 상영관의 상영 정보 조회
     @GetMapping("/screen/{screenId}")
-    public ResponseEntity<List<ScreeningDTO>> getScreeningsByScreenId(@PathVariable Long screenId) {
-        return ResponseEntity.ok(screeningService.getScreeningsByScreenId(screenId));
-    }
-
-    // 특정 날짜의 상영 정보 조회
-    @GetMapping("/date/{date}")
-    public ResponseEntity<List<ScreeningDTO>> getScreeningsByDate(
-            @PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
-        return ResponseEntity.ok(screeningService.getScreeningsByDate(date));
-    }
-
-    // 특정 영화, 특정 날짜의 상영 정보 조회
-    @GetMapping("/movie/{movieId}/date/{date}")
-    public ResponseEntity<List<ScreeningDTO>> getScreeningsByMovieAndDate(
-            @PathVariable Long movieId,
-            @PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
-        return ResponseEntity.ok(screeningService.getScreeningsByMovieAndDate(movieId, date));
+    public ResponseEntity<ApiResponse<List<ScreeningResponse>>> getScreeningsByScreen(@PathVariable Long screenId) {
+        List<ScreeningResponse> screenings = screeningService.getScreeningsByScreen(screenId);
+        return ResponseEntity.ok(ApiResponse.success(screenings));
     }
 
     // 특정 극장의 상영 정보 조회
     @GetMapping("/theater/{theaterId}")
-    public ResponseEntity<List<ScreeningDTO>> getScreeningsByTheaterId(@PathVariable Long theaterId) {
-        return ResponseEntity.ok(screeningService.getScreeningsByTheaterId(theaterId));
-    }
-
-    // 특정 극장, 특정 날짜의 상영 정보 조회
-    @GetMapping("/theater/{theaterId}/date/{date}")
-    public ResponseEntity<List<ScreeningDTO>> getScreeningsByTheaterAndDate(
+    public ResponseEntity<ApiResponse<List<ScreeningResponse>>> getScreeningsByTheater(
             @PathVariable Long theaterId,
-            @PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
-        return ResponseEntity.ok(screeningService.getScreeningsByTheaterAndDate(theaterId, date));
+            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
+        List<ScreeningResponse> screenings = screeningService.getScreeningsByTheater(theaterId, date);
+        return ResponseEntity.ok(ApiResponse.success(screenings));
     }
 
-    // 특정 극장, 특정 영화의 상영 정보 조회
-    @GetMapping("/theater/{theaterId}/movie/{movieId}")
-    public ResponseEntity<List<ScreeningDTO>> getScreeningsByTheaterAndMovie(
-            @PathVariable Long theaterId,
-            @PathVariable Long movieId) {
-        return ResponseEntity.ok(screeningService.getScreeningsByTheaterAndMovie(theaterId, movieId));
+    // 특정 스케줄의 상영 정보 조회
+    @GetMapping("/schedule/{scheduleId}")
+    public ResponseEntity<ApiResponse<List<ScreeningResponse>>> getScreeningsBySchedule(@PathVariable Long scheduleId) {
+        List<ScreeningResponse> screenings = screeningService.getScreeningsBySchedule(scheduleId);
+        return ResponseEntity.ok(ApiResponse.success(screenings));
     }
 
-    // 새 상영 정보 등록 (관리자용)
+    // 특정 상영 정보 상세 조회
+    @GetMapping("/{id}")
+    public ResponseEntity<ApiResponse<ScreeningResponse>> getScreeningById(@PathVariable Long id) {
+        ScreeningResponse screening = screeningService.getScreeningById(id);
+        return ResponseEntity.ok(ApiResponse.success(screening));
+    }
+
+    // 상영 정보 생성 (관리자용)
     @PostMapping
-    public ResponseEntity<ScreeningDTO> createScreening(@RequestBody ScreeningDTO screeningDTO) {
-        return new ResponseEntity<>(screeningService.createScreening(screeningDTO), HttpStatus.CREATED);
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<ApiResponse<ScreeningResponse>> createScreening(@Valid @RequestBody ScreeningRequest request) {
+        ScreeningResponse createdScreening = screeningService.createScreening(request);
+        return new ResponseEntity<>(ApiResponse.success("상영 정보가 성공적으로 등록되었습니다.", createdScreening), HttpStatus.CREATED);
     }
 
     // 상영 정보 수정 (관리자용)
     @PutMapping("/{id}")
-    public ResponseEntity<ScreeningDTO> updateScreening(
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<ApiResponse<ScreeningResponse>> updateScreening(
             @PathVariable Long id,
-            @RequestBody ScreeningDTO screeningDTO) {
-        return ResponseEntity.ok(screeningService.updateScreening(id, screeningDTO));
+            @Valid @RequestBody ScreeningRequest request) {
+        ScreeningResponse updatedScreening = screeningService.updateScreening(id, request);
+        return ResponseEntity.ok(ApiResponse.success("상영 정보가 성공적으로 수정되었습니다.", updatedScreening));
+    }
+
+    // 상영 정보 상태 변경 (관리자용)
+    @PatchMapping("/{id}/status")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<ApiResponse<ScreeningResponse>> updateScreeningStatus(
+            @PathVariable Long id,
+            @RequestParam String status) {
+        ScreeningResponse updatedScreening = screeningService.updateScreeningStatus(id, status);
+        return ResponseEntity.ok(ApiResponse.success("상영 정보 상태가 성공적으로 변경되었습니다.", updatedScreening));
     }
 
     // 상영 정보 삭제 (관리자용)
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteScreening(@PathVariable Long id) {
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<ApiResponse<Void>> deleteScreening(@PathVariable Long id) {
         screeningService.deleteScreening(id);
-        return ResponseEntity.noContent().build();
-    }
-    
-    // 상영 정보 상태 변경 (관리자용)
-    @PatchMapping("/{id}/status")
-    public ResponseEntity<ScreeningDTO> updateScreeningStatus(
-            @PathVariable Long id,
-            @RequestParam String status) {
-        return ResponseEntity.ok(screeningService.updateScreeningStatus(id, status));
-    }
-    
-    // 특정 날짜 범위의 상영 정보 조회
-    @GetMapping("/date-range")
-    public ResponseEntity<List<ScreeningDTO>> getScreeningsByDateRange(
-            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
-            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) {
-        return ResponseEntity.ok(screeningService.getScreeningsByDateRange(startDate, endDate));
-    }
-    
-    // 특정 날짜에 상영하는 영화 목록 조회
-    @GetMapping("/movies/date/{date}")
-    public ResponseEntity<List<MovieDTO>> getMoviesByScreeningDate(
-            @PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
-        return ResponseEntity.ok(screeningService.getMoviesByScreeningDate(date));
-    }
-    
-    // 특정 상영의 좌석 가용 상태 조회
-    @GetMapping("/{id}/seats")
-    public ResponseEntity<Map<String, Object>> getScreeningSeatsStatus(@PathVariable Long id) {
-        return ResponseEntity.ok(screeningService.getScreeningSeatsStatus(id));
+        return ResponseEntity.ok(ApiResponse.success("상영 정보가 성공적으로 삭제되었습니다.", null));
     }
 }
