@@ -14,23 +14,28 @@ export interface Ticket {
   screeningId: number;
   userId: number;
   seats: string[];
+
   ticketTypes: {
     adult: number;
     teen: number;
     child: number;
   };
+
   totalPrice: number;
   paymentStatus: 'pending' | 'completed' | 'cancelled';
   bookingDate: string;
+
   movie?: {
     id: number;
     title: string;
     posterUrl: string;
   };
+
   theater?: {
     name: string;
     screen: string;
   };
+
   screening?: {
     movie : Movie;
     theater : Theater;

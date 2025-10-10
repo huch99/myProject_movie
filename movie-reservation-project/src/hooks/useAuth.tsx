@@ -9,8 +9,9 @@ export interface AuthContextType {
   loading: boolean;
   login: (email: string, password: string) => Promise<boolean>;
   logout: () => void;
-  register: (nickname: string, email: string, password: string) => Promise<boolean>;
+  register: (name: string, email: string, password: string) => Promise<boolean>;
   loadUser: () => Promise<void>; // 사용자 정보를 다시 불러오는 함수
+  error:string | null;
 }
 
 // useAuth 커스텀 훅

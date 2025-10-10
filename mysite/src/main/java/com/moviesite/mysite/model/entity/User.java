@@ -1,15 +1,13 @@
 package com.moviesite.mysite.model.entity;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import jakarta.persistence.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "users")
@@ -18,12 +16,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class User {
+
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
-    @Column(nullable = false, unique = true)
-    private String username;
     
     @Column(nullable = false, unique = true)
     private String email;
@@ -34,135 +30,87 @@ public class User {
     @Column(nullable = false)
     private String name;
     
-    @Column(nullable = false)
+    private String nickname;
+    
     private String phone;
     
+    @Column(name = "birth_date")
     private LocalDate birthDate;
+    
+    @Enumerated(EnumType.STRING)
+    private Gender gender;
+    
+    @Column(name = "profile_image_url")
+    private String profileImageUrl;
     
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Role role;
     
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-    private List<Booking> bookings = new ArrayList<>();
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private UserStatus status;
     
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-    private List<Review> reviews = new ArrayList<>();
+    @Column(name = "last_login_at")
+    private LocalDateTime lastLoginAt;
     
+    @Column(name = "created_at")
     private LocalDateTime createdAt;
     
+    @Column(name = "updated_at")
     private LocalDateTime updatedAt;
     
+    @Column(name = "marketing_agree")
+    private Boolean marketingAgree;
+    
+    @Column(name = "terms_agree", nullable = false)
+    private Boolean termsAgree;
+    
+    // 성별 열거형
+    public enum Gender {
+        MALE, FEMALE, OTHER
+    }
+    
+    // 사용자 권한 열거형
     public enum Role {
         USER, ADMIN
     }
     
+    // 사용자 상태 열거형
+    public enum UserStatus {
+        ACTIVE, INACTIVE, SUSPENDED
+    }
+    
+    // JPA 엔티티 생명주기 콜백 메서드
     @PrePersist
     protected void onCreate() {
-        createdAt = LocalDateTime.now();
-        updatedAt = LocalDateTime.now();
+        this.createdAt = LocalDateTime.now();
+        this.updatedAt = LocalDateTime.now();
+        if (this.role == null) {
+            this.role = Role.USER;
+        }
+        if (this.status == null) {
+            this.status = UserStatus.ACTIVE;
+        }
+        if (this.marketingAgree == null) {
+            this.marketingAgree = false;
+        }
     }
     
     @PreUpdate
     protected void onUpdate() {
-        updatedAt = LocalDateTime.now();
+        this.updatedAt = LocalDateTime.now();
     }
     
- // Getter 메서드
-    public Long getId() {
-        return id;
+    // 편의 메서드: 관리자 여부 확인
+    @Transient
+    public boolean isAdmin() {
+        return this.role == Role.ADMIN;
     }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public LocalDate getBirthDate() {
-        return birthDate;
-    }
-
-    public Role getRole() {
-        return role;
-    }
-
-    public List<Booking> getBookings() {
-        return bookings;
-    }
-
-    public List<Review> getReviews() {
-        return reviews;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public LocalDateTime getUpdatedAt() {
-        return updatedAt;
-    }
-
-    // Setter 메서드
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public void setBirthDate(LocalDate birthDate) {
-        this.birthDate = birthDate;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
-    }
-
-    public void setBookings(List<Booking> bookings) {
-        this.bookings = bookings;
-    }
-
-    public void setReviews(List<Review> reviews) {
-        this.reviews = reviews;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public void setUpdatedAt(LocalDateTime updatedAt) {
-        this.updatedAt = updatedAt;
+    
+    // 편의 메서드: 활성 계정 여부 확인
+    @Transient
+    public boolean isActive() {
+        return this.status == UserStatus.ACTIVE;
     }
 }

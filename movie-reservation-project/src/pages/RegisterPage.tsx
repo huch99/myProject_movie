@@ -41,7 +41,7 @@ const RegisterPage: React.FC = () => {
   
   const handleRegisterSubmit = async (formData: RegisterFormData) => {
     try {
-      await register(formData); // useAuth 훅의 register 함수 호출
+      await register(formData.name, formData.email, formData.password); // useAuth 훅의 register 함수 호출
       alert('회원가입이 완료되었습니다. 로그인 페이지로 이동합니다.');
       navigate('/login');
     } catch (err) {

@@ -1,11 +1,11 @@
 package com.moviesite.mysite.model.entity;
 
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
@@ -16,8 +16,8 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Review {
-    
-    @Id
+	
+	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
@@ -33,78 +33,59 @@ public class Review {
     private BigDecimal rating;
     
     @Column(columnDefinition = "TEXT")
-    private String comment;
+    private String content;
     
+    @Column(nullable = false)
+    private Boolean spoiler;
+    
+    @Column(nullable = false)
+    private Integer likes;
+    
+    @Column(name = "created_at")
     private LocalDateTime createdAt;
     
+    @Column(name = "updated_at")
     private LocalDateTime updatedAt;
     
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private ReviewStatus status;
+    
+    // 리뷰 상태 열거형
+    public enum ReviewStatus {
+        ACTIVE, DELETED, HIDDEN
+    }
+    
+    // JPA 엔티티 생명주기 콜백 메서드
     @PrePersist
     protected void onCreate() {
-        createdAt = LocalDateTime.now();
-        updatedAt = LocalDateTime.now();
+        this.createdAt = LocalDateTime.now();
+        this.updatedAt = LocalDateTime.now();
+        if (this.likes == null) {
+            this.likes = 0;
+        }
+        if (this.spoiler == null) {
+            this.spoiler = false;
+        }
+        if (this.status == null) {
+            this.status = ReviewStatus.ACTIVE;
+        }
     }
     
     @PreUpdate
     protected void onUpdate() {
-        updatedAt = LocalDateTime.now();
+        this.updatedAt = LocalDateTime.now();
     }
     
- // Getter 메서드
-    public Long getId() {
-        return id;
+    // 편의 메서드: 리뷰 활성화 여부 확인
+    @Transient
+    public boolean isActive() {
+        return this.status == ReviewStatus.ACTIVE;
     }
-
-    public User getUser() {
-        return user;
-    }
-
-    public Movie getMovie() {
-        return movie;
-    }
-
-    public BigDecimal getRating() {
-        return rating;
-    }
-
-    public String getComment() {
-        return comment;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public LocalDateTime getUpdatedAt() {
-        return updatedAt;
-    }
-
-    // Setter 메서드
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public void setMovie(Movie movie) {
-        this.movie = movie;
-    }
-
-    public void setRating(BigDecimal rating) {
-        this.rating = rating;
-    }
-
-    public void setComment(String comment) {
-        this.comment = comment;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public void setUpdatedAt(LocalDateTime updatedAt) {
-        this.updatedAt = updatedAt;
+    
+    // 편의 메서드: 리뷰 숨김 여부 확인
+    @Transient
+    public boolean isHidden() {
+        return this.status == ReviewStatus.HIDDEN;
     }
 }

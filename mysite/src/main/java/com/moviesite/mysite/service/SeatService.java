@@ -1,175 +1,215 @@
 package com.moviesite.mysite.service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.stream.Collectors;
-
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.moviesite.mysite.exception.ResourceNotFoundException;
-import com.moviesite.mysite.model.dto.response.SeatResponse;
-import com.moviesite.mysite.model.entity.Booking;
-import com.moviesite.mysite.model.entity.BookingSeat;
+import com.moviesite.mysite.dto.SeatDTO;
+import com.moviesite.mysite.model.entity.Screen;
 import com.moviesite.mysite.model.entity.Seat;
-import com.moviesite.mysite.model.entity.SeatType;
-import com.moviesite.mysite.repository.BookingRepository;
-import com.moviesite.mysite.repository.BookingSeatRepository;
+import com.moviesite.mysite.repository.ReservationSeatRepository;
+import com.moviesite.mysite.repository.ScreenRepository;
 import com.moviesite.mysite.repository.SeatRepository;
-import com.moviesite.mysite.repository.SeatTypeRepository;
 
-import lombok.RequiredArgsConstructor;
+import jakarta.persistence.EntityNotFoundException;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class SeatService {
-	@Autowired
-	private SeatRepository seatRepository;
-    private BookingRepository bookingRepository;
-    private BookingSeatRepository bookingSeatRepository;
-    private SeatTypeRepository seatTypeRepository;
 
-    @Transactional(readOnly = true)
-    public List<SeatResponse> getSeatsByScreen(Long screenId) {
+	private final SeatRepository seatRepository;
+    private final ScreenRepository screenRepository;
+    private final ReservationSeatRepository reservationSeatRepository;
+
+    // 특정 좌석 정보 조회
+    public SeatDTO getSeatById(Long id) {
+        Seat seat = seatRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Seat not found with id: " + id));
+        return SeatDTO.fromEntity(seat);
+    }
+
+    // 특정 상영관의 모든 좌석 조회
+    public List<SeatDTO> getSeatsByScreenId(Long screenId) {
+        return seatRepository.findByScreenId(screenId).stream()
+                .map(SeatDTO::fromEntity)
+                .collect(Collectors.toList());
+    }
+
+    // 특정 상영관의 좌석 배치도 조회
+    public Map<String, List<SeatDTO>> getScreenSeatLayout(Long screenId) {
         List<Seat> seats = seatRepository.findByScreenId(screenId);
-        return seats.stream()
-                .map(SeatResponse::fromEntity)
+        Map<String, List<SeatDTO>> seatLayout = new LinkedHashMap<>();
+        
+        // 행별로 좌석 그룹화
+        seats.stream()
+                .map(SeatDTO::fromEntity)
+                .forEach(seat -> {
+                    String rowName = seat.getRowName();
+                    if (!seatLayout.containsKey(rowName)) {
+                        seatLayout.put(rowName, new ArrayList<>());
+                    }
+                    seatLayout.get(rowName).add(seat);
+                });
+        
+        // 각 행 내에서 열 번호순으로 정렬
+        seatLayout.forEach((row, seatList) -> 
+                seatList.sort(Comparator.comparing(SeatDTO::getColumnNumber)));
+        
+        return seatLayout;
+    }
+
+    // 특정 타입의 좌석 조회
+    public List<SeatDTO> getSeatsByType(Long screenId, String seatType) {
+        Seat.SeatType type = Seat.SeatType.valueOf(seatType);
+        return seatRepository.findByScreenIdAndSeatType(screenId, type).stream()
+                .map(SeatDTO::fromEntity)
                 .collect(Collectors.toList());
     }
 
-    @Transactional(readOnly = true)
-    public List<SeatResponse> getAvailableSeatsByScreening(Long screeningId) {
-        // 1. 상영관의 모든 좌석 조회
-        List<Booking> bookings = bookingRepository.findByScreeningIdAndStatus(
-                screeningId, Booking.BookingStatus.CONFIRMED);
+    // 새 좌석 등록
+    @Transactional
+    public SeatDTO createSeat(SeatDTO seatDTO) {
+        Screen screen = screenRepository.findById(seatDTO.getScreenId())
+                .orElseThrow(() -> new EntityNotFoundException("Screen not found with id: " + seatDTO.getScreenId()));
         
-        if (bookings.isEmpty()) {
-            // 예약이 없으면 모든 좌석이 가용 상태
-            List<Seat> allSeats = seatRepository.findByScreenId(
-                    bookingRepository.findById(screeningId)
-                            .orElseThrow(() -> new ResourceNotFoundException("Screening not found"))
-                            .getScreening().getScreen().getId());
-            return allSeats.stream()
-                    .filter(seat -> seat.getIsActive() == true) // Boolean을 명시적으로 비교
-                    .map(SeatResponse::fromEntity)
-                    .collect(Collectors.toList());
-        }
+        Seat seat = seatDTO.toEntity();
+        seat.setScreen(screen);
         
-        // 2. 예약된 좌석 ID 목록 조회
-        Set<Long> bookedSeatIds = bookings.stream()
-                .flatMap(booking -> booking.getBookingSeats().stream())
-                .<Long>map(bookingSeat -> bookingSeat.getSeat().getId())
-                .collect(Collectors.toSet());
-        
-        // 3. 상영관의 모든 좌석 중 예약되지 않은 좌석만 필터링
-        Long screenId = bookings.get(0).getScreening().getScreen().getId();
-        List<Seat> allSeats = seatRepository.findByScreenId(screenId);
-        
-        return allSeats.stream()
-                .filter(seat -> seat.getIsActive() && !bookedSeatIds.contains(seat.getId()))
-                .map(SeatResponse::fromEntity)
-                .collect(Collectors.toList());
+        Seat savedSeat = seatRepository.save(seat);
+        return SeatDTO.fromEntity(savedSeat);
     }
 
-    @Transactional(readOnly = true)
-    public List<SeatResponse> getBookedSeatsByScreening(Long screeningId) {
-        // 확정된 예약만 조회
-        List<Booking> confirmedBookings = bookingRepository.findByScreeningIdAndStatus(
-                screeningId, Booking.BookingStatus.CONFIRMED);
-        
-        if (confirmedBookings.isEmpty()) {
-            return new ArrayList<>();
+    // 여러 좌석 일괄 생성
+    @Transactional
+    public List<SeatDTO> createSeats(List<SeatDTO> seatDTOs) {
+        if (seatDTOs.isEmpty()) {
+            return Collections.emptyList();
         }
         
-        // 예약된 모든 좌석 조회
-        List<BookingSeat> bookingSeats = confirmedBookings.stream()
-                .flatMap(booking -> booking.getBookingSeats().stream())
-                .collect(Collectors.toList());
+        Long screenId = seatDTOs.get(0).getScreenId();
+        Screen screen = screenRepository.findById(screenId)
+                .orElseThrow(() -> new EntityNotFoundException("Screen not found with id: " + screenId));
         
-        // 좌석 정보 변환
-        return bookingSeats.stream()
-                .map(bookingSeat -> {
-                    SeatResponse response = SeatResponse.fromEntity(bookingSeat.getSeat());
-                    response.setIsBooked(true); // 예약된 좌석으로 표시
-                    return response;
+        List<Seat> seats = seatDTOs.stream()
+                .map(dto -> {
+                    Seat seat = dto.toEntity();
+                    seat.setScreen(screen);
+                    return seat;
                 })
                 .collect(Collectors.toList());
+        
+        List<Seat> savedSeats = seatRepository.saveAll(seats);
+        return savedSeats.stream()
+                .map(SeatDTO::fromEntity)
+                .collect(Collectors.toList());
     }
 
-    @Transactional(readOnly = true)
-    public boolean isSeatAvailableForScreening(Long seatId, Long screeningId) {
-        // 1. 좌석이 존재하는지 확인
-        Seat seat = seatRepository.findById(seatId)
-                .orElseThrow(() -> new ResourceNotFoundException("Seat not found with id: " + seatId));
-        
-        // 2. 좌석이 활성 상태인지 확인
-        if (!seat.getIsActive()) {
-            return false;
-        }
-        
-        // 3. 해당 상영에 대해 예약된 좌석인지 확인
-        List<Booking> confirmedBookings = bookingRepository.findByScreeningIdAndStatus(
-                screeningId, Booking.BookingStatus.CONFIRMED);
-        
-        if (confirmedBookings.isEmpty()) {
-            return true; // 예약이 없으면 좌석은 가용 상태
-        }
-        
-        // 예약된 좌석 ID 목록에 포함되어 있는지 확인
-        Set<Long> bookedSeatIds = confirmedBookings.stream()
-                .flatMap(booking -> booking.getBookingSeats().stream())
-                .map(bookingSeat -> bookingSeat.getSeat().getId())
-                .collect(Collectors.toSet());
-        
-        return !bookedSeatIds.contains(seatId);
-    }
-
-    @Transactional(readOnly = true)
-    public Map<Long, List<SeatResponse>> getSeatMapByScreenId(Long screenId) {
-        List<Seat> seats = seatRepository.findByScreenId(screenId);
-        
-        // 좌석을 행(row)별로 그룹화
-        return seats.stream()
-                .map(SeatResponse::fromEntity)
-                .collect(Collectors.groupingBy(
-                        seatResponse -> (long) seatResponse.getSeatIdentifier().charAt(0)
-                ));
-    }
-
-    @Transactional(readOnly = true)
-    public SeatResponse getSeatById(Long id) {
-        Seat seat = seatRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Seat not found with id: " + id));
-        return SeatResponse.fromEntity(seat);
-    }
-
-    // 동시 예약 처리를 위한 락 기반 좌석 확보 메서드
+    // 좌석 정보 수정
     @Transactional
-    public synchronized boolean lockSeatsForBooking(List<Long> seatIds, Long screeningId) {
-        // 모든 좌석이 가용 상태인지 확인
-        for (Long seatId : seatIds) {
-            if (!isSeatAvailableForScreening(seatId, screeningId)) {
-                return false; // 하나라도 이미 예약된 좌석이 있으면 실패
-            }
+    public SeatDTO updateSeat(Long id, SeatDTO seatDTO) {
+        Seat existingSeat = seatRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Seat not found with id: " + id));
+        
+        // 기존 좌석 정보 업데이트
+        Seat updatedSeat = seatDTO.toEntity();
+        updatedSeat.setId(id);
+        updatedSeat.setScreen(existingSeat.getScreen());
+        
+        // 생성일자 유지
+        updatedSeat.setCreatedAt(existingSeat.getCreatedAt());
+        
+        Seat savedSeat = seatRepository.save(updatedSeat);
+        return SeatDTO.fromEntity(savedSeat);
+    }
+
+    // 좌석 삭제
+    @Transactional
+    public void deleteSeat(Long id) {
+        if (!seatRepository.existsById(id)) {
+            throw new EntityNotFoundException("Seat not found with id: " + id);
         }
-        
-        // 실제 구현에서는 여기서 임시 예약 상태를 만들거나 Redis 등을 활용한 분산 락 구현 필요
-        // 현재는 단일 서버 환경을 가정하고 synchronized 메서드로 간단히 구현
-        
-        return true; // 모든 좌석 락 성공
+        seatRepository.deleteById(id);
     }
     
-    // 좌석 타입별 가격 정보 조회
-    @Transactional(readOnly = true)
-    public Map<String, Integer> getSeatTypePrices() {
-        List<SeatType> seatTypes = seatTypeRepository.findAll();
-        return seatTypes.stream()
-                .collect(Collectors.toMap(
-                        SeatType::getName,
-                        SeatType::getPriceAdditional
-                ));
+    // 좌석 활성화/비활성화
+    @Transactional
+    public SeatDTO updateSeatStatus(Long id, Boolean isActive) {
+        Seat seat = seatRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Seat not found with id: " + id));
+        
+        seat.setIsActive(isActive);
+        Seat savedSeat = seatRepository.save(seat);
+        return SeatDTO.fromEntity(savedSeat);
+    }
+    
+    // 특정 상영 일정에 예약된 좌석 조회
+    public List<SeatDTO> getReservedSeatsByScheduleId(Long scheduleId) {
+        List<Long> reservedSeatIds = reservationSeatRepository.findSeatIdsByScheduleId(scheduleId);
+        if (reservedSeatIds.isEmpty()) {
+            return Collections.emptyList();
+        }
+        
+        List<Seat> reservedSeats = seatRepository.findAllById(reservedSeatIds);
+        return reservedSeats.stream()
+                .map(SeatDTO::fromEntity)
+                .collect(Collectors.toList());
+    }
+    
+ // 특정 상영 일정에 예약 가능한 좌석 조회
+    public List<SeatDTO> getAvailableSeatsByScheduleId(Long scheduleId) {
+        // 해당 상영관의 모든 좌석 조회
+        Long screenId = reservationSeatRepository.findScreenIdByScheduleId(scheduleId);
+        if (screenId == null) {
+            throw new EntityNotFoundException("Screen not found for schedule id: " + scheduleId);
+        }
+        
+        // 예약 가능한 좌석 목록 조회 
+        List<Seat> allSeats = seatRepository.findByScreenIdAndIsActiveTrue(screenId);
+        
+        // 예약된 좌석 ID 목록 조회
+        List<Long> reservedSeatIds = reservationSeatRepository.findSeatIdsByScheduleId(scheduleId);
+        
+        // 예약되지 않은 좌석만 필터링
+        return allSeats.stream()
+                .filter(seat -> !reservedSeatIds.contains(seat.getId()))
+                .map(SeatDTO::fromEntity)
+                .collect(Collectors.toList());
+    }
+    
+    // 특정 행의 좌석 조회
+    public List<SeatDTO> getSeatsByRow(Long screenId, String rowName) {
+        return seatRepository.findByScreenIdAndRowNameOrderByColumnNumber(screenId, rowName).stream()
+                .map(SeatDTO::fromEntity)
+                .collect(Collectors.toList());
+    }
+    
+    // 특정 좌석 라벨로 좌석 조회
+    public SeatDTO getSeatBySeatLabel(Long screenId, String seatLabel) {
+        Seat seat = seatRepository.findBySeatLabel(screenId, seatLabel);
+        if (seat == null) {
+            throw new EntityNotFoundException("Seat not found with label: " + seatLabel + " in screen: " + screenId);
+        }
+        return SeatDTO.fromEntity(seat);
+    }
+    
+    // 특정 상영관의 모든 행 목록 조회
+    public List<String> getRowsByScreenId(Long screenId) {
+        return seatRepository.findByScreenId(screenId).stream()
+                .map(Seat::getRowName)
+                .distinct()
+                .sorted()
+                .collect(Collectors.toList());
+    }
+    
+    // 특정 상영관의 모든 열 목록 조회
+    public List<Integer> getColumnsByScreenId(Long screenId) {
+        return seatRepository.findByScreenId(screenId).stream()
+                .map(Seat::getColumnNumber)
+                .distinct()
+                .sorted()
+                .collect(Collectors.toList());
     }
 }

@@ -200,79 +200,6 @@ const EmptyState = styled.div`
   color: #666;
 `;
 
-// 예시 예매 데이터 (실제로는 API에서 가져옵니다)
-const mockBookings: Ticket[] = [
-    {
-        id: 1,
-        screeningId: 1,
-        userId: 1,
-        seats: ['A1', 'A2'],
-        ticketTypes: { adult: 2, teen: 0, child: 0 },
-        totalPrice: 28000,
-        paymentStatus: 'completed',
-        bookingDate: '2025-09-28T14:30:00',
-        // 추가 정보 (실제로는 API 응답에 포함될 수 있는 정보)
-        movie: {
-            id: 1,
-            title: '듄: 파트 2',
-            posterUrl: '/assets/images/posters/dune2.jpg',
-        },
-        theater: {
-            name: '강남',
-            screen: '2관 (IMAX)',
-        },
-        screening: {
-            startTime: '2025-10-05T15:30:00',
-        }
-    },
-    {
-        id: 2,
-        screeningId: 2,
-        userId: 1,
-        seats: ['C5', 'C6', 'C7'],
-        ticketTypes: { adult: 2, teen: 1, child: 0 },
-        totalPrice: 40000,
-        paymentStatus: 'cancelled',
-        bookingDate: '2025-09-15T10:15:00',
-        // 추가 정보
-        movie: {
-            id: 2,
-            title: '데드풀 & 울버린',
-            posterUrl: '/assets/images/posters/deadpool.jpg',
-        },
-        theater: {
-            name: '용산',
-            screen: '1관',
-        },
-        screening: {
-            startTime: '2025-09-20T19:00:00',
-        }
-    },
-    {
-        id: 3,
-        screeningId: 3,
-        userId: 1,
-        seats: ['F8', 'F9'],
-        ticketTypes: { adult: 1, teen: 1, child: 0 },
-        totalPrice: 26000,
-        paymentStatus: 'completed',
-        bookingDate: '2025-08-05T16:45:00',
-        // 추가 정보
-        movie: {
-            id: 3,
-            title: '원더우먼 1984',
-            posterUrl: '/assets/images/posters/wonderwoman.jpg',
-        },
-        theater: {
-            name: '홍대',
-            screen: '3관 (4DX)',
-        },
-        screening: {
-            startTime: '2025-08-10T13:20:00',
-        }
-    },
-];
-
 const BookingHistoryPage: React.FC = () => {
     const [activeTab, setActiveTab] = useState<'all' | 'current' | 'past' | 'cancelled'>('all');
     const [bookings, setBookings] = useState<Ticket[]>([]);
@@ -286,7 +213,6 @@ const BookingHistoryPage: React.FC = () => {
                 // 실제 API 호출 대신 목업 데이터 사용
                 await new Promise(resolve => setTimeout(resolve, 500)); // API 호출 시뮬레이션
 
-                setBookings(mockBookings);
                 setLoading(false);
             } catch (error) {
                 console.error('Error fetching bookings:', error);

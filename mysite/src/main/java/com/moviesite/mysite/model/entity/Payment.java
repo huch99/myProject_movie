@@ -1,131 +1,107 @@
 package com.moviesite.mysite.model.entity;
 
-import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import jakarta.persistence.*;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "payments")
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Payment {
-    
-    @Id
+	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "booking_id", nullable = false)
-    private Booking booking;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "reservation_id", nullable = false)
+    private Reservation reservation;
     
-    @Column(nullable = false, unique = true)
-    private String paymentNumber;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+    
+    @Column(nullable = false, precision = 10, scale = 2)
+    private BigDecimal amount;
+    
+    @Column(name = "payment_method", nullable = false)
+    private String paymentMethod;
     
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private PaymentMethod paymentMethod;
+    @Column(name = "payment_status", nullable = false)
+    private PaymentStatus paymentStatus;
     
-    @Column(nullable = false)
-    private Integer amount;
+    @Column(name = "transaction_id")
+    private String transactionId;
     
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private PaymentStatus status;
+    @Column(name = "card_company")
+    private String cardCompany;
     
-    private LocalDateTime paymentDate;
+    @Column(name = "card_number")
+    private String cardNumber;
     
+    private Integer installment;
+    
+    @Column(name = "discount_amount", precision = 10, scale = 2)
+    private BigDecimal discountAmount;
+    
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "coupon_id")
+    private Coupon coupon;
+    
+    @Column(name = "payment_time")
+    private LocalDateTime paymentTime;
+    
+    @Column(name = "refund_time")
+    private LocalDateTime refundTime;
+    
+    @Column(name = "created_at")
     private LocalDateTime createdAt;
     
+    @Column(name = "updated_at")
     private LocalDateTime updatedAt;
     
-    public enum PaymentMethod {
-        CREDIT_CARD, BANK_TRANSFER, MOBILE, KAKAO_PAY, NAVER_PAY, PAYCO
-    }
-    
+    // 결제 상태 열거형
     public enum PaymentStatus {
-        PENDING, COMPLETED, FAILED, REFUNDED
+        PENDING, COMPLETED, FAILED, REFUNDED, CANCELED
     }
     
+    // JPA 엔티티 생명주기 콜백 메서드
     @PrePersist
     protected void onCreate() {
-        createdAt = LocalDateTime.now();
-        updatedAt = LocalDateTime.now();
+        this.createdAt = LocalDateTime.now();
+        this.updatedAt = LocalDateTime.now();
+        if (this.discountAmount == null) {
+            this.discountAmount = BigDecimal.ZERO;
+        }
+        if (this.installment == null) {
+            this.installment = 0;
+        }
     }
     
     @PreUpdate
     protected void onUpdate() {
-        updatedAt = LocalDateTime.now();
+        this.updatedAt = LocalDateTime.now();
     }
     
- // Getter 메서드
-    public Long getId() {
-        return id;
+    // 편의 메서드: 결제 완료 여부 확인
+    @Transient
+    public boolean isCompleted() {
+        return this.paymentStatus == PaymentStatus.COMPLETED;
     }
-
-    public Booking getBooking() {
-        return booking;
-    }
-
-    public String getPaymentNumber() {
-        return paymentNumber;
-    }
-
-    public PaymentMethod getPaymentMethod() {
-        return paymentMethod;
-    }
-
-    public Integer getAmount() {
-        return amount;
-    }
-
-    public PaymentStatus getStatus() {
-        return status;
-    }
-
-    public LocalDateTime getPaymentDate() {
-        return paymentDate;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public LocalDateTime getUpdatedAt() {
-        return updatedAt;
-    }
-
-    // Setter 메서드
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setBooking(Booking booking) {
-        this.booking = booking;
-    }
-
-    public void setPaymentNumber(String paymentNumber) {
-        this.paymentNumber = paymentNumber;
-    }
-
-    public void setPaymentMethod(PaymentMethod paymentMethod) {
-        this.paymentMethod = paymentMethod;
-    }
-
-    public void setAmount(Integer amount) {
-        this.amount = amount;
-    }
-
-    public void setStatus(PaymentStatus status) {
-        this.status = status;
-    }
-
-    public void setPaymentDate(LocalDateTime paymentDate) {
-        this.paymentDate = paymentDate;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public void setUpdatedAt(LocalDateTime updatedAt) {
-        this.updatedAt = updatedAt;
+    
+    // 편의 메서드: 환불 가능 여부 확인
+    @Transient
+    public boolean isRefundable() {
+        return this.paymentStatus == PaymentStatus.COMPLETED && 
+               this.reservation != null && 
+               this.reservation.isCancelable();
     }
 }

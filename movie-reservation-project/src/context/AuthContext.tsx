@@ -1,3 +1,8 @@
+import { createContext, useEffect, useState, type ReactNode } from "react";
+import type { AuthContextType } from "../hooks/useAuth";
+import { useNavigate } from "react-router";
+import authService from "../service/authService";
+
 // 초기 Context 값
 const initialAuthContext: AuthContextType = {
   user: null,
@@ -6,7 +11,8 @@ const initialAuthContext: AuthContextType = {
   login: async () => false,
   logout: () => {},
   register: async () => false,
-  loadUser: async () => {}
+  loadUser: async () => {},
+  error:null
 };
 
 // Context 생성
@@ -21,6 +27,7 @@ interface AuthProviderProps {
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [user, setUser] = useState(initialAuthContext.user);
   const [loading, setLoading] = useState(initialAuthContext.loading);
+  const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
 
   // 사용자 정보 로드 함수
@@ -52,7 +59,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const login = async (email: string, password: string): Promise<boolean> => {
     try {
       setLoading(true);
-      const loggedInUser = await authService.login(email, password);
+      const loggedInUser = await authService.login({email, password});
       setUser(loggedInUser);
       navigate('/');
       return true;
@@ -73,10 +80,10 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   };
 
   // 회원가입 함수
-  const register = async (nickname: string, email: string, password: string): Promise<boolean> => {
+  const register = async (name: string, email: string, password: string): Promise<boolean> => {
     try {
       setLoading(true);
-      await authService.register(nickname, email, password);
+      await authService.register({name, email, password});
       navigate('/login');
       return true;
     } catch (error) {
@@ -95,7 +102,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     login,
     logout,
     register,
-    loadUser
+    loadUser,
+    error
   };
 
   return (

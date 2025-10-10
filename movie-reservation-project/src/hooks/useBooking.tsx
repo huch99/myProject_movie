@@ -2,8 +2,9 @@
 // Booking 상태 정의
 
 import { useCallback, useEffect, useMemo, useState } from "react";
-import type { Screening, Seat, Theater } from "../types/booking.types";
+import type { Seat } from "../types/booking.types";
 import type { Movie } from "../types/movie.types";
+import type { Screening, Theater } from "../types/theater.types";
 
 // ==========================================================
 export interface BookingState {

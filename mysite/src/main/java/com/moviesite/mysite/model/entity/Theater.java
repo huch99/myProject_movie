@@ -2,9 +2,18 @@ package com.moviesite.mysite.model.entity;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.PreUpdate;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -19,8 +28,8 @@ import lombok.NoArgsConstructor;
 public class Theater {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     
     @Column(nullable = false)
     private String name;
@@ -31,100 +40,73 @@ public class Theater {
     @Column(nullable = false)
     private String address;
     
+    private String contact;
+    
     private String phone;
     
-    @Column(nullable = false)
-    private Integer totalScreens;
+    @Column(columnDefinition = "TEXT")
+    private String facilities;
     
-    @OneToMany(mappedBy = "theater", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Screen> screens = new ArrayList<>();
+    @Column(name = "special_screens", columnDefinition = "TEXT")
+    private String specialScreens;
     
+    @Column(name = "image_url")
+    private String imageUrl;
+    
+    @Column(columnDefinition = "TEXT")
+    private String description;
+    
+    @Column(columnDefinition = "TEXT")
+    private String features;
+    
+    private String parking;
+    
+    private String transportation;
+    
+    private Integer capacity;
+    
+    private String type;
+    
+    @Column(name = "created_at")
     private LocalDateTime createdAt;
     
+    @Column(name = "updated_at")
     private LocalDateTime updatedAt;
     
+ // 편의 메서드: 쉼표로 구분된 문자열을 리스트로 변환
+    @Transient
+    public List<String> getFacilitiesList() {
+        if (this.facilities == null || this.facilities.isEmpty()) {
+            return new ArrayList<>();
+        }
+        return Arrays.asList(this.facilities.split(","));
+    }
+    
+    @Transient
+    public List<String> getSpecialScreensList() {
+        if (this.specialScreens == null || this.specialScreens.isEmpty()) {
+            return new ArrayList<>();
+        }
+        return Arrays.asList(this.specialScreens.split(","));
+    }
+    
+    @Transient
+    public List<String> getFeaturesList() {
+        if (this.features == null || this.features.isEmpty()) {
+            return new ArrayList<>();
+        }
+        return Arrays.asList(this.features.split(","));
+    }
+    
+    // JPA 엔티티 생명주기 콜백 메서드
     @PrePersist
     protected void onCreate() {
-        createdAt = LocalDateTime.now();
-        updatedAt = LocalDateTime.now();
+        this.createdAt = LocalDateTime.now();
+        this.updatedAt = LocalDateTime.now();
     }
     
     @PreUpdate
     protected void onUpdate() {
-        updatedAt = LocalDateTime.now();
-    }
-    
- // Getter 메서드
-    public Long getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getLocation() {
-        return location;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public Integer getTotalScreens() {
-        return totalScreens;
-    }
-
-    public List<Screen> getScreens() {
-        return screens;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public LocalDateTime getUpdatedAt() {
-        return updatedAt;
-    }
-
-    // Setter 메서드
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public void setTotalScreens(Integer totalScreens) {
-        this.totalScreens = totalScreens;
-    }
-
-    public void setScreens(List<Screen> screens) {
-        this.screens = screens;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public void setUpdatedAt(LocalDateTime updatedAt) {
-        this.updatedAt = updatedAt;
+        this.updatedAt = LocalDateTime.now();
     }
 }

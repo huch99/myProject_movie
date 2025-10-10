@@ -1,124 +1,107 @@
 package com.moviesite.mysite.model.entity;
 
-import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import jakarta.persistence.*;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Table(name = "screenings")
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Screening {
-	 @Id
-	    @GeneratedValue(strategy = GenerationType.IDENTITY)
-	    private Long id;
-	    
-	    @ManyToOne(fetch = FetchType.LAZY)
-	    @JoinColumn(name = "movie_id", nullable = false)
-	    private Movie movie;
-	    
-	    @ManyToOne(fetch = FetchType.LAZY)
-	    @JoinColumn(name = "screen_id", nullable = false)
-	    private Screen screen;
-	    
-	    @Column(nullable = false)
-	    private LocalDateTime startTime;
-	    
-	    @Column(nullable = false)
-	    private LocalDateTime endTime;
-	    
-	    @Column(nullable = false)
-	    private Integer basePrice;
-	    
-	    @OneToMany(mappedBy = "screening", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	    private List<Booking> bookings = new ArrayList<>();
-	    
-	    private LocalDateTime createdAt;
-	    
-	    private LocalDateTime updatedAt;
-	    
-	    @PrePersist
-	    protected void onCreate() {
-	        createdAt = LocalDateTime.now();
-	        updatedAt = LocalDateTime.now();
-	    }
-	    
-	    @PreUpdate
-	    protected void onUpdate() {
-	        updatedAt = LocalDateTime.now();
-	    }
-	    
-	    // Getter 메서드
-	    public Long getId() {
-	        return id;
-	    }
-	    
-	    public Movie getMovie() {
-	        return movie;
-	    }
-	    
-	    public Screen getScreen() {
-	        return screen;
-	    }
-	    
-	    public LocalDateTime getStartTime() {
-	        return startTime;
-	    }
-	    
-	    public LocalDateTime getEndTime() {
-	        return endTime;
-	    }
-	    
-	    public Integer getBasePrice() {
-	        return basePrice;
-	    }
-	    
-	    public List<Booking> getBookings() {
-	        return bookings;
-	    }
-	    
-	    public LocalDateTime getCreatedAt() {
-	        return createdAt;
-	    }
-	    
-	    public LocalDateTime getUpdatedAt() {
-	        return updatedAt;
-	    }
-	    
-	    // Setter 메서드
-	    public void setId(Long id) {
-	        this.id = id;
-	    }
-	    
-	    public void setMovie(Movie movie) {
-	        this.movie = movie;
-	    }
-	    
-	    public void setScreen(Screen screen) {
-	        this.screen = screen;
-	    }
-	    
-	    public void setStartTime(LocalDateTime startTime) {
-	        this.startTime = startTime;
-	    }
-	    
-	    public void setEndTime(LocalDateTime endTime) {
-	        this.endTime = endTime;
-	    }
-	    
-	    public void setBasePrice(Integer basePrice) {
-	        this.basePrice = basePrice;
-	    }
-	    
-	    public void setBookings(List<Booking> bookings) {
-	        this.bookings = bookings;
-	    }
-	    
-	    public void setCreatedAt(LocalDateTime createdAt) {
-	        this.createdAt = createdAt;
-	    }
-	    
-	    public void setUpdatedAt(LocalDateTime updatedAt) {
-	        this.updatedAt = updatedAt;
-	    }
+	
+	@Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "movie_id", nullable = false)
+    private Movie movie;
+    
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "screen_id", nullable = false)
+    private Screen screen;
+    
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "schedule_id", nullable = false)
+    private Schedule schedule;
+    
+    @Column(name = "screening_date", nullable = false)
+    private LocalDate screeningDate;
+    
+    @Column(name = "screening_time", nullable = false)
+    private LocalTime screeningTime;
+    
+    @Column(name = "end_time", nullable = false)
+    private LocalTime endTime;
+    
+    @Column(name = "is_full", nullable = false)
+    private Boolean isFull;
+    
+    @Column(name = "available_seats", nullable = false)
+    private Integer availableSeats;
+    
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private ScreeningStatus status;
+    
+    @Column(name = "created_at")
+    private LocalDateTime createdAt;
+    
+    @Column(name = "updated_at")
+    private LocalDateTime updatedAt;
+    
+    // 상영 상태 열거형
+    public enum ScreeningStatus {
+        ACTIVE, CANCELED, COMPLETED
+    }
+    
+    // JPA 엔티티 생명주기 콜백 메서드
+    @PrePersist
+    protected void onCreate() {
+        this.createdAt = LocalDateTime.now();
+        this.updatedAt = LocalDateTime.now();
+        if (this.isFull == null) {
+            this.isFull = false;
+        }
+        if (this.status == null) {
+            this.status = ScreeningStatus.ACTIVE;
+        }
+    }
+    
+    @PreUpdate
+    protected void onUpdate() {
+        this.updatedAt = LocalDateTime.now();
+    }
+    
+    // 편의 메서드: 예매 가능 여부 확인
+    @Transient
+    public boolean isBookable() {
+        return this.status == ScreeningStatus.ACTIVE && 
+               !this.isFull && 
+               this.availableSeats > 0 &&
+               LocalDateTime.of(screeningDate, screeningTime).isAfter(LocalDateTime.now());
+    }
+    
+    // 편의 메서드: 상영 취소 여부 확인
+    @Transient
+    public boolean isCanceled() {
+        return this.status == ScreeningStatus.CANCELED;
+    }
+    
+    // 편의 메서드: 상영 완료 여부 확인
+    @Transient
+    public boolean isCompleted() {
+        return this.status == ScreeningStatus.COMPLETED || 
+               LocalDateTime.of(screeningDate, endTime).isBefore(LocalDateTime.now());
+    }
+
 }

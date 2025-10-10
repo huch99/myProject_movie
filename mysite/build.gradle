@@ -35,8 +35,11 @@ dependencies {
     runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
     
     // Lombok
-    compileOnly 'org.projectlombok:lombok'
-    annotationProcessor 'org.projectlombok:lombok'
+    compileOnly 'org.projectlombok:lombok:1.18.24'  // 실제 사용하는 Lombok 버전에 맞게 조정 가능
+    annotationProcessor 'org.projectlombok:lombok:1.18.24'
+
+    testCompileOnly 'org.projectlombok:lombok:1.18.24'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.24'
     
     // JWT 관련 의존성
     implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
@@ -52,6 +55,9 @@ dependencies {
     
     // 개발 도구
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    
+    implementation 'org.springframework.boot:spring-boot-starter-mail'
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 }
 
 tasks.named('test') {

@@ -1,133 +1,78 @@
 package com.moviesite.mysite.model.entity;
 
-import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import jakarta.persistence.*;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Table(name = "seats")
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Seat {
-    
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "screen_id", nullable = false)
-    private Screen screen;
-    
-    @Column(nullable = false)
-    private Character seatRow;
-    
-    @Column(nullable = false)
-    private Integer seatNumber;
-    
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "seat_type_id", nullable = false)
-    private SeatType seatType;
-    
-    @Column(nullable = false)
-    private Boolean isActive;
-    
-    @OneToMany(mappedBy = "seat", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<BookingSeat> bookingSeats = new ArrayList<>();
-    
-    private LocalDateTime createdAt;
-    
-    private LocalDateTime updatedAt;
-    
-    @PrePersist
-    protected void onCreate() {
-        createdAt = LocalDateTime.now();
-        updatedAt = LocalDateTime.now();
-        if (isActive == null) {
-            isActive = true;
-        }
-    }
-    
-    @PreUpdate
-    protected void onUpdate() {
-        updatedAt = LocalDateTime.now();
-    }
-    
- // Getter 메서드
-    public Long getId() {
-        return id;
-    }
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-    public Screen getScreen() {
-        return screen;
-    }
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "screen_id", nullable = false)
+	private Screen screen;
 
-    public Character getSeatRow() {
-        return seatRow;
-    }
+	@Column(name = "row_name", nullable = false)
+	private String rowName;
 
-    public Integer getSeatNumber() {
-        return seatNumber;
-    }
+	@Column(name = "column_number", nullable = false)
+	private Integer columnNumber;
 
-    public SeatType getSeatType() {
-        return seatType;
-    }
+	@Enumerated(EnumType.STRING)
+	@Column(name = "seat_type", nullable = false)
+	private SeatType seatType;
 
-    public Boolean getIsActive() {
-        return isActive;
-    }
+	@Column(name = "is_active", nullable = false)
+	private Boolean isActive;
 
-    public List<BookingSeat> getBookingSeats() {
-        return bookingSeats;
-    }
+	@Column(name = "created_at")
+	private LocalDateTime createdAt;
 
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
+	@Column(name = "updated_at")
+	private LocalDateTime updatedAt;
 
-    public LocalDateTime getUpdatedAt() {
-        return updatedAt;
-    }
+	// 좌석 타입 열거형
+	public enum SeatType {
+		STANDARD, PREMIUM, HANDICAPPED, COUPLE
+	}
 
-    // Setter 메서드
-    public void setId(Long id) {
-        this.id = id;
-    }
+	// JPA 엔티티 생명주기 콜백 메서드
+	@PrePersist
+	protected void onCreate() {
+		this.createdAt = LocalDateTime.now();
+		this.updatedAt = LocalDateTime.now();
+		if (this.isActive == null) {
+			this.isActive = true;
+		}
+		if (this.seatType == null) {
+			this.seatType = SeatType.STANDARD;
+		}
+	}
 
-    public void setScreen(Screen screen) {
-        this.screen = screen;
-    }
+	@PreUpdate
+	protected void onUpdate() {
+		this.updatedAt = LocalDateTime.now();
+	}
 
-    public void setSeatRow(Character seatRow) {
-        this.seatRow = seatRow;
-    }
+	// 편의 메서드: 좌석 표기 (예: A1, B5 등)
+	@Transient
+	public String getSeatLabel() {
+		return this.rowName + this.columnNumber;
+	}
 
-    public void setSeatNumber(Integer seatNumber) {
-        this.seatNumber = seatNumber;
-    }
-
-    public void setSeatType(SeatType seatType) {
-        this.seatType = seatType;
-    }
-
-    public void setIsActive(Boolean isActive) {
-        this.isActive = isActive;
-    }
-
-    public void setBookingSeats(List<BookingSeat> bookingSeats) {
-        this.bookingSeats = bookingSeats;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public void setUpdatedAt(LocalDateTime updatedAt) {
-        this.updatedAt = updatedAt;
-    }
-
-    // filter 메서드에서 사용하기 위한 추가 메서드
-    public boolean isActive() {
-        return isActive != null && isActive;
-    }
+	public String getSeatNumber() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

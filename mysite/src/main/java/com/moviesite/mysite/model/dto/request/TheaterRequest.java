@@ -5,57 +5,46 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class TheaterRequest {
-	private String name;
-    private String location;
-    private String address;
-    private String phone;
-    private Integer totalScreens; // 스크린 정보는 별도의 요청으로 추가될 수 있으므로, 초기 생성 시에는 간단히 개수만 포함
+
+	@NotBlank(message = "극장 이름은 필수 입력 항목입니다")
+    @Size(max = 100, message = "극장 이름은 100자를 초과할 수 없습니다")
+    private String name;
     
- // Getter 메서드
-    public String getName() {
-        return name;
-    }
-
-    public String getLocation() {
-        return location;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public Integer getTotalScreens() {
-        return totalScreens;
-    }
-
-    // Setter 메서드
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public void setTotalScreens(Integer totalScreens) {
-        this.totalScreens = totalScreens;
-    }
-
+    @NotBlank(message = "지역은 필수 입력 항목입니다")
+    @Size(max = 50, message = "지역은 50자를 초과할 수 없습니다")
+    private String location;
+    
+    @NotBlank(message = "주소는 필수 입력 항목입니다")
+    @Size(max = 200, message = "주소는 200자를 초과할 수 없습니다")
+    private String address;
+    
+    private String contact;
+    
+    private String phone;
+    
+    private String facilities; // 쉼표로 구분된 문자열
+    
+    private String specialScreens; // 쉼표로 구분된 문자열
+    
+    private String imageUrl;
+    
+    private String description;
+    
+    private String features; // 쉼표로 구분된 문자열
+    
+    private String parking;
+    
+    private String transportation;
+    
+    private Integer capacity;
+    
+    private String type;
 }

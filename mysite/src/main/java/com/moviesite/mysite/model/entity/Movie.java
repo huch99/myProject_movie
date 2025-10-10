@@ -1,18 +1,35 @@
 package com.moviesite.mysite.model.entity;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.PreUpdate;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
+
 
 @Entity
 @Table(name = "movies")
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Movie {
 
 	@Id
@@ -20,195 +37,93 @@ public class Movie {
 	private Long id;
 	
 	@Column(nullable = false)
-	private String title;
-	
-	private String titleEn;
-	
-	private String director;
-	
-	@Column(columnDefinition = "TEXT")
-	private String actors;
-	
-	private String genre;
-	
-	@Column(nullable = false)
-	private Integer runningTime;
-	
-	@Column(nullable = false)
-	private LocalDate releaseDate;
-	
-	private LocalDate endDate;
-	
-	@Column(nullable = false)
-	private String rating;
-	
-	@Column(columnDefinition = "TEXT")
-	private String synopsis;
-	
-	private String posterUrl;
-	
-	private String backgroundUrl;
-	
-	private String trailerUrl;
-	
-	@Enumerated(EnumType.STRING)
-	@Column(nullable = false)
-	private MovieStatus status;
-	
-	private LocalDateTime createdAt;
-	
-	private LocalDateTime updatedAt;
-	
-	public enum MovieStatus {
-		COMING_SOON, NOW_SHOWING, ENDED
-	}
-	
-	@PrePersist
-	protected void onCreate() {
-		createdAt = LocalDateTime.now();
-		updatedAt = LocalDateTime.now();
-	}
-	
-	@PreUpdate
-	protected void onUpdate() {
-		updatedAt = LocalDateTime.now();
-	}
-	
-	// Getter 메서드
-    public Long getId() {
-        return id;
+    private String title;
+    
+    @Column(name = "title_en")
+    private String titleEn;
+    
+    private String director;
+    
+    @Column(columnDefinition = "TEXT")
+    private String actors;
+    
+    @Column(columnDefinition = "TEXT", nullable = false)
+    private String genre;
+    
+    @Column(name = "running_time", nullable = false)
+    private Integer runningTime;
+    
+    @Column(name = "release_date", nullable = false)
+    private LocalDate releaseDate;
+    
+    @Column(name = "end_date")
+    private LocalDate endDate;
+    
+    @Column(nullable = false, precision = 3, scale = 1)
+    private BigDecimal rating;
+    
+    @Column(columnDefinition = "TEXT")
+    private String synopsis;
+    
+    @Column(name = "poster_url")
+    private String posterUrl;
+    
+    @Column(name = "background_url")
+    private String backgroundUrl;
+    
+    @Column(name = "trailer_url")
+    private String trailerUrl;
+    
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private MovieStatus status;
+    
+    @Column(name = "age_rating", nullable = false)
+    private String ageRating;
+    
+    @Column(name = "created_at")
+    private LocalDateTime createdAt;
+    
+    @Column(name = "updated_at")
+    private LocalDateTime updatedAt;
+    
+ // 편의 메서드: 쉼표로 구분된 문자열을 리스트로 변환
+    @Transient
+    public List<String> getGenreList() {
+        if (this.genre == null || this.genre.isEmpty()) {
+            return new ArrayList<>();
+        }
+        return Arrays.asList(this.genre.split(","));
     }
     
-    public String getTitle() {
-        return title;
+    @Transient
+    public List<String> getActorsList() {
+        if (this.actors == null || this.actors.isEmpty()) {
+            return new ArrayList<>();
+        }
+        return Arrays.asList(this.actors.split(","));
     }
     
-    public String getTitleEn() {
-        return titleEn;
+ // 영화 상영 상태 열거형
+    public enum MovieStatus {
+        COMING_SOON, NOW_SHOWING, ENDED
     }
     
-    public String getDirector() {
-        return director;
+    // 프론트엔드의 isShowing 필드를 위한 편의 메서드
+    @Transient
+    public boolean isShowing() {
+        return this.status == MovieStatus.NOW_SHOWING;
     }
     
-    public String getActors() {
-        return actors;
+    // JPA 엔티티 생명주기 콜백 메서드
+    @PrePersist
+    protected void onCreate() {
+        this.createdAt = LocalDateTime.now();
+        this.updatedAt = LocalDateTime.now();
     }
     
-    public String getGenre() {
-        return genre;
-    }
-    
-    public Integer getRunningTime() {
-        return runningTime;
-    }
-    
-    public LocalDate getReleaseDate() {
-        return releaseDate;
-    }
-    
-    public LocalDate getEndDate() {
-        return endDate;
-    }
-    
-    public String getRating() {
-        return rating;
-    }
-    
-    public String getSynopsis() {
-        return synopsis;
-    }
-    
-    public String getPosterUrl() {
-        return posterUrl;
-    }
-    
-    public String getBackgroundUrl() {
-        return backgroundUrl;
-    }
-    
-    public String getTrailerUrl() {
-        return trailerUrl;
-    }
-    
-    public MovieStatus getStatus() {
-        return status;
-    }
-    
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-    
-    public LocalDateTime getUpdatedAt() {
-        return updatedAt;
-    }
-    
-    // Setter 메서드
-    public void setId(Long id) {
-        this.id = id;
-    }
-    
-    public void setTitle(String title) {
-        this.title = title;
-    }
-    
-    public void setTitleEn(String titleEn) {
-        this.titleEn = titleEn;
-    }
-    
-    public void setDirector(String director) {
-        this.director = director;
-    }
-    
-    public void setActors(String actors) {
-        this.actors = actors;
-    }
-    
-    public void setGenre(String genre) {
-        this.genre = genre;
-    }
-    
-    public void setRunningTime(Integer runningTime) {
-        this.runningTime = runningTime;
-    }
-    
-    public void setReleaseDate(LocalDate releaseDate) {
-        this.releaseDate = releaseDate;
-    }
-    
-    public void setEndDate(LocalDate endDate) {
-        this.endDate = endDate;
-    }
-    
-    public void setRating(String rating) {
-        this.rating = rating;
-    }
-    
-    public void setSynopsis(String synopsis) {
-        this.synopsis = synopsis;
-    }
-    
-    public void setPosterUrl(String posterUrl) {
-        this.posterUrl = posterUrl;
-    }
-    
-    public void setBackgroundUrl(String backgroundUrl) {
-        this.backgroundUrl = backgroundUrl;
-    }
-    
-    public void setTrailerUrl(String trailerUrl) {
-        this.trailerUrl = trailerUrl;
-    }
-    
-    public void setStatus(MovieStatus status) {
-        this.status = status;
-    }
-    
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
-    
-    public void setUpdatedAt(LocalDateTime updatedAt) {
-        this.updatedAt = updatedAt;
+    @PreUpdate
+    protected void onUpdate() {
+        this.updatedAt = LocalDateTime.now();
     }
 }
