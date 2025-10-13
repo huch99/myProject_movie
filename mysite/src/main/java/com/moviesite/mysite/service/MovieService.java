@@ -257,13 +257,4 @@ public class MovieService {
                 .map(MovieResponse::fromEntity)
                 .collect(Collectors.toList());
     }
-    
-    // 인기 영화 목록 조회 (예매율 기준)
-    public List<MovieResponse> getPopularMovies(int limit) {
-        List<Movie> movies = movieRepository.findPopularMovies(limit);
-        
-        return movies.stream()
-                .map(MovieResponse::fromEntity)
-                .collect(Collectors.toList());
-    }
 }

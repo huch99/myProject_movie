@@ -24,10 +24,10 @@ import java.util.stream.Collectors;
 @Component
 public class JwtTokenProvider {
 
-	@Value("${jwt.secret}")
+	@Value("${jwt.secret.key}")
     private String secretKey;
     
-    @Value("${jwt.token-validity-in-seconds}")
+    @Value("${jwt.expiration.ms}")
     private long tokenValidityInSeconds;
     
     private SecretKey key;

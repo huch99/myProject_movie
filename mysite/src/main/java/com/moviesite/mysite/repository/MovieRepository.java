@@ -80,6 +80,4 @@ public interface MovieRepository extends JpaRepository<Movie, Long> {
 	List<Movie> findByGenreContainingAndStatus(String genre, MovieStatus nowShowing);
 
 	List<Movie> findByDirectorContaining(String director);
-
-	List<Movie> findPopularMovies(int limit);
 }

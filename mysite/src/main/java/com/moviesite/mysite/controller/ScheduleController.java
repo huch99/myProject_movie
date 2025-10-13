@@ -22,29 +22,6 @@ public class ScheduleController {
 
     private final ScheduleService scheduleService;
 
-    // 특정 영화의 상영 일정 조회
-    @GetMapping("/movie/{movieId}")
-    public ResponseEntity<ApiResponse<List<ScheduleResponse>>> getSchedulesByMovie(@PathVariable Long movieId) {
-        List<ScheduleResponse> schedules = scheduleService.getSchedulesByMovie(movieId);
-        return ResponseEntity.ok(ApiResponse.success(schedules));
-    }
-
-    // 특정 상영관의 상영 일정 조회
-    @GetMapping("/screen/{screenId}")
-    public ResponseEntity<ApiResponse<List<ScheduleResponse>>> getSchedulesByScreen(@PathVariable Long screenId) {
-        List<ScheduleResponse> schedules = scheduleService.getSchedulesByScreen(screenId);
-        return ResponseEntity.ok(ApiResponse.success(schedules));
-    }
-
-    // 특정 극장의 상영 일정 조회
-    @GetMapping("/theater/{theaterId}")
-    public ResponseEntity<ApiResponse<List<ScheduleResponse>>> getSchedulesByTheater(
-            @PathVariable Long theaterId,
-            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
-        List<ScheduleResponse> schedules = scheduleService.getSchedulesByTheater(theaterId, date);
-        return ResponseEntity.ok(ApiResponse.success(schedules));
-    }
-
     // 특정 상영 일정 상세 조회
     @GetMapping("/{id}")
     public ResponseEntity<ApiResponse<ScheduleResponse>> getScheduleById(@PathVariable Long id) {

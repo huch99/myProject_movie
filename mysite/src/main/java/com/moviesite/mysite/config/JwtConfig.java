@@ -8,15 +8,15 @@ import org.springframework.context.annotation.Configuration;
 @Getter
 public class JwtConfig {
 	
-	@Value("${jwt.secret}")
+	@Value("${jwt.secret.key}")
     private String secret;
 
     // Access Token 유효 기간
-    @Value("${jwt.access-token-validity}") // Huch님 설정명으로 변경
+    @Value("${jwt.expiration.ms}") // Huch님 설정명으로 변경
     private Long accessTokenValidity; // 변수명도 명확하게 변경
 
     // 리프레시 토큰 유효 기간
-    @Value("${jwt.refresh-token-validity}") // Huch님 설정명으로 변경
+    @Value("${jwt.refresh.expiration.ms}") // Huch님 설정명으로 변경
     private Long refreshTokenValidity; // 변수명도 명확하게 변경
     
     // --- 아래는 제가 이전 JwtConfig에 추가했던 부분으로, Huch님의 설정 파일에 추가해주셔야 합니다. ---

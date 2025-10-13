@@ -112,10 +112,6 @@ public class ReservationService {
             if (!seat.getScreen().getId().equals(schedule.getScreen().getId())) {
                 throw new BadRequestException("선택된 좌석 중 상영관에 맞지 않는 좌석이 있습니다");
             }
-            
-            if (reservationSeatRepository.existsBySeatAndSchedule(seat, schedule)) {
-                throw new BadRequestException("이미 예약된 좌석이 포함되어 있습니다");
-            }
         }
         
         // 티켓 수량 확인

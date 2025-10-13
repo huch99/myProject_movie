@@ -79,19 +79,7 @@ public interface ScheduleRepository extends JpaRepository<Schedule, Long> {
 	List<Schedule> findByScreenIdAndStartTimeLessThanEqualAndEndTimeGreaterThanEqual(Long screenId, LocalDateTime now,
 			LocalDateTime now2);
 
-	List<Schedule> findByMovieIdAndStartTimeBetween(Long movieId, LocalDateTime startTime, LocalDateTime endTime);
+	List<Schedule> findByMovieIdAndStartTimeBetween(Long movie, LocalDateTime startTime, LocalDateTime endTime);
 
-	List<Schedule> findOverlappingSchedules(Long screenId, LocalDateTime startTime, LocalDateTime endTime);
 
-	List<Schedule> findByMovieIdAndStatusAndStartTimeAfterOrderByStartTime(Long movieId, ScheduleStatus open,
-			LocalDateTime now);
-
-	List<Schedule> findByScreenIdAndStatusAndStartTimeAfterOrderByStartTime(Long screenId, ScheduleStatus open,
-			LocalDateTime now);
-
-	List<Schedule> findByScreenTheaterIdAndStartTimeBetweenAndStatusOrderByStartTime(Long theaterId,
-			LocalDateTime startOfDay, LocalDateTime endOfDay, ScheduleStatus open);
-
-	List<Schedule> findOverlappingSchedulesExcluding(Long screenId, LocalDateTime startTime, LocalDateTime endTime,
-			Long excludeScheduleId);
 }

@@ -56,11 +56,7 @@ public interface ReservationSeatRepository extends JpaRepository<ReservationSeat
 
 	List<ReservationSeat> findBySeatIdIn(List<Long> reservedSeatIds);
 
-	boolean existsByScheduleAndSeat(Schedule schedule, Seat seat);
-
 	List<ReservationSeat> findByReservation(Reservation reservation);
-
-	boolean existsBySeatAndSchedule(Seat seat, Schedule schedule);
 
 	void deleteByReservation(Reservation reservation);
 

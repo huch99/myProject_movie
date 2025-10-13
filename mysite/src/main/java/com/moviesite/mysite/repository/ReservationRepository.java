@@ -88,19 +88,12 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
     // 기간 내 총 예매 수
 	Long countByReservationTimeBetween(LocalDateTime startDateTime, LocalDateTime endDateTime);
 
-	// 기간 내 총 매출
-	BigDecimal sumTotalPriceByReservationTimeBetweenAndStatus(LocalDateTime startDateTime, LocalDateTime endDateTime,
-			ReservationStatus confirmed);
-
-	// 영화별 예매 통계
-	List<Object[]> findMovieReservationStats(LocalDateTime startDateTime, LocalDateTime endDateTime);
-
-	// 극장별 예매 통계
-	List<Object[]> findTheaterReservationStats(LocalDateTime startDateTime, LocalDateTime endDateTime);
-
-	// 결제 방법별 통계
-	List<Object[]> findPaymentMethodStats(LocalDateTime startDateTime, LocalDateTime endDateTime);
-
+	@Query("SELECT SUM(r.totalPrice) FROM Reservation r WHERE r.reservationTime BETWEEN :startDate AND :endDate AND r.status = :status")
+    BigDecimal sumTotalPriceByReservationTimeBetweenAndStatus(
+        @Param("startDate") LocalDateTime startDate, 
+        @Param("endDate") LocalDateTime endDate,
+        @Param("status") Reservation.ReservationStatus status);
+	
 	Page<Reservation> findByUserOrderByReservationTimeDesc(User currentUser, Pageable pageable);
 
 	Page<Reservation> findAll(Specification<Reservation> spec, Pageable pageable);

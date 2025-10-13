@@ -26,14 +26,6 @@ public interface TheaterRepository extends JpaRepository<Theater, Long> {
     // 특정 특별관을 갖춘 극장 검색
     List<Theater> findBySpecialScreensContaining(String specialScreen);
     
-    // 특정 영화를 상영 중인 극장 검색
-    @Query("SELECT DISTINCT t FROM Theater t JOIN t.screens s JOIN Schedule sc ON sc.screen = s WHERE sc.movie.id = :movieId AND sc.status = 'OPEN'")
-    List<Theater> findTheatersShowingMovie(@Param("movieId") Long movieId);
-    
-    // 특정 지역에서 특정 영화를 상영 중인 극장 검색
-    @Query("SELECT DISTINCT t FROM Theater t JOIN t.screens s JOIN Schedule sc ON sc.screen = s WHERE sc.movie.id = :movieId AND t.location LIKE %:location% AND sc.status = 'OPEN'")
-    List<Theater> findTheatersShowingMovieInLocation(@Param("movieId") Long movieId, @Param("location") String location);
-    
     // 주차 시설이 있는 극장 검색
     @Query("SELECT t FROM Theater t WHERE t.parking IS NOT NULL AND t.parking != ''")
     List<Theater> findTheatersWithParking();

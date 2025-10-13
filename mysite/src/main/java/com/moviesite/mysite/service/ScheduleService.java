@@ -33,39 +33,6 @@ public class ScheduleService {
     private final ScreenRepository screenRepository;
     private final UserRepository userRepository;
 
-    // 특정 영화의 상영 일정 조회
-    public List<ScheduleResponse> getSchedulesByMovie(Long movieId) {
-        List<Schedule> schedules = scheduleRepository.findByMovieIdAndStatusAndStartTimeAfterOrderByStartTime(
-                movieId, Schedule.ScheduleStatus.OPEN, LocalDateTime.now());
-        
-        return schedules.stream()
-                .map(ScheduleResponse::fromEntity)
-                .collect(Collectors.toList());
-    }
-
-    // 특정 상영관의 상영 일정 조회
-    public List<ScheduleResponse> getSchedulesByScreen(Long screenId) {
-        List<Schedule> schedules = scheduleRepository.findByScreenIdAndStatusAndStartTimeAfterOrderByStartTime(
-                screenId, Schedule.ScheduleStatus.OPEN, LocalDateTime.now());
-        
-        return schedules.stream()
-                .map(ScheduleResponse::fromEntity)
-                .collect(Collectors.toList());
-    }
-
-    // 특정 극장의 상영 일정 조회
-    public List<ScheduleResponse> getSchedulesByTheater(Long theaterId, LocalDate date) {
-        LocalDateTime startOfDay = date.atStartOfDay();
-        LocalDateTime endOfDay = date.plusDays(1).atStartOfDay();
-        
-        List<Schedule> schedules = scheduleRepository.findByScreenTheaterIdAndStartTimeBetweenAndStatusOrderByStartTime(
-                theaterId, startOfDay, endOfDay, Schedule.ScheduleStatus.OPEN);
-        
-        return schedules.stream()
-                .map(ScheduleResponse::fromEntity)
-                .collect(Collectors.toList());
-    }
-
     // 특정 상영 일정 상세 조회
     public ScheduleResponse getScheduleById(Long id) {
         Schedule schedule = findScheduleById(id);
@@ -189,20 +156,6 @@ public class ScheduleService {
             throw new BadRequestException("시작 시간은 종료 시간보다 이전이어야 합니다");
         }
         
-        // 상영 시간 중복 확인
-        List<Schedule> overlappingSchedules;
-        
-        if (excludeScheduleId != null) {
-            overlappingSchedules = scheduleRepository.findOverlappingSchedulesExcluding(
-                    screenId, startTime, endTime, excludeScheduleId);
-        } else {
-            overlappingSchedules = scheduleRepository.findOverlappingSchedules(
-                    screenId, startTime, endTime);
-        }
-        
-        if (!overlappingSchedules.isEmpty()) {
-            throw new BadRequestException("해당 상영관에 이미 같은 시간대에 예정된 상영이 있습니다");
-        }
     }
     
     // 스케줄 엔티티 조회 (내부 메서드)
