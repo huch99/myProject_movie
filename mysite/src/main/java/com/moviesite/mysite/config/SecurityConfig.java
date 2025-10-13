@@ -37,7 +37,7 @@ public class SecurityConfig {
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 	    http
-	        .cors(cors -> cors.configure(http)) // WebConfig에서 설정한 CORS 설정 사용
+	        .cors(cors -> cors.configurationSource(corsConfigurationSource()))
 	        .csrf(csrf -> csrf.disable())
 	        .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 	        .authorizeHttpRequests(authorize -> authorize
@@ -49,6 +49,7 @@ public class SecurityConfig {
 	            .requestMatchers("/api/events/**").permitAll()
 	            .requestMatchers("/api/notices/**").permitAll()
 	            .requestMatchers("/api/faqs/**").permitAll()
+	            .requestMatchers("/**").permitAll()
 	            // Swagger UI 관련 경로
 	            .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()
 	            // 나머지는 인증 필요
@@ -63,7 +64,7 @@ public class SecurityConfig {
 		@Bean
 	    public CorsConfigurationSource corsConfigurationSource() {
 	        CorsConfiguration configuration = new CorsConfiguration();
-	        configuration.setAllowedOrigins(Arrays.asList("http://localhost:5173", "http://localhost:5173", "https://your-domain.com")); // 여기에 프론트엔드 주소 추가
+	        configuration.setAllowedOrigins(Arrays.asList("http://localhost:5173", "https://your-domain.com")); // 여기에 프론트엔드 주소 추가
 	        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
 	        configuration.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type", "X-Requested-With"));
 	        configuration.setExposedHeaders(Arrays.asList("Authorization"));
