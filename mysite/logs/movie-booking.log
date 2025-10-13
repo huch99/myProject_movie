@@ -4092,3 +4092,9 @@ java.lang.InterruptedException: null
 2025-10-13T17:37:00.551+09:00  INFO 6932 --- [mysite] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
 2025-10-13T17:37:00.551+09:00  INFO 6932 --- [mysite] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
 2025-10-13T17:37:00.552+09:00  INFO 6932 --- [mysite] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2025-10-13T17:38:30.159+09:00  INFO 6932 --- [mysite] [RMI TCP Connection(10)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
+2025-10-13T17:38:30.161+09:00  INFO 6932 --- [mysite] [RMI TCP Connection(10)-127.0.0.1] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-10-13T17:38:30.164+09:00  INFO 6932 --- [mysite] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-10-13T17:38:30.168+09:00  INFO 6932 --- [mysite] [RMI TCP Connection(10)-127.0.0.1] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-10-13T17:38:30.170+09:00  INFO 6932 --- [mysite] [RMI TCP Connection(10)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-10-13T17:38:30.172+09:00  INFO 6932 --- [mysite] [RMI TCP Connection(10)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
