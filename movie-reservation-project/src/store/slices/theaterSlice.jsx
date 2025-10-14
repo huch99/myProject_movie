@@ -35,10 +35,10 @@ export const fetchTheaters = createAsyncThunk(
 // 지역별 극장 목록 가져오기
 export const fetchTheatersByRegion = createAsyncThunk(
     'theaters/fetchTheatersByRegion',
-    async (region, { rejectWithValue }) => {
+    async (location, { rejectWithValue }) => {
         try {
-            const response = await theaterService.getTheatersByRegion(region);
-            return { region, theaters: response.data };
+            const response = await theaterService.getTheatersByRegion(location);
+            return { location, theaters: response.data };
         } catch (error) {
             return rejectWithValue(error.response?.data?.message || '지역별 극장 정보를 불러오는데 실패했습니다.');
         }
@@ -167,11 +167,14 @@ const theaterSlice = createSlice({
             })
             .addCase(fetchTheaters.fulfilled, (state, action) => {
                 state.loading = false;
-                state.theaters = action.payload;
+    
+    // 페이징 응답 구조 처리
+    const theaters = action.payload.content || [];
+    state.theaters = theaters;
 
-                // 지역 목록 추출
-                const regions = [...new Set(action.payload.map(theater => theater.region))];
-                state.regions = regions;
+    // 지역 목록 추출
+    const locations = [...new Set(theaters.map(theater => theater.location))];
+    state.locations = locations;
             })
             .addCase(fetchTheaters.rejected, (state, action) => {
                 state.loading = false;
@@ -185,7 +188,7 @@ const theaterSlice = createSlice({
             })
             .addCase(fetchTheatersByRegion.fulfilled, (state, action) => {
                 state.loading = false;
-                state.selectedRegion = action.payload.region;
+                state.selectedRegion = action.payload.location;
                 state.theaters = action.payload.theaters;
             })
             .addCase(fetchTheatersByRegion.rejected, (state, action) => {

@@ -501,7 +501,7 @@ export const {
     removeCoupon,
     setReservationStep,
     clearReservation,
-    clearError
+    clearError,
 } = reservationSlice.actions;
 
 // 리듀서 내보내기

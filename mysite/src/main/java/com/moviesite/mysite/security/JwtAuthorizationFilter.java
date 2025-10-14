@@ -36,12 +36,18 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
     
     // 인증이 필요 없는 URL 패턴 목록
     private static final List<String> EXCLUDE_URL = Arrays.asList(
-            "/api/auth/login",
-            "/api/auth/register",
-            "/api/auth/refresh",
-            "/api/movies",
-            "/api/theaters",
-            "/api/health"
+    		 "/api/auth/login",
+    	        "/api/auth/register", 
+    	        "/api/auth/refresh",
+    	        "/api/movies",
+    	        "/api/theaters",
+    	        "/api/screenings",
+    	        "/api/events",
+    	        "/api/notices",
+    	        "/api/faqs",
+    	        "/swagger-ui/",
+    	        "/v3/api-docs/",
+    	        "/api/health"
     );
     
     public JwtAuthorizationFilter() {

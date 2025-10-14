@@ -26,8 +26,8 @@ public class TheaterController {
     // 모든 극장 목록 조회 (페이징 처리)
     @GetMapping
     public ResponseEntity<ApiResponse<Page<TheaterResponse>>> getAllTheaters(
-            @RequestParam(required = false) String name,
-            @RequestParam(required = false) String location,
+    		@RequestParam(name = "name", required = false) String name,
+            @RequestParam(name = "location", required = false) String location,
             Pageable pageable) {
         Page<TheaterResponse> theaters = theaterService.getAllTheaters(name, location, pageable);
         return ResponseEntity.ok(ApiResponse.success(theaters));

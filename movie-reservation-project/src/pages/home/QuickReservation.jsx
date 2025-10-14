@@ -22,7 +22,7 @@ const QuickReservation = ({ compact = false }) => {
     // Redux 상태
     const { movies, loading: moviesLoading } = useSelector(state => state.movies);
     const { theaters, loading: theatersLoading } = useSelector(state => state.theaters);
-    const { availableDates, loading: datesLoading } = useSelector(state => state.reservation);
+    const { availableDates, loading: datesLoading } = useSelector(state => state.reservations);
 
     // 로컬 상태
     const [selectedMovie, setSelectedMovie] = useState('');
@@ -61,15 +61,15 @@ const QuickReservation = ({ compact = false }) => {
     };
 
     return (
-        <QuickReservationContainer compact={compact}>
-            <ReservationTitle compact={compact}>
+        <QuickReservationContainer compact={compact || undefined}>
+            <ReservationTitle compact={compact || undefined}>
                 <FaSearch />
                 <span>빠른 예매</span>
             </ReservationTitle>
 
             <ReservationForm onSubmit={handleSubmit}>
                 <FormGroup>
-                    <FormLabel compact={compact}>
+                    <FormLabel compact={compact || undefined}>
                         <FaFilm />
                         <span>영화</span>
                     </FormLabel>
@@ -90,7 +90,7 @@ const QuickReservation = ({ compact = false }) => {
                 </FormGroup>
 
                 <FormGroup>
-                    <FormLabel compact={compact}>
+                    <FormLabel compact={compact || undefined}>
                         <FaMapMarkerAlt />
                         <span>극장</span>
                     </FormLabel>
@@ -110,7 +110,7 @@ const QuickReservation = ({ compact = false }) => {
                 </FormGroup>
 
                 <FormGroup>
-                    <FormLabel compact={compact}>
+                    <FormLabel compact={compact || undefined}>
                         <FaCalendarAlt />
                         <span>날짜</span>
                     </FormLabel>

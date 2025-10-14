@@ -106,9 +106,6 @@ const apiService = {
     addReview: (movieId, reviewData) => api.post(`/movies/${movieId}/reviews`, reviewData),
     updateReview: (movieId, reviewId, reviewData) => api.put(`/movies/${movieId}/reviews/${reviewId}`, reviewData),
     deleteReview: (movieId, reviewId) => api.delete(`/movies/${movieId}/reviews/${reviewId}`),
-    getNowPlaying: () => api.get('/movies/now-playing'),
-    getComingSoon: () => api.get('/movies/coming-soon'),
-    getPopular: () => api.get('/movies/popular'),
   },
   
   // 극장 관련 API

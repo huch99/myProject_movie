@@ -39,23 +39,29 @@ public class SecurityConfig {
 	    http
 	        .cors(cors -> cors.configurationSource(corsConfigurationSource()))
 	        .csrf(csrf -> csrf.disable())
+	        
 	        .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 	        .authorizeHttpRequests(authorize -> authorize
-	            // 공개 API 엔드포인트
-	            .requestMatchers("/api/auth/**").permitAll()
-	            .requestMatchers("/api/movies/**").permitAll()
-	            .requestMatchers("/api/theaters/**").permitAll()
-	            .requestMatchers("/api/screenings/**").permitAll()
-	            .requestMatchers("/api/events/**").permitAll()
-	            .requestMatchers("/api/notices/**").permitAll()
-	            .requestMatchers("/api/faqs/**").permitAll()
-	            .requestMatchers("/**").permitAll()
-	            // Swagger UI 관련 경로
-	            .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()
-	            // 나머지는 인증 필요
-	            .anyRequest().authenticated()
-	        )
-	        .addFilterBefore(new JwtAuthorizationFilter(jwtUtil), UsernamePasswordAuthenticationFilter.class);
+	            // 일시적으로 모든 요청을 허용 (디버깅 목적)
+	            .anyRequest().permitAll() // <<< 이 부분을 변경해주세요!
+	        );
+//	        .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+//	        .authorizeHttpRequests(authorize -> authorize
+//	            // 공개 API 엔드포인트
+//	            .requestMatchers("/api/auth/**").permitAll()
+//	            .requestMatchers("/api/movies/**").permitAll()
+//	            .requestMatchers("/api/theaters/**").permitAll()
+//	            .requestMatchers("/api/screenings/**").permitAll()
+//	            .requestMatchers("/api/events/**").permitAll()
+//	            .requestMatchers("/api/notices/**").permitAll()
+//	            .requestMatchers("/api/faqs/**").permitAll()
+//	            .requestMatchers("/api/**").permitAll()
+//	            // Swagger UI 관련 경로
+//	            .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()
+//	            // 나머지는 인증 필요
+//	            .anyRequest().authenticated()
+//	        )
+//	        .addFilterBefore(new JwtAuthorizationFilter(jwtUtil), UsernamePasswordAuthenticationFilter.class);
 
 	    return http.build();
 	}
@@ -90,20 +96,6 @@ public class SecurityConfig {
 	            }
 	        };
 	    }
-	
-	@Configuration
-	public class WebConfig implements WebMvcConfigurer {
-	    
-	    @Override
-	    public void addCorsMappings(CorsRegistry registry) {
-	        registry.addMapping("/**")
-	                .allowedOrigins("http://localhost:3000", "https://your-domain.com")
-	                .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
-	                .allowedHeaders("Authorization", "Content-Type", "X-Requested-With")
-	                .exposedHeaders("Authorization")
-	                .allowCredentials(true);
-	    }
-	}
 	
     @Bean
     public PasswordEncoder passwordEncoder() {
