@@ -24,6 +24,7 @@ import java.nio.charset.StandardCharsets;
 import java.security.Key;
 import java.time.LocalDateTime;
 import java.util.Arrays;
+import java.util.Base64;
 import java.util.Collection;
 import java.util.Date;
 import java.util.Optional;
@@ -92,15 +93,23 @@ public class JwtTokenProvider {
 
 	@Autowired
     public JwtTokenProvider(RefreshTokenRepository refreshTokenRepository,
-                           @Value("${jwt.secret.key}") String secretKey,
-                           @Value("${jwt.expiration.ms}") long tokenValidityInSeconds) {
+                          @Value("${jwt.secret.key}") String secretKey,
+                          @Value("${jwt.expiration.ms}") long tokenValidityInSeconds) {
         this.refreshTokenRepository = refreshTokenRepository;
-        this.accessTokenValidityInMilliseconds = tokenValidityInSeconds;
-        this.refreshTokenValidityInMilliseconds = tokenValidityInSeconds * 7; // 리프레시 토큰은 7배 길게 설정
         
-        // 시크릿 키 초기화
-        byte[] keyBytes = Decoders.BASE64.decode(secretKey);
-        this.key = Keys.hmacShaKeyFor(keyBytes);
+        try {
+            // 시크릿 키 초기화 부분을 try-catch로 감싸기
+            byte[] keyBytes = Base64.getDecoder().decode(secretKey);
+            this.key = Keys.hmacShaKeyFor(keyBytes);
+        } catch (Exception e) {
+            // 로깅 추가
+            System.err.println("JWT 키 생성 오류: " + e.getMessage());
+            // 기본 키 생성 (개발용)
+            this.key = Keys.secretKeyFor(SignatureAlgorithm.HS512);
+        }
+        
+        this.accessTokenValidityInMilliseconds = tokenValidityInSeconds;
+        this.refreshTokenValidityInMilliseconds = tokenValidityInSeconds * 7; // 리프레시 토큰은 7배 길게
     }
 
 	public String createAccessToken(String email, String role) {
