@@ -7,8 +7,8 @@ import { fetchNowPlayingMovies, fetchComingSoonMovies, fetchPopularMovies } from
 import MovieCard from '../components/movie/MovieCard';
 import MainBanner from './home/MainBanner';
 import MovieSlider from './home/MovieSlider';
-import EventSection from './home/EventSection';
-import QuickReservation from './home/QuickReservation';
+// import EventSection from './home/EventSection';
+// import QuickReservation from './home/QuickReservation';
 import Loading from '../components/common/Loading';
 import useScrollToTop from '../hooks/useScrollToTop';
 
@@ -36,9 +36,9 @@ const HomePage = () => {
       <MainBanner movies={popular.slice(0, 5)} />
       
       {/* 빠른 예매 섹션 */}
-      <Section>
+      {/* <Section>
         <QuickReservation />
-      </Section>
+      </Section> */}
       
       {/* 현재 상영 영화 섹션 */}
       <Section>
@@ -72,13 +72,13 @@ const HomePage = () => {
       </Section>
       
       {/* 이벤트 및 프로모션 섹션 */}
-      <Section>
+      {/* <Section>
         <SectionHeader>
           <SectionTitle>이벤트 & 프로모션</SectionTitle>
           <ViewMoreLink to="/events">더 보기</ViewMoreLink>
         </SectionHeader>
         <EventSection />
-      </Section>
+      </Section> */}
     </HomeContainer>
   );
 };

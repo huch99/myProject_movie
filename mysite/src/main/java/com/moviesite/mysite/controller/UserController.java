@@ -3,9 +3,14 @@ package com.moviesite.mysite.controller;
 import com.moviesite.mysite.model.dto.request.PasswordChangeDTO;
 import com.moviesite.mysite.model.dto.request.UserRequest;
 import com.moviesite.mysite.model.dto.response.ApiResponse;
+import com.moviesite.mysite.model.dto.response.TheaterResponse;
 import com.moviesite.mysite.model.dto.response.UserResponse;
+import com.moviesite.mysite.model.entity.User.UserStatus;
 import com.moviesite.mysite.service.UserService;
 import lombok.RequiredArgsConstructor;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -21,13 +26,44 @@ import java.util.List;
 public class UserController {
 
     private final UserService userService;
+    
+//    @GetMapping
+//    public ResponseEntity<ApiResponse<Page<UserResponse>>> getAllUsers (
+//    		@RequestParam(name = "email", required = false) String email,
+//            @RequestParam(name = "name", required = false) String name,
+//            @RequestParam(name = "status", required = false) UserStatus status,
+//            Pageable pageable) {
+//        Page<UserResponse> users = userService.getAllUsers(email, name, status, pageable);
+//        return ResponseEntity.ok(ApiResponse.success(users));
+//    }
+    
+//    @GetMapping
+//    public ResponseEntity<ApiResponse<Page<UserResponse>>> getAllUsers(
+//            @RequestParam(name = "email", required = false) String email,
+//            @RequestParam(name = "name", required = false) String name,
+//            @RequestParam(name = "status", required = false) String statusStr,
+//            Pageable pageable) {
+//        
+//        // String을 UserStatus로 안전하게 변환
+//        UserStatus status = null;
+//        if (statusStr != null && !statusStr.isEmpty()) {
+//            try {
+//                status = UserStatus.valueOf(statusStr.toUpperCase());
+//            } catch (IllegalArgumentException e) {
+//                return ResponseEntity.badRequest().body(ApiResponse.error("유효하지 않은 상태 값입니다."));
+//            }
+//        }
+//        
+//        Page<UserResponse> users = userService.getAllUsers(email, name, status, pageable);
+//        return ResponseEntity.ok(ApiResponse.success(users));
+//    }
 
     // 회원 가입
-    @PostMapping("/register")
-    public ResponseEntity<ApiResponse<UserResponse>> registerUser(@Valid @RequestBody UserRequest userRequest) {
-        UserResponse createdUser = userService.registerUser(userRequest);
-        return new ResponseEntity<>(ApiResponse.success("회원가입이 성공적으로 완료되었습니다.", createdUser), HttpStatus.CREATED);
-    }
+//    @PostMapping("/register")
+//    public ResponseEntity<ApiResponse<UserResponse>> registerUser(@Valid @RequestBody UserRequest userRequest) {
+//        UserResponse createdUser = userService.registerUser(userRequest);
+//        return new ResponseEntity<>(ApiResponse.success("회원가입이 성공적으로 완료되었습니다.", createdUser), HttpStatus.CREATED);
+//    }
 
     // 현재 로그인한 사용자 정보 조회
     @GetMapping("/me")

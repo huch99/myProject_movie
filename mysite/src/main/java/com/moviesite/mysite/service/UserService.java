@@ -3,10 +3,16 @@ package com.moviesite.mysite.service;
 import com.moviesite.mysite.model.dto.request.UserRequest;
 import com.moviesite.mysite.exception.BadRequestException;
 import com.moviesite.mysite.exception.ResourceNotFoundException;
+import com.moviesite.mysite.model.dto.response.TheaterResponse;
 import com.moviesite.mysite.model.dto.response.UserResponse;
+import com.moviesite.mysite.model.entity.Theater;
 import com.moviesite.mysite.model.entity.User;
+import com.moviesite.mysite.model.entity.User.UserStatus;
 import com.moviesite.mysite.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -26,7 +32,7 @@ public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final FileService fileService;
-
+    
     // 사용자 등록
     @Transactional
     public UserResponse registerUser(UserRequest userRequest) {

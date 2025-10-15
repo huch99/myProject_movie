@@ -6,7 +6,7 @@ import MovieList from '../components/movie/MovieList';
 import MovieFilter from '../components/movie/MovieFilter';
 import Loading from '../components/common/Loading';
 import ErrorMessage from '../components/common/ErrorMessage';
-import { fetchMovies } from '../services/api'; 
+import { fetchMovies } from '../services/api';
 import ROUTE_PATHS from '../constants/routePaths';
 
 /**
@@ -30,9 +30,11 @@ const MoviePage = () => {
     const loadMovies = async () => {
       try {
         setLoading(true);
-        const data = await fetchMovies();
-        setMovies(data);
-        setFilteredMovies(data);
+        await dispatch(fetchMovies({ page: 0, size: 20 })); // dispatch 추가
+        // 결과는 Redux 스토어에서 가져오기
+        const moviesData = useSelector(state => state.movies.movies);
+        setMovies(moviesData);
+        setFilteredMovies(moviesData);
         setLoading(false);
       } catch (err) {
         console.error('영화 데이터를 불러오는 중 오류가 발생했습니다:', err);
@@ -59,7 +61,7 @@ const MoviePage = () => {
 
     // 장르 필터링
     if (filters.genre !== 'all') {
-      result = result.filter(movie => 
+      result = result.filter(movie =>
         movie.genres.some(genre => genre.toLowerCase() === filters.genre.toLowerCase())
       );
     }
@@ -99,15 +101,15 @@ const MoviePage = () => {
         <SubTitle>현재 상영 중인 영화와 개봉 예정작을 확인하세요</SubTitle>
       </PageHeader>
 
-      <MovieFilter 
-        filters={filters} 
-        onFilterChange={handleFilterChange} 
+      <MovieFilter
+        filters={filters}
+        onFilterChange={handleFilterChange}
       />
 
       {filteredMovies.length > 0 ? (
-        <MovieList 
-          movies={filteredMovies} 
-          onMovieClick={handleMovieClick} 
+        <MovieList
+          movies={filteredMovies}
+          onMovieClick={handleMovieClick}
         />
       ) : (
         <NoResults>

@@ -10,6 +10,8 @@ import movieReducer from './slices/movieSlice';
 import theaterReducer from './slices/theaterSlice';
 import reservationReducer from './slices/reservationSlice';
 
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
 // 리듀서 지속성(persistence) 설정
 const authPersistConfig = {
   key: 'auth',

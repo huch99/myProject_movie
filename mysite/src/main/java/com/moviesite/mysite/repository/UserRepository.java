@@ -8,6 +8,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.moviesite.mysite.model.entity.User;
+import com.moviesite.mysite.model.entity.User.UserStatus;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -74,4 +75,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
            "FROM User u GROUP BY FUNCTION('YEAR', u.createdAt), FUNCTION('MONTH', u.createdAt) " +
            "ORDER BY FUNCTION('YEAR', u.createdAt) DESC, FUNCTION('MONTH', u.createdAt) DESC")
     List<Object[]> countByMonthlyRegistration();
+
+
 }

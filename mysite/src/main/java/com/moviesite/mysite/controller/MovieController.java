@@ -27,8 +27,8 @@ public class MovieController {
     // 모든 영화 목록 조회 (페이징 처리)
     @GetMapping
     public ResponseEntity<ApiResponse<Page<MovieResponse>>> getAllMovies(
-            @RequestParam(required = false) String title,
-            @RequestParam(required = false) String status,
+            @RequestParam(name = "title", required = false) String title,
+            @RequestParam(name = "status", required = false) String status,
             Pageable pageable) {
         Page<MovieResponse> movies = movieService.getAllMovies(title, status, pageable);
         return ResponseEntity.ok(ApiResponse.success(movies));

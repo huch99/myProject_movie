@@ -23,11 +23,13 @@ const TheaterPage = () => {
 
     // 페이지 로드 시 극장 데이터 가져오기
     useEffect(() => {
+       console.log('theaters fetching 실행');
         dispatch(fetchTheaters());
     }, [dispatch]);
 
     // 검색어나 선택된 지역이 변경될 때 극장 목록 필터링
     useEffect(() => {
+      console.log('필터링 실행', theaters?.length, selectedRegion, searchQuery);
         if (!theaters) return;
 
         let filtered = [...theaters];
