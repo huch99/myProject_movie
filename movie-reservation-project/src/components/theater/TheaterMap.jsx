@@ -25,7 +25,7 @@ const TheaterMap = ({ theater, theaters, zoom = 15, height = '400px' }) => {
             } else {
                 // 카카오맵 API 로드
                 const script = document.createElement('script');
-                script.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.REACT_APP_KAKAO_MAP_API_KEY}&autoload=false`;
+                script.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=${import.meta.env.REACT_APP_KAKAO_MAP_API_KEY}&autoload=false`;
                 script.async = true;
                 script.onload = () => {
                     window.kakao.maps.load(initializeMap);
