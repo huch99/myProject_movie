@@ -12,196 +12,194 @@ import Loading from '../components/common/Loading';
 import useScrollToTop from '../hooks/useScrollToTop';
 
 const TheaterPage = () => {
-    // 스크롤을 맨 위로 이동
-    useScrollToTop();
+  // 스크롤을 맨 위로 이동
+  useScrollToTop();
 
-    const dispatch = useDispatch();
-    const { theaters, regions, selectedRegion, loading, error } = useSelector((state) => state.theaters);
-    const [searchQuery, setSearchQuery] = useState('');
-    const [filteredTheaters, setFilteredTheaters] = useState([]);
-    const [viewMode, setViewMode] = useState('list'); // 'list' 또는 'map'
+  const dispatch = useDispatch();
+  const { theaters, regions, selectedRegion, loading, error } = useSelector((state) => state.theaters);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [filteredTheaters, setFilteredTheaters] = useState([]);
+  const [viewMode, setViewMode] = useState('list'); // 'list' 또는 'map'
 
-    // 페이지 로드 시 극장 데이터 가져오기
-    useEffect(() => {
-       console.log('theaters fetching 실행');
-        dispatch(fetchTheaters());
-    }, [dispatch]);
+  // 페이지 로드 시 극장 데이터 가져오기
+  useEffect(() => {
+    dispatch(fetchTheaters());
+  }, [dispatch]);
 
-    // 검색어나 선택된 지역이 변경될 때 극장 목록 필터링
-    useEffect(() => {
-      console.log('필터링 실행', theaters?.length, selectedRegion, searchQuery);
-        if (!theaters) return;
+  // 검색어나 선택된 지역이 변경될 때 극장 목록 필터링
+  useEffect(() => {
+    if (!theaters) return;
 
-        let filtered = [...theaters];
+    let filtered = [...theaters];
 
-        // 지역으로 필터링
-        if (selectedRegion && selectedRegion !== '전체') {
-            filtered = filtered.filter(theater => theater.region === selectedRegion);
-        }
-
-        // 검색어로 필터링
-        if (searchQuery) {
-            const query = searchQuery.toLowerCase();
-            filtered = filtered.filter(theater =>
-                theater.name.toLowerCase().includes(query) ||
-                theater.address.toLowerCase().includes(query)
-            );
-        }
-
-        setFilteredTheaters(filtered);
-    }, [theaters, selectedRegion, searchQuery]);
-
-    // 지역 선택 핸들러
-    const handleRegionSelect = (region) => {
-        dispatch(selectRegion(region));
-    };
-
-    // 검색어 변경 핸들러
-    const handleSearchChange = (e) => {
-        setSearchQuery(e.target.value);
-    };
-
-    // 뷰 모드 변경 핸들러
-    const handleViewModeChange = (mode) => {
-        setViewMode(mode);
-    };
-
-    if (loading && !theaters.length) {
-        return <Loading />;
+    // 지역으로 필터링
+    if (selectedRegion && selectedRegion !== '전체') {
+      filtered = filtered.filter(theater => theater.region === selectedRegion);
     }
 
-    return (
-        <TheaterPageContainer>
-            <PageHeader>
-                <h1>극장</h1>
-                <p>원하시는 극장을 선택해 주세요.</p>
-            </PageHeader>
+    // 검색어로 필터링
+    if (searchQuery) {
+      const query = searchQuery.toLowerCase();
+      filtered = filtered.filter(theater =>
+        theater.name.toLowerCase().includes(query) ||
+        theater.address.toLowerCase().includes(query)
+      );
+    }
 
-            <SearchSection>
-                <SearchBar
-                    placeholder="극장명 또는 주소로 검색"
-                    value={searchQuery}
-                    onChange={handleSearchChange}
+    setFilteredTheaters(filtered);
+  }, [theaters, selectedRegion, searchQuery]);
+
+  // 지역 선택 핸들러
+  const handleRegionSelect = (region) => {
+    dispatch(selectRegion(region));
+  };
+
+  // 검색어 변경 핸들러
+  const handleSearchChange = (e) => {
+    setSearchQuery(e.target.value);
+  };
+
+  // 뷰 모드 변경 핸들러
+  const handleViewModeChange = (mode) => {
+    setViewMode(mode);
+  };
+
+  if (loading && !theaters.length) {
+    return <Loading />;
+  }
+
+  return (
+    <TheaterPageContainer>
+      <PageHeader>
+        <h1>극장</h1>
+        <p>원하시는 극장을 선택해 주세요.</p>
+      </PageHeader>
+
+      <SearchSection>
+        <SearchBar
+          placeholder="극장명 또는 주소로 검색"
+          value={searchQuery}
+          onChange={handleSearchChange}
+        />
+
+        <ViewToggle>
+          <ViewButton
+            $active={viewMode === 'list'}
+            onClick={() => handleViewModeChange('list')}
+          >
+            목록 보기
+          </ViewButton>
+          <ViewButton
+            $active={viewMode === 'map'}
+            onClick={() => handleViewModeChange('map')}
+          >
+            지도 보기
+          </ViewButton>
+        </ViewToggle>
+      </SearchSection>
+
+      <RegionSection>
+        <RegionSelector
+          regions={['전체', ...regions]}
+          selectedRegion={selectedRegion || '전체'}
+          onSelectRegion={handleRegionSelect}
+        />
+      </RegionSection>
+
+      {error && (
+        <ErrorMessage>
+          극장 정보를 불러오는데 실패했습니다. 다시 시도해 주세요.
+        </ErrorMessage>
+      )}
+
+      {viewMode === 'list' ? (
+        <TheaterListSection>
+          {filteredTheaters.length === 0 ? (
+            <NoResults>
+              <p>검색 결과가 없습니다.</p>
+              <p>다른 검색어나 지역을 선택해 주세요.</p>
+            </NoResults>
+          ) : (
+            <TheaterGrid>
+              {filteredTheaters.map(theater => (
+                <TheaterCard
+                  key={theater.theaterId}
+                  theater={theater}
                 />
+              ))}
+            </TheaterGrid>
+          )}
+        </TheaterListSection>
+      ) : (
+        <MapSection>
+          <TheaterMap theaters={filteredTheaters} />
+        </MapSection>
+      )}
 
-                <ViewToggle>
-                    <ViewButton
-                        active={viewMode === 'list'}
-                        onClick={() => handleViewModeChange('list')}
-                    >
-                        목록 보기
-                    </ViewButton>
-                    <ViewButton
-                        active={viewMode === 'map'}
-                        onClick={() => handleViewModeChange('map')}
-                    >
-                        지도 보기
-                    </ViewButton>
-                </ViewToggle>
-            </SearchSection>
+      {/* <FavoriteSection>
+        <SectionTitle>자주 가는 극장</SectionTitle>
+        <FavoriteTheaters />
+      </FavoriteSection>
 
-            <RegionSection>
-                <RegionSelector
-                    regions={['전체', ...regions]}
-                    selectedRegion={selectedRegion || '전체'}
-                    onSelectRegion={handleRegionSelect}
-                />
-            </RegionSection>
-
-            {error && (
-                <ErrorMessage>
-                    극장 정보를 불러오는데 실패했습니다. 다시 시도해 주세요.
-                </ErrorMessage>
-            )}
-
-            {viewMode === 'list' ? (
-                <TheaterListSection>
-                    {filteredTheaters.length === 0 ? (
-                        <NoResults>
-                            <p>검색 결과가 없습니다.</p>
-                            <p>다른 검색어나 지역을 선택해 주세요.</p>
-                        </NoResults>
-                    ) : (
-                        <TheaterGrid>
-                            {filteredTheaters.map(theater => (
-                                <TheaterCard
-                                    key={theater.id}
-                                    theater={theater}
-                                />
-                            ))}
-                        </TheaterGrid>
-                    )}
-                </TheaterListSection>
-            ) : (
-                <MapSection>
-                    <TheaterMap theaters={filteredTheaters} />
-                </MapSection>
-            )}
-
-            <FavoriteSection>
-                <SectionTitle>자주 가는 극장</SectionTitle>
-                <FavoriteTheaters />
-            </FavoriteSection>
-
-            <RecentSection>
-                <SectionTitle>최근 본 극장</SectionTitle>
-                <RecentTheaters />
-            </RecentSection>
-        </TheaterPageContainer>
-    );
+      <RecentSection>
+        <SectionTitle>최근 본 극장</SectionTitle>
+        <RecentTheaters />
+      </RecentSection> */}
+    </TheaterPageContainer>
+  );
 };
 
 // 자주 가는 극장 컴포넌트
 const FavoriteTheaters = () => {
-    const { favoriteTheaters } = useSelector((state) => state.theaters);
+  const { favoriteTheaters } = useSelector((state) => state.theaters);
 
-    if (!favoriteTheaters || favoriteTheaters.length === 0) {
-        return (
-            <EmptyMessage>
-                자주 가는 극장이 없습니다.
-                <p>극장 상세 페이지에서 ♡ 버튼을 눌러 추가할 수 있습니다.</p>
-            </EmptyMessage>
-        );
-    }
-
+  if (!favoriteTheaters || favoriteTheaters.length === 0) {
     return (
-        <HorizontalScroll>
-            {favoriteTheaters.map(theater => (
-                <TheaterItem key={theater.id}>
-                    <Link to={`/theaters/${theater.id}`}>
-                        <TheaterName>{theater.name}</TheaterName>
-                        <TheaterRegion>{theater.region}</TheaterRegion>
-                    </Link>
-                </TheaterItem>
-            ))}
-        </HorizontalScroll>
+      <EmptyMessage>
+        자주 가는 극장이 없습니다.
+        <p>극장 상세 페이지에서 ♡ 버튼을 눌러 추가할 수 있습니다.</p>
+      </EmptyMessage>
     );
+  }
+
+  return (
+    <HorizontalScroll>
+      {favoriteTheaters.map(theater => (
+        <TheaterItem key={theater.id}>
+          <Link to={`/theaters/${theater.id}`}>
+            <TheaterName>{theater.name}</TheaterName>
+            <TheaterRegion>{theater.region}</TheaterRegion>
+          </Link>
+        </TheaterItem>
+      ))}
+    </HorizontalScroll>
+  );
 };
 
 // 최근 본 극장 컴포넌트
 const RecentTheaters = () => {
-    const { recentTheaters } = useSelector((state) => state.theaters);
+  const { recentTheaters } = useSelector((state) => state.theaters);
 
-    if (!recentTheaters || recentTheaters.length === 0) {
-        return (
-            <EmptyMessage>
-                최근 본 극장이 없습니다.
-            </EmptyMessage>
-        );
-    }
-
+  if (!recentTheaters || recentTheaters.length === 0) {
     return (
-        <HorizontalScroll>
-            {recentTheaters.map(theater => (
-                <TheaterItem key={theater.id}>
-                    <Link to={`/theaters/${theater.id}`}>
-                        <TheaterName>{theater.name}</TheaterName>
-                        <TheaterRegion>{theater.region}</TheaterRegion>
-                    </Link>
-                </TheaterItem>
-            ))}
-        </HorizontalScroll>
+      <EmptyMessage>
+        최근 본 극장이 없습니다.
+      </EmptyMessage>
     );
+  }
+
+  return (
+    <HorizontalScroll>
+      {recentTheaters.map(theater => (
+        <TheaterItem key={theater.id}>
+          <Link to={`/theaters/${theater.id}`}>
+            <TheaterName>{theater.name}</TheaterName>
+            <TheaterRegion>{theater.region}</TheaterRegion>
+          </Link>
+        </TheaterItem>
+      ))}
+    </HorizontalScroll>
+  );
 };
 
 // 스타일 컴포넌트
@@ -252,14 +250,14 @@ const ViewToggle = styled.div`
 
 const ViewButton = styled.button`
   padding: var(--spacing-xs) var(--spacing-md);
-  background-color: ${({ active }) => active ? 'var(--color-primary)' : 'transparent'};
-  color: ${({ active }) => active ? 'white' : 'var(--color-text-primary)'};
+  background-color: ${({ $active }) => $active ? 'var(--color-primary)' : 'transparent'};
+  color: ${({ $active }) => $active ? 'white' : 'var(--color-text-primary)'};
   border: none;
   cursor: pointer;
   transition: var(--transition-fast);
   
   &:hover {
-    background-color: ${({ active }) => active ? 'var(--color-primary)' : 'var(--color-surface)'};
+    background-color: ${({ $active }) => $active ? 'var(--color-primary)' : 'var(--color-surface)'};
   }
 `;
 

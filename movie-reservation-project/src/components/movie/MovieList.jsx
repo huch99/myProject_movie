@@ -46,7 +46,7 @@ const MovieList = ({
                     dispatch(fetchNowPlayingMovies({ page: currentPage, size: moviesPerPage, ...filter }));
             }
         };
-
+        console.log('movieList - fachmovies');
         fetchMovies();
     }, [dispatch, type, currentPage, moviesPerPage, filter]);
 

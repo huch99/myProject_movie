@@ -6,7 +6,7 @@ import storageUtils from '../utils/storageUtils';
 const API_URL = import.meta.env.VITE_API_KEY || 'http://localhost:8080/api';
 
 // axios 인스턴스 생성
-const api = axios.create({
+export const api = axios.create({
   baseURL: API_URL,
   headers: {
     'Content-Type': 'application/json',
@@ -149,20 +149,11 @@ const apiService = {
   },
 };
 
-export const fetchMovies = async () => {
-  try {
-    const response = await apiClient.get('/movies');
-    return response.data;
-  } catch (error) {
-    console.error('영화 목록을 불러오는 중 오류가 발생했습니다:', error);
-    throw error;
-  }
-};
 
 // 특정 영화 상세 정보 가져오기
 export const fetchMovieById = async (movieId) => {
   try {
-    const response = await apiClient.get(`/movies/${movieId}`);
+    const response = await api.get(`/movies/${movieId}`); //apiClient >> api
     return response.data;
   } catch (error) {
     console.error(`영화 상세 정보를 불러오는 중 오류가 발생했습니다:`, error);
@@ -173,7 +164,7 @@ export const fetchMovieById = async (movieId) => {
 // 현재 상영 중인 영화 목록 가져오기
 export const fetchNowPlayingMovies = async () => {
   try {
-    const response = await apiClient.get('/movies/now-playing');
+    const response = await api.get('/movies/now-playing');  //apiClient >> api
     return response.data;
   } catch (error) {
     console.error('현재 상영 중인 영화 목록을 불러오는 중 오류가 발생했습니다:', error);

@@ -1,6 +1,7 @@
 // 영화 관련 슬라이스
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import movieService from '../../services/movieService';
+import { api } from '../../services/api';
 
 // 초기 상태 정의
 const initialState = {
@@ -102,26 +103,17 @@ export const addMovieReview = createAsyncThunk(
 
 export const fetchMovies = createAsyncThunk(
     'movies/fetchMovies',
-    async ({ page = 0, size = 10, sort = 'releaseDate' }, { getState, rejectWithValue }) => {
-        // 현재 상태 확인 (fetchMovies의 경우, 페이지 정보도 확인하는 것이 좋음)
+    async (_,{ getState, rejectWithValue }) => {
         const { movies, currentPage, currentSize, currentSort } = getState().movies; // 현재 상태에서 필요한 값들을 가져옴
-
-        // 현재 요청하려는 page, size, sort가 이미 불러온 데이터와 일치한다면 요청 생략
-        // (정확한 비교 로직은 프로젝트 요구사항에 따라 달라질 수 있습니다)
+        // console.log('fetching Movies...');
         if (movies && movies.length > 0 && currentPage === page && currentSize === size && currentSort === sort) {
             console.log(`fetchMovies: 페이지 ${page}의 영화 데이터 존재, 요청 생략`);
-            return { content: movies, page, size, sort }; // 기존 데이터를 그대로 반환
+            return { content: movies, page: currentPage, size: currentSize, sort: currentSize }; // 기존 데이터를 그대로 반환
         }
 
         try {
-            const response = await fetch(`/api/movies?page=${page}&size=${size}&sort=${sort}`);
-
-            if (!response.ok) {
-                throw new Error('영화 목록을 불러오는데 실패했습니다.');
-            }
-
-            const data = await response.json();
-            return data;
+            const response = await api.get('/movies');
+            return response.data;
         } catch (error) {
             return rejectWithValue(error.message);
         }
@@ -250,14 +242,11 @@ const movieSlice = createSlice({
             })
             .addCase(fetchMovies.fulfilled, (state, action) => {
                 state.loading = false;
-                const incomingMovies = action.payload.content || [];
+                const incomingMovies = action.payload?.data?.content || [];
 
-                // 실제 데이터가 변경되었을 때만 상태 업데이트
-                if (JSON.stringify(state.movies) !== JSON.stringify(incomingMovies)) {
+                if (Array.isArray(incomingMovies) && JSON.stringify(state.movies) !== JSON.stringify(incomingMovies)) {
                     state.movies = incomingMovies;
-                    state.currentPage = action.payload.page || 0;
-                    state.totalPages = action.payload.totalPages || 1;
-                }
+                }  
             })
             .addCase(fetchMovies.rejected, (state, action) => {
                 state.loading = false;

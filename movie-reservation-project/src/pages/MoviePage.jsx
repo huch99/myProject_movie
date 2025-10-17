@@ -6,14 +6,16 @@ import MovieList from '../components/movie/MovieList';
 import MovieFilter from '../components/movie/MovieFilter';
 import Loading from '../components/common/Loading';
 import ErrorMessage from '../components/common/ErrorMessage';
-import { fetchMovies } from '../services/api';
 import ROUTE_PATHS from '../constants/routePaths';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchMovies } from '../store/slices/movieSlice';
 
 /**
  * 영화 목록 페이지
  * 현재 상영 중인 영화와 개봉 예정작을 필터링하여 보여줍니다.
  */
 const MoviePage = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [movies, setMovies] = useState([]);
   const [filteredMovies, setFilteredMovies] = useState([]);
@@ -25,65 +27,76 @@ const MoviePage = () => {
     sortBy: 'popularity', // 'popularity', 'rating', 'release-date'
   });
 
-  // 영화 데이터 불러오기
-  useEffect(() => {
-    const loadMovies = async () => {
-      try {
-        setLoading(true);
-        await dispatch(fetchMovies({ page: 0, size: 20 })); // dispatch 추가
-        // 결과는 Redux 스토어에서 가져오기
-        const moviesData = useSelector(state => state.movies.movies);
-        setMovies(moviesData);
-        setFilteredMovies(moviesData);
-        setLoading(false);
-      } catch (err) {
-        console.error('영화 데이터를 불러오는 중 오류가 발생했습니다:', err);
-        setError('영화 정보를 불러올 수 없습니다. 잠시 후 다시 시도해주세요.');
-        setLoading(false);
-      }
-    };
+  const moviesData = useSelector(state => state.movies.movies);
 
-    loadMovies();
-  }, []);
+  useEffect(() => {
+    dispatch(fetchMovies());
+  }, [dispatch]);
+
+  // useEffect(() => {
+  //   const loadMovies = async () => {
+  //     try {
+  //       // setLoading(true);
+  //       setMovies(moviesData);
+  //       setFilteredMovies(moviesData);
+  //       setLoading(false);
+  //     } catch (error) {
+  //       console.error('영화 데이터를 불러오는 중 오류가 발생했습니다:', error);
+  //       setError('영화 정보를 불러올 수 없습니다. 잠시 후 다시 시도해주세요.');
+  //       setLoading(false);
+  //     }
+  //   };
+
+  //   loadMovies();
+  // }, []);
+
+  useEffect(() => {
+    if (moviesData && moviesData.length > 0) {
+      setMovies(moviesData);
+      setFilteredMovies(moviesData);
+      setLoading(false);
+    }
+  }, [moviesData]);
+
 
   // 필터 변경 시 영화 목록 필터링
-  useEffect(() => {
-    if (!movies.length) return;
+  // useEffect(() => {
+  //   if (!movies.length) return;    
 
-    let result = [...movies];
+  //   let result = [...movies];
 
-    // 카테고리 필터링
-    if (filters.category === 'now-playing') {
-      result = result.filter(movie => new Date(movie.releaseDate) <= new Date());
-    } else if (filters.category === 'coming-soon') {
-      result = result.filter(movie => new Date(movie.releaseDate) > new Date());
-    }
+  //   // 카테고리 필터링
+  //   if (filters.category === 'now-playing') {
+  //     result = result.filter(movie => new Date(movie.releaseDate) <= new Date());
+  //   } else if (filters.category === 'coming-soon') {
+  //     result = result.filter(movie => new Date(movie.releaseDate) > new Date());
+  //   }
 
-    // 장르 필터링
-    if (filters.genre !== 'all') {
-      result = result.filter(movie =>
-        movie.genres.some(genre => genre.toLowerCase() === filters.genre.toLowerCase())
-      );
-    }
+  //   // 장르 필터링
+  //   if (filters.genre !== 'all') {
+  //     result = result.filter(movie =>
+  //       movie.genres.some(genre => genre.toLowerCase() === filters.genre.toLowerCase())
+  //     );
+  //   }
 
-    // 정렬
-    if (filters.sortBy === 'popularity') {
-      result.sort((a, b) => b.popularity - a.popularity);
-    } else if (filters.sortBy === 'rating') {
-      result.sort((a, b) => b.rating - a.rating);
-    } else if (filters.sortBy === 'release-date') {
-      result.sort((a, b) => new Date(b.releaseDate) - new Date(a.releaseDate));
-    }
+  //   // 정렬
+  //   if (filters.sortBy === 'popularity') {
+  //     result.sort((a, b) => b.popularity - a.popularity);
+  //   } else if (filters.sortBy === 'rating') {
+  //     result.sort((a, b) => b.rating - a.rating);
+  //   } else if (filters.sortBy === 'release-date') {
+  //     result.sort((a, b) => new Date(b.releaseDate) - new Date(a.releaseDate));
+  //   }
 
-    setFilteredMovies(result);
-  }, [filters, movies]);
+  //   setFilteredMovies(result);
+  // }, [filters, movies]);
 
   // 필터 변경 핸들러
   const handleFilterChange = (filterName, value) => {
-    setFilters(prev => ({
-      ...prev,
-      [filterName]: value
-    }));
+    // setFilters(prev => ({
+    //   ...prev,
+    //   [filterName]: value
+    // }));
   };
 
   // 영화 상세 페이지로 이동
@@ -106,7 +119,7 @@ const MoviePage = () => {
         onFilterChange={handleFilterChange}
       />
 
-      {filteredMovies.length > 0 ? (
+      {/* {filteredMovies.length > 0 ? (
         <MovieList
           movies={filteredMovies}
           onMovieClick={handleMovieClick}
@@ -116,7 +129,7 @@ const MoviePage = () => {
           <p>검색 결과가 없습니다.</p>
           <p>다른 필터 옵션을 선택해 주세요.</p>
         </NoResults>
-      )}
+      )} */}
     </PageContainer>
   );
 };
