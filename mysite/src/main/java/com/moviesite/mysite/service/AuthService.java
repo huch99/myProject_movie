@@ -79,6 +79,14 @@ public class AuthService {
         if (userRepository.existsByEmail(registerRequest.getEmail())) {
             throw new RuntimeException("이미 등록된 이메일입니다.");
         }
+        // 비밀번호  null 확인 로직
+        if (registerRequest.getPassword() == null) {
+            throw new IllegalArgumentException("비밀번호는 필수 입력값입니다.");
+        }
+        
+        // 디버깅용 로그
+        System.out.println("RegisterRequest: " + registerRequest);
+        System.out.println("Password 값: " + (registerRequest.getPassword() != null ? "존재함" : "null"));
         
         User user = User.builder()
             .email(registerRequest.getEmail())

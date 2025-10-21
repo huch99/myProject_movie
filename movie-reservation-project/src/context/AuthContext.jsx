@@ -89,6 +89,7 @@ export const AuthProvider = ({ children }) => {
             return result;
         } catch (error) {
             setError(error.response?.data?.message || '회원가입에 실패했습니다.');
+            console.log('에러메세지 : ',error.message);
             throw error;
         } finally {
             setLoading(false);

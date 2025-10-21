@@ -186,6 +186,11 @@ const RegisterForm = () => {
         }
 
         try {
+             // 디버깅용 로그 추가
+    console.log('회원가입 전체 데이터:', formData);
+    console.log('비밀번호 값:', formData.password);
+    console.log('비밀번호 타입:', typeof formData.password);
+
             // 회원가입 액션 디스패치
             const userData = {
                 ...formData,
