@@ -1,60 +1,31 @@
 // 인증 컨텍스트
 import { createContext, useContext, useEffect, useState } from "react";
 import { getCurrentUser, login, logout, refreshToken, register } from "../services/authService";
+import { useDispatch } from "react-redux";
+import { loadAuth } from "../store/slices/authSlice";
 
 // 인증 컨텍스트 생성
 const AuthContext = createContext(null);
 
 // 인증 컨텍스트 제공자 컴포넌트
 export const AuthProvider = ({ children }) => {
-    const [user, setUser] = useState(null);
+
+    const dispatch = useDispatch();
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+    useEffect(() => {
+        const initializeAuth = async () => {
+            await dispatch(loadAuth()); // Redux Thunk 디스패치
+            setLoading(false);
+        };
+        initializeAuth();
+    }, [dispatch]);
 
     // 컴포넌트 마운트 시 사용자 인증 상태 확인
-    useEffect(() => {
-        const checkAuthStatus = async () => {
-            const token = localStorage.getItem('token');
-
-            if (!token) {
-                setLoading(false);
-                return;
-            }
-
-            try {
-                // 토큰이 있으면 현재 사용자 정보 요청
-                const userData = await getCurrentUser();
-                setUser(userData);
-                setIsAuthenticated(true);
-            } catch (error) {
-                // 토큰이 만료되었거나 유효하지 않은 경우 토큰 갱신 시도
-                try {
-                    const refreshTokenValue = localStorage.getItem('refreshToken');
-                    if (refreshTokenValue) {
-                        const result = await refreshToken(refreshTokenValue);
-                        if (result.token) {
-                            localStorage.setItem('token', result.token);
-                            const userData = await getCurrentUser();
-                            setUser(userData);
-                            setIsAuthenticated(true);
-                        } else {
-                            handleLogout();
-                        }
-                    } else {
-                        handleLogout();
-                    }
-                } catch (error) {
-                    console.error('토큰 갱신 실패 : ', refreshError);
-                    handleLogout
-                }
-            } finally {
-                setLoading(false);
-            }
-        };
-
-        checkAuthStatus();
-    }, []);
+    // useEffect(() => {
+    //     checkAuthStatus();
+    // }, []);
 
     // 로그인 처리 함수
     const handleLogin = async (email, password) => {
@@ -105,17 +76,15 @@ export const AuthProvider = ({ children }) => {
         } finally {
             localStorage.removeItem('token');
             localStorage.removeItem('refreshToken');
-            setUser(null);
-            setIsAuthenticated(false);
         }
     };
 
     // 제공할 컨텍스트 값
     const value = {
-        user,
+        // user,
         loading,
         error,
-        isAuthenticated,
+        // isAuthenticated,
         login: handleLogin,
         register: handleRegister,
         logout: handleLogout

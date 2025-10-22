@@ -61,10 +61,12 @@ public class AuthService {
         User user = userRepository.findByEmail(loginRequest.getEmail())
             .orElseThrow(() -> new RuntimeException("사용자를 찾을 수 없습니다."));
         
+        // 사용자 조회 로직
         if (!passwordEncoder.matches(loginRequest.getPassword(), user.getPassword())) {
             throw new RuntimeException("비밀번호가 일치하지 않습니다.");
         }
         
+        // 사용자 조회 로직
         String accessToken = jwtTokenProvider.createAccessToken(user.getEmail(), user.getRole().name());
         String refreshToken = jwtTokenProvider.createRefreshToken(user.getEmail());
         
@@ -80,21 +82,21 @@ public class AuthService {
             throw new RuntimeException("이미 등록된 이메일입니다.");
         }
         // 비밀번호  null 확인 로직
-        if (registerRequest.getPassword() == null) {
-            throw new IllegalArgumentException("비밀번호는 필수 입력값입니다.");
-        }
-        
-        // 디버깅용 로그
-        System.out.println("RegisterRequest: " + registerRequest);
-        System.out.println("Password 값: " + (registerRequest.getPassword() != null ? "존재함" : "null"));
+//        if (registerRequest.getPassword() == null) {
+//            throw new IllegalArgumentException("비밀번호는 필수 입력값입니다.");
+//        }
         
         User user = User.builder()
             .email(registerRequest.getEmail())
             .password(passwordEncoder.encode(registerRequest.getPassword()))
             .name(registerRequest.getName())
             .role(User.Role.USER)
+            .phone(registerRequest.getPhone())
+            .birthDate(registerRequest.getBirthDate())
+            .nickname(registerRequest.getNickname())
             .status(User.UserStatus.ACTIVE)
             .termsAgree(true)
+            .marketingAgree(true)
             .build();
         
         userRepository.save(user);

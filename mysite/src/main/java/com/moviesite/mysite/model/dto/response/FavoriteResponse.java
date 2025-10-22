@@ -1,5 +1,6 @@
 package com.moviesite.mysite.model.dto.response;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.moviesite.mysite.model.entity.Favorite;
 import lombok.AllArgsConstructor;
@@ -33,6 +34,7 @@ public class FavoriteResponse {
     private String theaterName;
     private String theaterLocation;
     
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createdAt;
     private String formattedCreatedAt;
     

@@ -20,20 +20,20 @@ const RegisterForm = () => {
 
     // 폼 상태 관리
     const [formData, setFormData] = useState({
-        username: '',
+        name: '',
         email: '',
         password: '',
         confirmPassword: '',
         nickname: '',
         birthDate: '',
-        phoneNumber: '',
+        phone: '',
     });
 
     // 약관 동의 상태
     const [agreements, setAgreements] = useState({
-        terms: false,
-        privacy: false,
-        marketing: false,
+        termsAgree: false,
+        privacyAgree: false,
+        marketingAgree: false,
     });
 
     // 유효성 검사 오류 메시지
@@ -60,7 +60,7 @@ const RegisterForm = () => {
         });
 
         // 약관 동의 오류 제거
-        if (name === 'terms' || name === 'privacy') {
+        if (name === 'termsAgree' || name === 'privacyAgree') {
             setErrors({
                 ...errors,
                 agreements: ''
@@ -72,9 +72,9 @@ const RegisterForm = () => {
     const handleAgreeAll = (e) => {
         const { checked } = e.target;
         setAgreements({
-            terms: checked,
-            privacy: checked,
-            marketing: checked
+            termsAgree: checked,
+            privacyAgree: checked,
+            marketingAgree: checked
         });
 
         if (checked) {
@@ -163,7 +163,7 @@ const RegisterForm = () => {
         });
 
         // 필수 약관 동의 검사
-        if (!agreements.terms || !agreements.privacy) {
+        if (!agreements.termsAgree || !agreements.privacyAgree) {
             fieldErrors.agreements = '필수 약관에 동의해주세요.';
             isValid = false;
         }
@@ -186,15 +186,21 @@ const RegisterForm = () => {
         }
 
         try {
-             // 디버깅용 로그 추가
-    console.log('회원가입 전체 데이터:', formData);
-    console.log('비밀번호 값:', formData.password);
-    console.log('비밀번호 타입:', typeof formData.password);
+            // 디버깅용 로그 추가
+            // console.log('회원가입 전체 데이터:', formData);
+            // console.log('비밀번호 값:', formData.password);
+            // console.log('비밀번호 타입:', typeof formData.password);
 
             // 회원가입 액션 디스패치
             const userData = {
-                ...formData,
-                marketingAgreed: agreements.marketing
+                email: formData.email,
+                password: formData.password,
+                name: formData.name,
+                phone: formData.phone,
+                birthDate: formData.birthDate,
+                nickname: formData.nickname,
+                marketingAgree: agreements.marketingAgree,
+                termsAgree: agreements.termsAgree,
             };
 
             await dispatch(registerUser(userData)).unwrap();
@@ -230,12 +236,12 @@ const RegisterForm = () => {
                         <StyledInput
                             label="이름"
                             type="text"
-                            name="username"
-                            value={formData.username}
+                            name="name"
+                            value={formData.name}
                             onChange={handleChange}
                             placeholder="이름을 입력하세요"
                             icon={<FaUser />}
-                            error={errors.username}
+                            error={errors.name}
                             required
                         />
                     </InputGroup>
@@ -318,12 +324,12 @@ const RegisterForm = () => {
                         <StyledInput
                             label="휴대폰 번호"
                             type="tel"
-                            name="phoneNumber"
-                            value={formData.phoneNumber}
+                            name="phone"
+                            value={formData.phone}
                             onChange={handleChange}
                             placeholder="'-' 없이 입력하세요"
                             icon={<FaPhoneAlt />}
-                            error={errors.phoneNumber}
+                            error={errors.phone}
                         />
                     </InputGroup>
                 </FormSection>
@@ -336,7 +342,7 @@ const RegisterForm = () => {
                         <input
                             type="checkbox"
                             id="agreeAll"
-                            checked={agreements.terms && agreements.privacy && agreements.marketing}
+                            checked={agreements.termsAgree && agreements.privacyAgree && agreements.marketingAgree}
                             onChange={handleAgreeAll}
                         />
                         <label htmlFor="agreeAll">
@@ -350,8 +356,8 @@ const RegisterForm = () => {
                         <input
                             type="checkbox"
                             id="terms"
-                            name="terms"
-                            checked={agreements.terms}
+                            name="termsAgree"
+                            checked={agreements.termsAgree}
                             onChange={handleAgreementChange}
                             required
                         />
@@ -366,7 +372,7 @@ const RegisterForm = () => {
                             type="checkbox"
                             id="privacy"
                             name="privacy"
-                            checked={agreements.privacy}
+                            checked={agreements.privacyAgree}
                             onChange={handleAgreementChange}
                             required
                         />
@@ -380,8 +386,8 @@ const RegisterForm = () => {
                         <input
                             type="checkbox"
                             id="marketing"
-                            name="marketing"
-                            checked={agreements.marketing}
+                            name="marketingAgree"
+                            checked={agreements.marketingAgree}
                             onChange={handleAgreementChange}
                         />
                         <label htmlFor="marketing">

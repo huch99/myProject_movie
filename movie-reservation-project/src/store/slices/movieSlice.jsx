@@ -6,9 +6,7 @@ import { api } from '../../services/api';
 // 초기 상태 정의
 const initialState = {
     movies: { content: [] },
-    nowPlaying: [],
-    comingSoon: [],
-    popular: [],
+    popular: null,
     currentMovie: null,
     recentMovies: [],
     genres: [],
@@ -103,7 +101,7 @@ export const addMovieReview = createAsyncThunk(
 
 export const fetchMovies = createAsyncThunk(
     'movies/fetchMovies',
-    async (_,{ getState, rejectWithValue }) => {
+    async (_, { getState, rejectWithValue }) => {
         const { movies, currentPage, currentSize, currentSort } = getState().movies; // 현재 상태에서 필요한 값들을 가져옴
         // console.log('fetching Movies...');
         if (movies && movies.length > 0 && currentPage === page && currentSize === size && currentSort === sort) {
@@ -146,6 +144,15 @@ const movieSlice = createSlice({
         // 에러 메시지 초기화
         clearError: (state) => {
             state.error = null;
+        },
+        setLoading: (state, action) => {
+            state.loading = action.payload;
+        },
+        setError: (state, action) => {
+            state.error = action.payload;
+        },
+        setMovies: (state, action) => {
+            state.movies = action.payload;
         }
     },
     extraReducers: (builder) => {
@@ -246,7 +253,7 @@ const movieSlice = createSlice({
 
                 if (Array.isArray(incomingMovies) && JSON.stringify(state.movies) !== JSON.stringify(incomingMovies)) {
                     state.movies = incomingMovies;
-                }  
+                }
             })
             .addCase(fetchMovies.rejected, (state, action) => {
                 state.loading = false;
@@ -260,7 +267,10 @@ export const {
     clearCurrentMovie,
     clearSearchResults,
     loadRecentMovies,
-    clearError
+    clearError,
+    setLoading,
+    setError,
+    setMovies
 } = movieSlice.actions;
 
 // 리듀서 내보내기

@@ -1,8 +1,13 @@
 package com.moviesite.mysite.config;
 
 import lombok.Getter;
+
+import javax.crypto.SecretKey;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
+import io.jsonwebtoken.io.Decoders;
+import io.jsonwebtoken.security.Keys;
 
 @Configuration
 @Getter
@@ -10,23 +15,24 @@ public class JwtConfig {
 	
 	@Value("${jwt.secret.key}")
     private String secret;
+	
+	private SecretKey signingKey;
 
     // Access Token 유효 기간
-    @Value("${jwt.expiration.ms}") // Huch님 설정명으로 변경
-    private Long accessTokenValidity; // 변수명도 명확하게 변경
+    @Value("${jwt.expiration.ms}") 
+    private Long accessTokenValidity;
 
     // 리프레시 토큰 유효 기간
-    @Value("${jwt.refresh.expiration.ms}") // Huch님 설정명으로 변경
-    private Long refreshTokenValidity; // 변수명도 명확하게 변경
+    @Value("${jwt.refresh.expiration.ms}")
+    private Long refreshTokenValidity;
     
-    // --- 아래는 제가 이전 JwtConfig에 추가했던 부분으로, Huch님의 설정 파일에 추가해주셔야 합니다. ---
-    @Value("${jwt.header:Authorization}") // 기본값 부여
+    @Value("${jwt.header:Authorization}") 
     private String header;
 
-    @Value("${jwt.token-prefix:Bearer }") // 기본값 부여 (공백 포함)
+    @Value("${jwt.token-prefix:Bearer }")
     private String tokenPrefix;
 
-    @Value("${jwt.issuer:movie-booking-app}") // 기본값 부여
+    @Value("${jwt.issuer:movie-booking-app}")
     private String issuer;
     
     // 토큰 타입 (상수)
@@ -40,4 +46,17 @@ public class JwtConfig {
     
     // 토큰 생성 시간 클레임 (상수)
     public static final String TOKEN_CREATED_DATE = "created";
+    
+ // 생성자에서 secret 값을 주입받아 SecretKey를 초기화합니다.
+    public JwtConfig(@Value("${jwt.secret.key}") String secret) {
+        this.secret = secret; // secret 필드에도 값 저장
+        // Base64 디코딩된 바이트 배열로 키를 생성
+        byte[] keyBytes = Decoders.BASE64.decode(secret); 
+        this.signingKey = Keys.hmacShaKeyFor(keyBytes);
+    }
+    
+    // 이 메서드를 통해 SecretKey를 제공합니다.
+    public SecretKey getSigningKey() {
+        return signingKey;
+    }
 }

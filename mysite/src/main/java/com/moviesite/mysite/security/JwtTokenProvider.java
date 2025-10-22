@@ -46,11 +46,6 @@ public class JwtTokenProvider {
 
 	private SecretKey key;
 
-	@PostConstruct
-	protected void init() {
-		this.key = Keys.hmacShaKeyFor(secretKey.getBytes(StandardCharsets.UTF_8));
-	}
-
 	// 토큰 생성
 	public String createToken(Authentication authentication) {
 		String authorities = authentication.getAuthorities().stream().map(GrantedAuthority::getAuthority)
@@ -98,13 +93,12 @@ public class JwtTokenProvider {
         this.refreshTokenRepository = refreshTokenRepository;
         
         try {
-            // 시크릿 키 초기화 부분을 try-catch로 감싸기
-            byte[] keyBytes = Base64.getDecoder().decode(secretKey);
+        	byte[] keyBytes = Decoders.BASE64.decode(secretKey);
             this.key = Keys.hmacShaKeyFor(keyBytes);
         } catch (Exception e) {
             // 로깅 추가
-            System.err.println("JWT 키 생성 오류: " + e.getMessage());
-            // 기본 키 생성 (개발용)
+        	System.err.println("JWT 키 생성 오류: " + e.getMessage());
+            // HS512에 적합한 안전한 키 생성
             this.key = Keys.secretKeyFor(SignatureAlgorithm.HS512);
         }
         

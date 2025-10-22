@@ -1,5 +1,6 @@
 package com.moviesite.mysite.model.dto.response;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.moviesite.mysite.model.entity.Theater;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -31,7 +32,9 @@ public class TheaterResponse {
 	private String transportation;
 	private Integer capacity;
 	private String type;
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private LocalDateTime createdAt;
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private LocalDateTime updatedAt;
 	private String formattedCreatedAt;
 

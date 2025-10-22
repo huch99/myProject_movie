@@ -119,7 +119,7 @@ const MoviePage = () => {
         onFilterChange={handleFilterChange}
       />
 
-      {/* {filteredMovies.length > 0 ? (
+      {filteredMovies.length > 0 ? (
         <MovieList
           movies={filteredMovies}
           onMovieClick={handleMovieClick}
@@ -129,7 +129,7 @@ const MoviePage = () => {
           <p>검색 결과가 없습니다.</p>
           <p>다른 필터 옵션을 선택해 주세요.</p>
         </NoResults>
-      )} */}
+      )}
     </PageContainer>
   );
 };

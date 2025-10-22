@@ -34,14 +34,14 @@ const MovieCard = ({ movie, showRating = true, showReservation = true }) => {
     };
 
     return (
-        <CardContainer to={`${ROUTE_PATHS.MOVIE_DETAIL(movie.id)}`}>
+        <CardContainer to={`${ROUTE_PATHS.MOVIE_DETAIL(movie.movieId)}`}>
             <PosterWrapper>
                 <PosterImage src={movie.posterPath || '/images/default-poster.jpg'} alt={movie.title} />
 
                 <CardOverlay>
                     <OverlayContent>
                         {showReservation && (
-                            <ReservationButton to={`${ROUTE_PATHS.RESERVATION(movie.id)}`} onClick={(e) => e.stopPropagation()}>
+                            <ReservationButton to={`${ROUTE_PATHS.RESERVATION(movie.movieId)}`} onClick={(e) => e.stopPropagation()}>
                                 예매하기
                             </ReservationButton>
                         )}
@@ -89,7 +89,7 @@ const MovieCard = ({ movie, showRating = true, showReservation = true }) => {
 };
 
 // 스타일 컴포넌트
-const CardContainer = styled(Link)`
+const CardContainer = styled.div`
   display: flex;
   flex-direction: column;
   background-color: var(--color-surface);

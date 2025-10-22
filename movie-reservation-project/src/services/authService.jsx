@@ -16,7 +16,7 @@ export const login = async (email, password) => {
 export const register = async (userData) => {
   try {
     // apiService 객체의 auth 모듈 안에 있는 register 함수를 호출합니다.
-    const response = await apiService.auth.register(userData);
+    const response = await apiService.auth.register(userData);    
     return response;
   } catch (error) {
     console.error('authService - 회원가입 실패:', error);
@@ -26,12 +26,25 @@ export const register = async (userData) => {
 
 // 로그아웃 서비스
 export const logout = async () => {
-  try {
-    const response = await api.post('/auth/logout');
+  // try {
+  //   const response = await apiService.auth.logout();
+  //   return response;
+  // } catch (error) {
+  //   console.error('로그아웃 실패:', error);
+  //   throw error;
+  // }
+
+   try {
+    const response = await apiService.auth.logout();
     return response.data;
   } catch (error) {
-    console.error('로그아웃 실패:', error);
-    throw error;
+    console.error('로그아웃 중 오류:', error);
+    // 오류가 발생해도 로컬 스토리지는 정리
+    localStorage.removeItem('accessToken');
+    localStorage.removeItem('refreshToken');
+    localStorage.removeItem('userData');
+    // 로그아웃은 성공한 것으로 간주
+    return { success: true, message: '로컬에서 로그아웃됨' };
   }
 };
 

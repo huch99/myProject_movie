@@ -24,10 +24,23 @@ const storageUtils = {
      * @param {any} defaultValue - 기본값 (데이터가 없을 경우)
      * @returns {any} 저장된 데이터 또는 기본값
      */
+    // getItem: (key, defaultValue = null) => {
+    //     try {
+    //         const serializedValue = localStorage.getItem(key);
+    //         if (serializedValue === null) {
+    //             return defaultValue;
+    //         }
+    //         return JSON.parse(serializedValue);
+    //     } catch (error) {
+    //         console.error('로컬 스토리지에서 데이터를 가져오는 중 오류가 발생했습니다:', error);
+    //         return defaultValue;
+    //     }
+    // },
     getItem: (key, defaultValue = null) => {
         try {
             const serializedValue = localStorage.getItem(key);
-            if (serializedValue === null) {
+
+            if (serializedValue === null || serializedValue === undefined) {
                 return defaultValue;
             }
             return JSON.parse(serializedValue);
@@ -89,8 +102,46 @@ const storageUtils = {
          * 액세스 토큰 가져오기
          * @returns {string|null} 액세스 토큰
          */
+        // 원래 방법
+        // getAccessToken: () => {
+        //     return storageUtils.getItem('accessToken');
+        // },
+
+        // 2번 방법
+        // getAccessToken: () => {
+        //     // userData 객체에서 토큰 가져오기 시도
+        //     const userData = storageUtils.getItem('userData');
+        //     if (userData?.accessToken) {
+        //         return userData.accessToken;
+        //     }
+
+        //     // 직접 accessToken 키로도 확인
+        //     return storageUtils.getItem('accessToken');
+        //     // 기본값이 null이므로 따로 지정할 필요 없음
+        // },
+
+        // 3번 방법
         getAccessToken: () => {
-            return storageUtils.getItem('accessToken');
+            try {
+                // userData 객체에서 토큰 가져오기
+                const userData = storageUtils.getItem('userData');
+                if (userData && userData.accessToken) {
+                    return userData.accessToken;
+                }
+
+                // 직접 accessToken 키로 확인할 때 안전하게 처리
+                const token = localStorage.getItem('accessToken');
+                if (!token) return null;
+
+                try {
+                    return JSON.parse(token);
+                } catch {
+                    return token; // JSON이 아니면 그대로 반환
+                }
+            } catch (error) {
+                console.error('액세스 토큰을 가져오는 중 오류:', error);
+                return null;
+            }
         },
 
         /**
@@ -105,8 +156,38 @@ const storageUtils = {
          * 리프레시 토큰 가져오기
          * @returns {string|null} 리프레시 토큰
          */
+        // getRefreshToken: () => {
+        //     return storageUtils.getItem('refreshToken');
+        // },
         getRefreshToken: () => {
-            return storageUtils.getItem('refreshToken');
+            try {
+                // userData 객체에서 토큰을 가져오기
+                const userData = storageUtils.getItem('userData');
+
+                // userData가 있고 그 안에 refreshToken이 있으면 반환
+                if (userData && userData.refreshToken) {
+                    return userData.refreshToken;
+                }
+
+                // 직접 refreshToken 키로도 확인
+                const directToken = localStorage.getItem('refreshToken');
+
+                // 값이 null이거나 undefined인 경우 처리
+                if (directToken === null || directToken === undefined) {
+                    return null;
+                }
+
+                // 문자열이면 JSON 파싱 시도
+                try {
+                    return JSON.parse(directToken);
+                } catch {
+                    // 일반 문자열이면 그대로 반환
+                    return directToken;
+                }
+            } catch (error) {
+                console.error('리프레시 토큰을 가져오는 중 오류가 발생했습니다:', error);
+                return null;
+            }
         },
 
         /**
@@ -134,8 +215,32 @@ const storageUtils = {
          * 사용자 정보 가져오기
          * @returns {Object|null} 사용자 정보
          */
+
+        // getUserInfo: () => {
+        //     return storageUtils.getItem('user');
+        // },
+
         getUserInfo: () => {
-            return storageUtils.getItem('user');
+            try {
+                // userData 객체에서 사용자 정보 가져오기
+                const userData = localStorage.getItem('userData');
+
+                // userData가 null이거나 undefined인 경우
+                if (!userData) {
+                    return null;
+                }
+
+                try {
+                    // JSON으로 파싱 시도
+                    return JSON.parse(userData);
+                } catch {
+                    // 일반 문자열이면 그대로 반환
+                    return userData;
+                }
+            } catch (error) {
+                console.error('사용자 정보를 가져오는 중 오류가 발생했습니다:', error);
+                return null;
+            }
         },
 
         /**

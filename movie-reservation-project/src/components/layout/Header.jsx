@@ -1,102 +1,107 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Link, useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { useAuth } from '../../context/AuthContext';
+import { useDispatch, useSelector } from 'react-redux';
 import { useTheme } from '../../context/ThemeContext';
 import ROUTE_PATHS from '../../constants/routePaths';
 import Input from '../common/Input';
 import { FaSearch, FaSun, FaMoon, FaSignOutAlt } from 'react-icons/fa';
-import { logoutUser } from '../../store/slices/authSlice'; // Redux action 임포트
+import { clearAuthData, logoutUser } from '../../store/slices/authSlice'; // Redux action 임포트
 
 const Header = () => {
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
-    const { isAuthenticated, user, logout } = useAuth(); // AuthContext 훅 사용
-    const { currentThemeName, toggleTheme } = useTheme(); // ThemeContext 훅 사용
-    const [searchQuery, setSearchQuery] = useState('');
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
+  const user = useSelector(state => state.auth.user);
+  const { currentThemeName, toggleTheme } = useTheme(); // ThemeContext 훅 사용
+  const [searchQuery, setSearchQuery] = useState('');
 
-    // 검색 입력값 변경 핸들러
-    const handleSearchChange = (e) => {
-        setSearchQuery(e.target.value);
-    };
+  // 검색 입력값 변경 핸들러
+  const handleSearchChange = (e) => {
+    setSearchQuery(e.target.value);
+  };
 
-    // 검색 제출 핸들러
-    const handleSearchSubmit = (e) => {
-        e.preventDefault();
-        if (searchQuery.trim()) {
-            navigate(`${ROUTE_PATHS.SEARCH}?query=${searchQuery}`);
-            setSearchQuery(''); // 검색 후 입력창 비우기
-        }
-    };
+  // 검색 제출 핸들러
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      navigate(`${ROUTE_PATHS.SEARCH}?query=${searchQuery}`);
+      setSearchQuery(''); // 검색 후 입력창 비우기
+    }
+  };
 
-    // 로그아웃 핸들러
-    const handleLogout = async () => {
-        try {
-            await dispatch(logoutUser()).unwrap(); // Redux action 디스패치
-            navigate(ROUTE_PATHS.HOME);
-        } catch (err) {
-            console.error('로그아웃 실패:', err);
-            alert('로그아웃 처리 중 오류가 발생했습니다. 다시 시도해 주세요.');
-        }
-    };
+  // 로그아웃 핸들러
+  const handleLogout = async () => {
+    try {
+      await dispatch(logoutUser()).unwrap(); // Redux action 디스패치
+    } catch (err) {
+      console.error('로그아웃 실패:', err);
+      alert('로그아웃 처리 중 오류가 발생했습니다. 다시 시도해 주세요.');
+    } finally {
+      localStorage.removeItem('accessToken');
+      localStorage.removeItem('refreshToken');
+      localStorage.removeItem('userData');
+      dispatch(clearAuthData()); // Redux 상태 초기화
+      navigate(ROUTE_PATHS.HOME);
+    }
+  };
 
-    return (
-        <HeaderContainer>
-            <HeaderWrapper>
-                {/* 로고 */}
-                <Logo to={ROUTE_PATHS.HOME}>
-                    MOVIE<span>BOOKING</span>
-                </Logo>
+  return (
+    <HeaderContainer>
+      <HeaderWrapper>
+        {/* 로고 */}
+        <Logo to={ROUTE_PATHS.HOME}>
+          MOVIE<span>BOOKING</span>
+        </Logo>
 
-                {/* 메인 네비게이션 */}
-                <Nav>
-                    <NavItem to={ROUTE_PATHS.MOVIES}>영화</NavItem>
-                    <NavItem to={ROUTE_PATHS.THEATERS}>극장</NavItem>
-                    <NavItem to={ROUTE_PATHS.RESERVATION()}>예매</NavItem> {/* 예매 페이지는 영화ID를 파라미터로 받도록 변경 */}
-                </Nav>
+        {/* 메인 네비게이션 */}
+        <Nav>
+          <NavItem to={ROUTE_PATHS.MOVIES}>영화</NavItem>
+          <NavItem to={ROUTE_PATHS.THEATERS}>극장</NavItem>
+          <NavItem to={ROUTE_PATHS.RESERVATION()}>예매</NavItem> {/* 예매 페이지는 영화ID를 파라미터로 받도록 변경 */}
+        </Nav>
 
-                <RightSection>
-                    {/* 검색 바 */}
-                    <SearchForm onSubmit={handleSearchSubmit}>
-                        <SearchInput
-                            type="text"
-                            placeholder="영화, 극장 검색"
-                            value={searchQuery}
-                            onChange={handleSearchChange}
-                            name="search"
-                            size="small"
-                            fullWidth
-                        />
-                        <SearchButton type="submit">
-                            <FaSearch />
-                        </SearchButton>
-                    </SearchForm>
+        <RightSection>
+          {/* 검색 바 */}
+          <SearchForm onSubmit={handleSearchSubmit}>
+            <SearchInput
+              type="text"
+              placeholder="영화, 극장 검색"
+              value={searchQuery}
+              onChange={handleSearchChange}
+              name="search"
+              size="small"
+              fullWidth
+            />
+            <SearchButton type="submit">
+              <FaSearch />
+            </SearchButton>
+          </SearchForm>
 
-                    {/* 테마 토글 버튼 */}
-                    <ThemeToggleButton onClick={toggleTheme}>
-                        {currentThemeName === 'light' ? <FaMoon /> : <FaSun />}
-                    </ThemeToggleButton>
+          {/* 테마 토글 버튼 */}
+          <ThemeToggleButton onClick={toggleTheme}>
+            {currentThemeName === 'light' ? <FaMoon /> : <FaSun />}
+          </ThemeToggleButton>
 
-                    {/* 사용자 메뉴 (로그인 상태에 따라 다름) */}
-                    {isAuthenticated ? (
-                        <UserMenu>
-                            <UserNickname to={ROUTE_PATHS.MYPAGE}>{user?.nickname || user?.username || '내 정보'}</UserNickname>
-                            <AuthButton variant="text" onClick={handleLogout} size="small">
-                                <FaSignOutAlt />
-                                로그아웃
-                            </AuthButton>
-                        </UserMenu>
-                    ) : (
-                        <AuthButtons>
-                            <AuthButton to={ROUTE_PATHS.LOGIN} variant="text" size="small">로그인</AuthButton>
-                            <AuthButton to={ROUTE_PATHS.REGISTER} variant="text" size="small">회원가입</AuthButton>
-                        </AuthButtons>
-                    )}
-                </RightSection>
-            </HeaderWrapper>
-        </HeaderContainer>
-    );
+          {/* 사용자 메뉴 (로그인 상태에 따라 다름) */}
+          {isAuthenticated ? (
+            <UserMenu>
+              <UserNickname to={ROUTE_PATHS.MYPAGE}>{user?.nickname || user?.username || '내 정보'}</UserNickname>
+              <AuthButton variant="text" onClick={handleLogout} size="small">
+                <FaSignOutAlt />
+                로그아웃
+              </AuthButton>
+            </UserMenu>
+          ) : (
+            <AuthButtons>
+              <AuthButton to={ROUTE_PATHS.LOGIN} variant="text" size="small">로그인</AuthButton>
+              <AuthButton to={ROUTE_PATHS.REGISTER} variant="text" size="small">회원가입</AuthButton>
+            </AuthButtons>
+          )}
+        </RightSection>
+      </HeaderWrapper>
+    </HeaderContainer>
+  );
 };
 
 // 스타일 컴포넌트

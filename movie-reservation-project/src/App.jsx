@@ -1,12 +1,13 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import AppRouter from './AppRouter';
-import { checkAuthStatus } from './store/slices/authSlice';
+import { checkAuthStatus, logoutUser } from './store/slices/authSlice';
 import { ThemeProvider } from './context/ThemeContext';
 import ScrollToTop from './components/common/ScrollToTop';
 import { AuthProvider } from './context/AuthContext'; // ⭐️ AuthProvider 임포트 추가
 import { BrowserRouter } from 'react-router-dom';
 import ErrorBoundary from './components/common/ErrorBoundary';
+import storageUtils from './utils/storageUtils';
 
 /**
  * 애플리케이션의 최상위 컴포넌트

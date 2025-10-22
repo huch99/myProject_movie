@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { fetchNowPlayingMovies, fetchComingSoonMovies, fetchPopularMovies } from '../store/slices/movieSlice';
+// import { fetchNowPlayingMovies, fetchComingSoonMovies, fetchPopularMovies } from '../store/slices/movieSlice';
 import MovieCard from '../components/movie/MovieCard';
 import MainBanner from './home/MainBanner';
 import MovieSlider from './home/MovieSlider';
@@ -19,12 +19,12 @@ const HomePage = () => {
   const dispatch = useDispatch();
   const { nowPlaying, comingSoon, popular, loading } = useSelector((state) => state.movies);
   
-  useEffect(() => {
-    // 페이지 로드 시 영화 데이터 가져오기
-    dispatch(fetchNowPlayingMovies());
-    dispatch(fetchComingSoonMovies());
-    dispatch(fetchPopularMovies());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   // 페이지 로드 시 영화 데이터 가져오기
+  //   dispatch(fetchNowPlayingMovies());
+  //   dispatch(fetchComingSoonMovies());
+  //   dispatch(fetchPopularMovies());
+  // }, [dispatch]);
   
   if (loading && !nowPlaying.length && !comingSoon.length && !popular.length) {
     return <Loading />;
@@ -33,7 +33,7 @@ const HomePage = () => {
   return (
     <HomeContainer>
       {/* 메인 배너 (인기 영화 중 하나를 큰 배너로 표시) */}
-      <MainBanner movies={popular.slice(0, 5)} />
+      {/* <MainBanner movies={popular.slice(0, 5)} /> */}
       
       {/* 빠른 예매 섹션 */}
       {/* <Section>
@@ -46,7 +46,7 @@ const HomePage = () => {
           <SectionTitle>현재 상영작</SectionTitle>
           <ViewMoreLink to="/movies/now-playing">더 보기</ViewMoreLink>
         </SectionHeader>
-        <MovieSlider movies={nowPlaying.slice(0, 10)} />
+        {/* <MovieSlider movies={nowPlaying.slice(0, 10)} /> */}
       </Section>
       
       {/* 개봉 예정 영화 섹션 */}
@@ -55,7 +55,7 @@ const HomePage = () => {
           <SectionTitle>개봉 예정작</SectionTitle>
           <ViewMoreLink to="/movies/coming-soon">더 보기</ViewMoreLink>
         </SectionHeader>
-        <MovieSlider movies={comingSoon.slice(0, 10)} />
+        {/* <MovieSlider movies={comingSoon.slice(0, 10)} /> */}
       </Section>
       
       {/* 인기 영화 섹션 */}
@@ -65,9 +65,9 @@ const HomePage = () => {
           <ViewMoreLink to="/movies/popular">더 보기</ViewMoreLink>
         </SectionHeader>
         <PopularMoviesGrid>
-          {popular.slice(0, 8).map((movie) => (
+          {/* {popular.slice(0, 8).map((movie) => (
             <MovieCard key={movie.id} movie={movie} />
-          ))}
+          ))} */}
         </PopularMoviesGrid>
       </Section>
       

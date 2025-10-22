@@ -1,5 +1,6 @@
 package com.moviesite.mysite.model.dto.response;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.moviesite.mysite.model.entity.Seat;
 import lombok.AllArgsConstructor;
@@ -24,6 +25,7 @@ public class SeatResponse {
     private String seatLabel;
     private String seatType;
     private Boolean isActive;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createdAt;
 
     // Entity -> DTO 변환 메서드

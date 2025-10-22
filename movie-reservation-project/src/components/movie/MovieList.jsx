@@ -2,11 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { fetchNowPlayingMovies, fetchComingSoonMovies, fetchPopularMovies } from '../../store/slices/movieSlice';
+// import { fetchNowPlayingMovies, fetchComingSoonMovies, fetchPopularMovies } from '../../store/slices/movieSlice';
 import MovieCard from './MovieCard';
 import Pagination from '../common/Pagination';
 import Loading from '../common/Loading';
 import { PAGINATION } from '../../styles/variables';
+import movieService from '../../services/movieService';
+import { setLoading, setError, setMovies } from '../../store/slices/movieSlice';
 
 /**
  * 영화 목록을 표시하는 컴포넌트
@@ -24,69 +26,53 @@ const MovieList = ({
     filter = {}
 }) => {
     const dispatch = useDispatch();
-    const { nowPlaying, comingSoon, popular, loading, error } = useSelector(state => state.movies);
+    const movies = useSelector(state => state.movies.movies);
+    const { loading, error } = useSelector(state => state.movies.movies);
     const [currentPage, setCurrentPage] = useState(initialPage);
     const [filteredMovies, setFilteredMovies] = useState([]);
     const [totalPages, setTotalPages] = useState(0);
 
     // 영화 목록 유형에 따른 데이터 가져오기
     useEffect(() => {
-        const fetchMovies = () => {
-            switch (type) {
-                case 'nowPlaying':
-                    dispatch(fetchNowPlayingMovies({ page: currentPage, size: moviesPerPage, ...filter }));
-                    break;
-                case 'comingSoon':
-                    dispatch(fetchComingSoonMovies({ page: currentPage, size: moviesPerPage, ...filter }));
-                    break;
-                case 'popular':
-                    dispatch(fetchPopularMovies({ page: currentPage, size: moviesPerPage, ...filter }));
-                    break;
-                default:
-                    dispatch(fetchNowPlayingMovies({ page: currentPage, size: moviesPerPage, ...filter }));
+        const fetchMovies = async () => {
+            try {
+                // 로딩 상태 설정 (Redux 액션)
+                dispatch(setLoading(true));
+
+                // 영화 목록 타입에 따라 다른 API 호출
+
+                const response = await movieService.getAllMovies();
+                // 영화 데이터 저장 (Redux 액션)
+                dispatch(setMovies(response.data));
+            } catch (error) {
+                console.error('영화 데이터 로딩 실패:', error);
+                dispatch(setError('영화 목록을 불러오는데 실패했습니다.'));
+            } finally {
+                dispatch(setLoading(false));
             }
         };
-        console.log('movieList - fachmovies');
         fetchMovies();
-    }, [dispatch, type, currentPage, moviesPerPage, filter]);
+    }, [dispatch]);
 
     // 영화 데이터 및 필터링 처리
     useEffect(() => {
-        let movies = [];
+        try {
 
-        switch (type) {
-            case 'nowPlaying':
-                movies = nowPlaying?.content || [];
-                setTotalPages(nowPlaying?.totalPages || 1);
-                break;
-            case 'comingSoon':
-                movies = comingSoon?.content || [];
-                setTotalPages(comingSoon?.totalPages || 1);
-                break;
-            case 'popular':
-                movies = popular?.content || [];
-                setTotalPages(popular?.totalPages || 1);
-                break;
-            default:
-                movies = nowPlaying?.content || [];
-                setTotalPages(nowPlaying?.totalPages || 1);
+            console.log("movies : ", movies);
+            setFilteredMovies(movies.data.content);
+            console.log("filteredMovies : ", filteredMovies);
+            console.log('filteredMovies 타입:', Array.isArray(filteredMovies));
+            console.log('filteredMovies 길이:', filteredMovies.length);
+            // console.log(filteredMovies);
+            // 페이지네이션 처리 (필요한 경우)
+            // const calculatedTotalPages = Math.ceil(movies.content.length / moviesPerPage);
+            // setTotalPages(calculatedTotalPages);
+
+        } catch (error) {
+            console.log('실행 실패', error);
         }
 
-        // 필터링 적용 (예: 장르별, 평점별 등)
-        if (filter.genre) {
-            movies = movies.filter(movie =>
-                movie.genres && movie.genres.some(genre => genre.id === filter.genre)
-            );
-        }
-
-        if (filter.minRating) {
-            movies = movies.filter(movie =>
-                movie.averageRating >= filter.minRating
-            );
-        }
-
-        setFilteredMovies(movies);
-    }, [type, nowPlaying, comingSoon, popular, filter]);
+    }, [movies]);
 
     // 페이지 변경 핸들러
     const handlePageChange = (page) => {
@@ -131,15 +117,19 @@ const MovieList = ({
             ) : (
                 <>
                     <MoviesGrid>
-                        {filteredMovies.map(movie => (
-                            <MovieCardWrapper key={movie.id}>
-                                <MovieCard
-                                    movie={movie}
-                                    showRating={true}
-                                    showReservation={type === 'nowPlaying'}
-                                />
-                            </MovieCardWrapper>
-                        ))}
+                        {filteredMovies && filteredMovies.length > 0 ? (
+                            filteredMovies.map(movie => (
+                                <MovieCardWrapper key={movie.movieId}>
+                                    <MovieCard
+                                        movie={movie}
+                                        showRating={true}
+                                        showReservation={type === 'nowPlaying'}
+                                    />
+                                </MovieCardWrapper>
+                            ))
+                        ) : (
+                            <p>표시할 영화가 없습니다.</p>
+                        )}
                     </MoviesGrid>
 
                     {totalPages > 1 && (

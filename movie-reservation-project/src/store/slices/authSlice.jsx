@@ -4,12 +4,19 @@ import authService from '../../services/authService'; // authService.js 임포�
 import userService from '../../services/userService'; // userService.js 임포트 (getCurrentUser 위임)
 import storageUtils from '../../utils/storageUtils'; // 로컬 스토리지 유틸리티 임포트
 
+
+
 // 초기 상태
 const initialState = {
-    user: storageUtils.user.getUserInfo(), // 로컬 스토리지에서 사용자 정보 로드
+    // user: storageUtils.user.getUserInfo(), // 로컬 스토리지에서 사용자 정보 로드
+    // user : null,
+    user: storageUtils.user.getUserInfo() || null,
     accessToken: storageUtils.token.getAccessToken(), // 로컬 스토리지에서 액세스 토큰 로드
+    // accessToken: storageUtils.getItem('accessToken') || null,
     refreshToken: storageUtils.token.getRefreshToken(), // 로컬 스토리지에서 리프레시 토큰 로드
+    // refreshToken: storageUtils.getItem('refreshToken') || null,
     isAuthenticated: !!storageUtils.token.getAccessToken(), // 액세스 토큰 존재 여부로 인증 상태 판단
+    // isAuthenticated : true,
     loading: false,
     error: null,
 };
@@ -20,11 +27,14 @@ export const loginUser = createAsyncThunk(
     async ({ email, password }, { rejectWithValue }) => {
         try {
             const response = await authService.login(email, password);
-            // 토큰과 사용자 정보 로컬 스토리지에 저장
             storageUtils.token.setAccessToken(response.accessToken);
             storageUtils.token.setRefreshToken(response.refreshToken);
             storageUtils.user.setUserInfo(response.user);
-            return response;
+            return {
+                data: response.data,
+                status: response.status
+                // headers는 제외하거나 필요한 헤더만 객체 형태로 추출
+            };
         } catch (error) {
             return rejectWithValue(error.response?.data?.message || '로그인에 실패했습니다.');
         }
@@ -37,7 +47,11 @@ export const registerUser = createAsyncThunk(
     async (userData, { rejectWithValue }) => {
         try {
             const response = await authService.register(userData);
-            return response;
+            // return response;
+            return {
+                data: response.data,
+                status: response.status
+            };
         } catch (error) {
             return rejectWithValue(error.response?.data?.message || '회원가입에 실패했습니다.');
         }
@@ -132,23 +146,94 @@ export const updateUserProfile = createAsyncThunk(
 );
 
 export const checkAuthStatus = createAsyncThunk(
-  'auth/checkAuthStatus',
-  async (_, { rejectWithValue }) => {
-    try {
-      // 인증 상태 확인 로직
-      // ...
-    } catch (error) {
-      return rejectWithValue(error.message);
+    'auth/checkAuthStatus',
+    async (_, { rejectWithValue }) => {
+        try {
+            // 인증 상태 확인 로직
+            // ...
+        } catch (error) {
+            return rejectWithValue(error.message);
+        }
     }
-  }
 );
+
+
+export const loadAuth = createAsyncThunk(
+    'auth/loadAuth',
+    async (_, { dispatch }) => {
+        const token = localStorage.getItem('accessToken');
+        const refreshTokenValue = localStorage.getItem('refreshToken');
+        // const dispatch = useDispatch();
+
+        if (token) {
+            // 액세스 토큰이 있으면 사용자 정보를 가져와 Redux 상태 업데이트
+            try {
+                const userData = await authService.getCurrentUser(); // 백엔드 호출
+                dispatch(authSlice.actions.setAuth({
+                    isAuthenticated: true,
+                    user: userData,
+                    accessToken: token, // 로컬 스토리지에서 가져온 토큰 전달
+                }));
+            } catch (error) {
+                // 액세스 토큰 만료 등 문제 발생 시 리프레시 토큰 시도
+                if (refreshTokenValue) {
+                    try {
+                        const result = await authService.refreshToken(refreshTokenValue);
+                        if (result.token) {
+                            localStorage.setItem('accessToken', result.token);
+                            const newUserData = await authService.getCurrentUser();
+                            dispatch(authSlice.actions.setAuth({
+                                isAuthenticated: true,
+                                user: newUserData,
+                                accessToken: result.token,
+                            }));
+                        } else {
+                            // 리프레시 토큰도 실패하면 로그아웃 처리
+                            dispatch(authSlice.actions.clearAuth()); // Redux 상태 초기화
+                            localStorage.clear(); // 로컬 스토리지도 정리
+                        }
+                    } catch (refreshError) {
+                        console.log('리프레시 토큰 갱신 실패 : ', refreshError);
+                        dispatch(authSlice.actions.clearAuth());
+                        localStorage.clear();
+                    }
+                } else {
+                    // 액세스 토큰도 없고 리프레시 토큰도 없으면 로그아웃 처리
+                    dispatch(authSlice.actions.clearAuth());
+                    localStorage.clear();
+                }
+            }
+        } else {
+            // 토큰이 아예 없으면 Redux 상태 초기화
+            dispatch(authSlice.actions.clearAuth());
+            localStorage.clear();
+        }
+    }
+)
 
 
 // 인증 슬라이스 생성
 const authSlice = createSlice({
     name: 'auth',
-    initialState,
+    initialState: {
+        isAuthenticated: false,
+        user: null,
+        accessToken: null,
+        refreshToken: null,
+    },
     reducers: {
+        setAuth: (state, action) => {
+            state.isAuthenticated = action.payload.isAuthenticated;
+            state.user = action.payload.user;
+            state.accessToken = action.payload.accessToken;
+            // refreshToken도 필요하면 payload에 포함
+        },
+        clearAuth: (state) => {
+            state.isAuthenticated = false;
+            state.user = null;
+            state.accessToken = null;
+            state.refreshToken = null;
+        },
         // 동기 액션: 인증 관련 에러 수동 설정
         setAuthError: (state, action) => {
             state.error = action.payload;
@@ -181,21 +266,21 @@ const authSlice = createSlice({
                 state.loading = true;
                 state.error = null;
             })
-            .addCase(loginUser.fulfilled, (state, action) => {
-                state.loading = false;
-                state.user = action.payload.user;
-                state.accessToken = action.payload.accessToken;
-                state.refreshToken = action.payload.refreshToken;
-                state.isAuthenticated = true;
-            })
-            .addCase(loginUser.rejected, (state, action) => {
-                state.loading = false;
-                state.error = action.payload || '로그인에 실패했습니다.';
-                state.isAuthenticated = false;
-                // 실패 시 로컬 스토리지 정보도 정리
-                storageUtils.token.clearTokens();
-                storageUtils.user.clearUserInfo();
-            })
+            // .addCase(loginUser.fulfilled, (state, action) => {
+            //     state.loading = false;
+            //     state.user = action.payload.user;
+            //     state.accessToken = action.payload.accessToken;
+            //     state.refreshToken = action.payload.refreshToken;
+            //     state.isAuthenticated = true;
+            // })
+            // .addCase(loginUser.rejected, (state, action) => {
+            //     state.loading = false;
+            //     state.error = action.payload || '로그인에 실패했습니다.';
+            //     state.isAuthenticated = false;
+            //     // 실패 시 로컬 스토리지 정보도 정리
+            //     storageUtils.token.clearTokens();
+            //     storageUtils.user.clearUserInfo();
+            // })
 
             // 회원가입 액션 처리 (로딩 및 에러만 관리)
             .addCase(registerUser.pending, (state) => {
@@ -268,6 +353,22 @@ const authSlice = createSlice({
             .addCase(updateUserProfile.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.payload;
+            })
+
+            // 추가
+            .addCase(loginUser.fulfilled, (state, action) => {
+                // 로그인 성공 시 로컬 스토리지 저장은 loginUser Thunk 내부에서
+                state.isAuthenticated = true;
+                state.user = action.payload.user; // 백엔드 응답의 user
+                state.accessToken = action.payload.accessToken; // 백엔드 응답의 accessToken
+                state.refreshToken = action.payload.refreshToken; // 백엔드 응답의 refreshToken
+            })
+            .addCase(loginUser.rejected, (state, action) => {
+                state.isAuthenticated = false;
+                state.user = null;
+                state.accessToken = null;
+                state.refreshToken = null;
+                localStorage.clear();
             });
     },
 });

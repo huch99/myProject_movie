@@ -1,5 +1,6 @@
 package com.moviesite.mysite.model.dto.response;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.moviesite.mysite.model.entity.ReservationSeat;
 import lombok.AllArgsConstructor;
@@ -25,6 +26,7 @@ public class ReservationSeatResponse {
     private String seatColumn;
     private BigDecimal price;
     private String screenName;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createdAt;
     
     // Entity -> DTO 변환 메서드

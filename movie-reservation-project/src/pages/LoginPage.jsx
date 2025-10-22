@@ -13,60 +13,61 @@ import ROUTE_PATHS from '../constants/routePaths';
  * 로그인 페이지 컴포넌트
  */
 const LoginPage = () => {
-    const navigate = useNavigate();
-    const location = useLocation();
-    const { isAuthenticated } = useSelector(state => state.auth);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { isAuthenticated } = useSelector(state => state.auth);
 
-    // 로그인 성공 후 리다이렉트할 경로
-    const from = location.state?.from || '/';
-    // 표시할 메시지 (회원가입 성공 등)
-    const message = location.state?.message || '';
+  // 로그인 성공 후 리다이렉트할 경로
+  const from = location.state?.from || '/';
+  // 표시할 메시지 (회원가입 성공 등)
+  const message = location.state?.message || '';
 
-    const [showMessage, setShowMessage] = useState(!!message);
+  const [showMessage, setShowMessage] = useState(!!message);
 
-    // 이미 로그인된 경우 메인 페이지로 리다이렉트
-    useEffect(() => {
-        if (isAuthenticated) {
-            navigate(ROUTE_PATHS.HOME);
-        }
-    }, [isAuthenticated, navigate]);
+  // 이미 로그인된 경우 메인 페이지로 리다이렉트
+  useEffect(() => {
+    const token = localStorage.getItem('accessToken');
+    if (isAuthenticated && token) {
+      navigate(ROUTE_PATHS.HOME);
+    }
+  }, [isAuthenticated, navigate]);
 
-    // 메시지 닫기 핸들러
-    const handleCloseMessage = () => {
-        setShowMessage(false);
-    };
+  // 메시지 닫기 핸들러
+  const handleCloseMessage = () => {
+    setShowMessage(false);
+  };
 
-    return (
-        <Container>
-            <LoginContainer>
-                {showMessage && message && (
-                    <Alert
-                        message={message}
-                        type="success"
-                        onClose={handleCloseMessage}
-                        autoClose={5000}
-                    />
-                )}
+  return (
+    <Container>
+      <LoginContainer>
+        {showMessage && message && (
+          <Alert
+            message={message}
+            type="success"
+            onClose={handleCloseMessage}
+            autoClose={5000}
+          />
+        )}
 
-                <PageTitle>
-                    <TitleIcon>
-                        <FaSignInAlt />
-                    </TitleIcon>
-                    <span>로그인</span>
-                </PageTitle>
+        <PageTitle>
+          <TitleIcon>
+            <FaSignInAlt />
+          </TitleIcon>
+          <span>로그인</span>
+        </PageTitle>
 
-                <LoginFormWrapper>
-                    <LoginForm />
-                </LoginFormWrapper>
+        <LoginFormWrapper>
+          <LoginForm />
+        </LoginFormWrapper>
 
-                <LoginHelp>
-                    <HelpText>
-                        로그인에 문제가 있으신가요? <HelpLink href="/help">고객센터</HelpLink>에 문의하세요.
-                    </HelpText>
-                </LoginHelp>
-            </LoginContainer>
-        </Container>
-    );
+        <LoginHelp>
+          <HelpText>
+            로그인에 문제가 있으신가요? <HelpLink href="/help">고객센터</HelpLink>에 문의하세요.
+          </HelpText>
+        </LoginHelp>
+      </LoginContainer>
+    </Container>
+  );
 };
 
 // 스타일 컴포넌트
