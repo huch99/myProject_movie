@@ -52,8 +52,8 @@ public class TheaterService {
     }
 
     // 특정 극장 상세 정보 조회
-    public TheaterResponse getTheaterById(Long id) {
-        Theater theater = findTheaterById(id);
+    public TheaterResponse getTheaterById(Long theaterId) {
+        Theater theater = findTheaterById(theaterId);
         return TheaterResponse.fromEntity(theater);
     }
 

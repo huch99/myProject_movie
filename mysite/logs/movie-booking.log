@@ -19006,3 +19006,837 @@ com.fasterxml.jackson.databind.exc.InvalidDefinitionException: Java 8 date/time 
 2025-10-22T16:58:10.000+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-4] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/yaml]
 2025-10-22T16:58:10.000+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-4] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [ApiResponse(status=200, message=요청이 성공적으로 처리되었습니다., data=Page 1 of 1 containing com.moviesite.mysite (truncated)...]
 2025-10-22T16:58:10.001+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-4] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-10-22T16:59:12.607+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-8] o.s.web.servlet.DispatcherServlet        : GET "/api/movies", parameters={}
+2025-10-22T16:59:12.607+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-8] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.moviesite.mysite.controller.MovieController#getAllMovies(String, String, Pageable)
+2025-10-22T16:59:12.609+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-8] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/yaml]
+2025-10-22T16:59:12.609+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-8] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [ApiResponse(status=200, message=요청이 성공적으로 처리되었습니다., data=Page 1 of 1 containing com.moviesite.mysite (truncated)...]
+2025-10-22T16:59:12.609+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-8] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-10-22T16:59:12.611+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : GET "/api/movies", parameters={}
+2025-10-22T16:59:12.611+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-7] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.moviesite.mysite.controller.MovieController#getAllMovies(String, String, Pageable)
+2025-10-22T16:59:12.612+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-7] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/yaml]
+2025-10-22T16:59:12.612+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-7] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [ApiResponse(status=200, message=요청이 성공적으로 처리되었습니다., data=Page 1 of 1 containing com.moviesite.mysite (truncated)...]
+2025-10-22T16:59:12.613+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-10-22T16:59:12.623+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-10] o.s.web.servlet.DispatcherServlet        : GET "/api/movies", parameters={}
+2025-10-22T16:59:12.624+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-10] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.moviesite.mysite.controller.MovieController#getAllMovies(String, String, Pageable)
+2025-10-22T16:59:12.628+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-10] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/yaml]
+2025-10-22T16:59:12.628+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-10] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [ApiResponse(status=200, message=요청이 성공적으로 처리되었습니다., data=Page 1 of 1 containing com.moviesite.mysite (truncated)...]
+2025-10-22T16:59:12.628+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-10] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-10-22T16:59:12.630+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : GET "/api/movies", parameters={}
+2025-10-22T16:59:12.630+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-9] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.moviesite.mysite.controller.MovieController#getAllMovies(String, String, Pageable)
+2025-10-22T16:59:12.632+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-9] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/yaml]
+2025-10-22T16:59:12.632+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-9] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [ApiResponse(status=200, message=요청이 성공적으로 처리되었습니다., data=Page 1 of 1 containing com.moviesite.mysite (truncated)...]
+2025-10-22T16:59:12.632+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-10-22T17:00:19.267+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : GET "/api/theaters", parameters={}
+2025-10-22T17:00:19.267+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-3] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.moviesite.mysite.controller.TheaterController#getAllTheaters(String, String, Pageable)
+2025-10-22T17:00:19.269+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/yaml]
+2025-10-22T17:00:19.269+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [ApiResponse(status=200, message=요청이 성공적으로 처리되었습니다., data=Page 1 of 1 containing com.moviesite.mysite (truncated)...]
+2025-10-22T17:00:19.270+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-10-22T17:00:19.272+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-4] o.s.web.servlet.DispatcherServlet        : GET "/api/theaters", parameters={}
+2025-10-22T17:00:19.272+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-4] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.moviesite.mysite.controller.TheaterController#getAllTheaters(String, String, Pageable)
+2025-10-22T17:00:19.274+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-4] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/yaml]
+2025-10-22T17:00:19.274+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-4] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [ApiResponse(status=200, message=요청이 성공적으로 처리되었습니다., data=Page 1 of 1 containing com.moviesite.mysite (truncated)...]
+2025-10-22T17:00:19.275+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-4] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-10-22T17:01:14.220+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-6] o.s.web.servlet.DispatcherServlet        : GET "/api/theaters", parameters={}
+2025-10-22T17:01:14.220+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-6] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.moviesite.mysite.controller.TheaterController#getAllTheaters(String, String, Pageable)
+2025-10-22T17:01:14.222+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-6] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/yaml]
+2025-10-22T17:01:14.222+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-6] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [ApiResponse(status=200, message=요청이 성공적으로 처리되었습니다., data=Page 1 of 1 containing com.moviesite.mysite (truncated)...]
+2025-10-22T17:01:14.223+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-6] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-10-22T17:01:14.224+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : GET "/api/theaters", parameters={}
+2025-10-22T17:01:14.224+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-5] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.moviesite.mysite.controller.TheaterController#getAllTheaters(String, String, Pageable)
+2025-10-22T17:01:14.227+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-5] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/yaml]
+2025-10-22T17:01:14.227+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-5] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [ApiResponse(status=200, message=요청이 성공적으로 처리되었습니다., data=Page 1 of 1 containing com.moviesite.mysite (truncated)...]
+2025-10-22T17:01:14.227+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-10-22T17:01:17.233+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-8] o.s.web.servlet.DispatcherServlet        : GET "/api/theaters", parameters={}
+2025-10-22T17:01:17.233+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-8] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.moviesite.mysite.controller.TheaterController#getAllTheaters(String, String, Pageable)
+2025-10-22T17:01:17.235+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-8] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/yaml]
+2025-10-22T17:01:17.235+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-8] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [ApiResponse(status=200, message=요청이 성공적으로 처리되었습니다., data=Page 1 of 1 containing com.moviesite.mysite (truncated)...]
+2025-10-22T17:01:17.235+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-8] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-10-22T17:01:17.236+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : GET "/api/theaters", parameters={}
+2025-10-22T17:01:17.236+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-7] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.moviesite.mysite.controller.TheaterController#getAllTheaters(String, String, Pageable)
+2025-10-22T17:01:17.238+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-7] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/yaml]
+2025-10-22T17:01:17.238+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-7] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [ApiResponse(status=200, message=요청이 성공적으로 처리되었습니다., data=Page 1 of 1 containing com.moviesite.mysite (truncated)...]
+2025-10-22T17:01:17.238+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-10-22T17:01:27.222+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-10] o.s.web.servlet.DispatcherServlet        : GET "/api/theaters", parameters={}
+2025-10-22T17:01:27.223+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-10] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.moviesite.mysite.controller.TheaterController#getAllTheaters(String, String, Pageable)
+2025-10-22T17:01:27.225+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-10] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/yaml]
+2025-10-22T17:01:27.225+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-10] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [ApiResponse(status=200, message=요청이 성공적으로 처리되었습니다., data=Page 1 of 1 containing com.moviesite.mysite (truncated)...]
+2025-10-22T17:01:27.225+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-10] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-10-22T17:01:27.226+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : GET "/api/theaters", parameters={}
+2025-10-22T17:01:27.226+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-9] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.moviesite.mysite.controller.TheaterController#getAllTheaters(String, String, Pageable)
+2025-10-22T17:01:27.228+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-9] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/yaml]
+2025-10-22T17:01:27.228+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-9] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [ApiResponse(status=200, message=요청이 성공적으로 처리되었습니다., data=Page 1 of 1 containing com.moviesite.mysite (truncated)...]
+2025-10-22T17:01:27.228+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-10-22T17:03:17.288+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : GET "/api/theaters", parameters={}
+2025-10-22T17:03:17.288+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-3] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.moviesite.mysite.controller.TheaterController#getAllTheaters(String, String, Pageable)
+2025-10-22T17:03:17.290+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/yaml]
+2025-10-22T17:03:17.290+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [ApiResponse(status=200, message=요청이 성공적으로 처리되었습니다., data=Page 1 of 1 containing com.moviesite.mysite (truncated)...]
+2025-10-22T17:03:17.291+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-10-22T17:03:17.292+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-4] o.s.web.servlet.DispatcherServlet        : GET "/api/theaters", parameters={}
+2025-10-22T17:03:17.292+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-4] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.moviesite.mysite.controller.TheaterController#getAllTheaters(String, String, Pageable)
+2025-10-22T17:03:17.294+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-4] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/yaml]
+2025-10-22T17:03:17.295+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-4] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [ApiResponse(status=200, message=요청이 성공적으로 처리되었습니다., data=Page 1 of 1 containing com.moviesite.mysite (truncated)...]
+2025-10-22T17:03:17.295+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-4] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-10-22T17:03:20.980+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-6] o.s.web.servlet.DispatcherServlet        : GET "/api/theaters", parameters={}
+2025-10-22T17:03:20.980+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-6] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.moviesite.mysite.controller.TheaterController#getAllTheaters(String, String, Pageable)
+2025-10-22T17:03:20.982+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-6] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/yaml]
+2025-10-22T17:03:20.982+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-6] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [ApiResponse(status=200, message=요청이 성공적으로 처리되었습니다., data=Page 1 of 1 containing com.moviesite.mysite (truncated)...]
+2025-10-22T17:03:20.982+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-6] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-10-22T17:03:20.983+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : GET "/api/theaters", parameters={}
+2025-10-22T17:03:20.984+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-5] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.moviesite.mysite.controller.TheaterController#getAllTheaters(String, String, Pageable)
+2025-10-22T17:03:20.985+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-5] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/yaml]
+2025-10-22T17:03:20.985+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-5] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [ApiResponse(status=200, message=요청이 성공적으로 처리되었습니다., data=Page 1 of 1 containing com.moviesite.mysite (truncated)...]
+2025-10-22T17:03:20.985+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-10-22T17:03:27.277+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-8] o.s.web.servlet.DispatcherServlet        : GET "/api/theaters", parameters={}
+2025-10-22T17:03:27.278+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-8] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.moviesite.mysite.controller.TheaterController#getAllTheaters(String, String, Pageable)
+2025-10-22T17:03:27.280+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-8] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json;q=0.8', given [text/html, application/xhtml+xml, image/avif, image/webp, image/apng, application/xml;q=0.9, */*;q=0.8, application/signed-exchange;v=b3;q=0.7] and supported [application/json, application/*+json, application/yaml]
+2025-10-22T17:03:27.280+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-8] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [ApiResponse(status=200, message=요청이 성공적으로 처리되었습니다., data=Page 1 of 1 containing com.moviesite.mysite (truncated)...]
+2025-10-22T17:03:27.281+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-8] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-10-22T17:03:56.665+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : GET "/api/theaters", parameters={}
+2025-10-22T17:03:56.665+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-7] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.moviesite.mysite.controller.TheaterController#getAllTheaters(String, String, Pageable)
+2025-10-22T17:03:56.667+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-7] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/yaml]
+2025-10-22T17:03:56.667+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-7] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [ApiResponse(status=200, message=요청이 성공적으로 처리되었습니다., data=Page 1 of 1 containing com.moviesite.mysite (truncated)...]
+2025-10-22T17:03:56.667+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-10-22T17:03:56.668+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-10] o.s.web.servlet.DispatcherServlet        : GET "/api/theaters", parameters={}
+2025-10-22T17:03:56.669+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-10] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.moviesite.mysite.controller.TheaterController#getAllTheaters(String, String, Pageable)
+2025-10-22T17:03:56.670+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-10] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/yaml]
+2025-10-22T17:03:56.670+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-10] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [ApiResponse(status=200, message=요청이 성공적으로 처리되었습니다., data=Page 1 of 1 containing com.moviesite.mysite (truncated)...]
+2025-10-22T17:03:56.670+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-10] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-10-22T17:06:58.509+09:00  INFO 5376 --- [mysite] [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+2025-10-22T17:06:58.511+09:00  INFO 5376 --- [mysite] [Thread-43] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-10-22T17:06:58.513+09:00  INFO 5376 --- [mysite] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-10-22T17:06:58.516+09:00  INFO 5376 --- [mysite] [Thread-43] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-10-22T17:06:58.516+09:00  INFO 5376 --- [mysite] [Thread-43] com.zaxxer.hikari.HikariDataSource       : HikariPool-11 - Shutdown initiated...
+2025-10-22T17:06:58.517+09:00  INFO 5376 --- [mysite] [Thread-43] com.zaxxer.hikari.HikariDataSource       : HikariPool-11 - Shutdown completed.
+2025-10-22T17:06:58.586+09:00  INFO 5376 --- [mysite] [restartedMain] c.m.mysite.MovieReservationApplication   : Starting MovieReservationApplication using Java 21.0.8 with PID 5376 (D:\my-project\myProject_movie\mysite\bin\main started by YONSAI in D:\my-project\myProject_movie\mysite)
+2025-10-22T17:06:58.586+09:00 DEBUG 5376 --- [mysite] [restartedMain] c.m.mysite.MovieReservationApplication   : Running with Spring Boot v3.5.6, Spring v6.2.11
+2025-10-22T17:06:58.586+09:00  INFO 5376 --- [mysite] [restartedMain] c.m.mysite.MovieReservationApplication   : No active profile set, falling back to 1 default profile: "default"
+2025-10-22T17:06:58.913+09:00  INFO 5376 --- [mysite] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-10-22T17:06:58.942+09:00  INFO 5376 --- [mysite] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 28 ms. Found 16 JPA repository interfaces.
+2025-10-22T17:06:59.061+09:00  INFO 5376 --- [mysite] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-10-22T17:06:59.062+09:00  INFO 5376 --- [mysite] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-10-22T17:06:59.062+09:00  INFO 5376 --- [mysite] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.46]
+2025-10-22T17:06:59.077+09:00  INFO 5376 --- [mysite] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-10-22T17:06:59.077+09:00  INFO 5376 --- [mysite] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 489 ms
+2025-10-22T17:06:59.131+09:00 DEBUG 5376 --- [mysite] [restartedMain] o.s.w.f.ServerHttpObservationFilter      : Filter 'webMvcObservationFilter' configured for use
+2025-10-22T17:06:59.131+09:00 DEBUG 5376 --- [mysite] [restartedMain] c.m.m.security.JwtAuthorizationFilter    : Filter 'jwtAuthorizationFilter' configured for use
+2025-10-22T17:06:59.178+09:00  INFO 5376 --- [mysite] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-10-22T17:06:59.180+09:00  INFO 5376 --- [mysite] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-10-22T17:06:59.188+09:00  INFO 5376 --- [mysite] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-10-22T17:06:59.189+09:00  INFO 5376 --- [mysite] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-12 - Starting...
+2025-10-22T17:06:59.192+09:00  INFO 5376 --- [mysite] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-12 - Added connection org.mariadb.jdbc.Connection@4b394552
+2025-10-22T17:06:59.192+09:00  INFO 5376 --- [mysite] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-12 - Start completed.
+2025-10-22T17:06:59.193+09:00  WARN 5376 --- [mysite] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: MariaDBDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-10-22T17:06:59.193+09:00  INFO 5376 --- [mysite] [restartedMain] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-12)']
+	Database driver: undefined/unknown
+	Database version: 11.4.8
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-10-22T17:06:59.385+09:00  INFO 5376 --- [mysite] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-10-22T17:06:59.414+09:00  INFO 5376 --- [mysite] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-10-22T17:06:59.902+09:00  WARN 5376 --- [mysite] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-10-22T17:06:59.953+09:00 DEBUG 5376 --- [mysite] [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 119 mappings in 'requestMappingHandlerMapping'
+2025-10-22T17:06:59.998+09:00 DEBUG 5376 --- [mysite] [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**, /swagger-ui*/*swagger-initializer.js, /swagger-ui*/**] in 'resourceHandlerMapping'
+2025-10-22T17:07:00.045+09:00  INFO 5376 --- [mysite] [restartedMain] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint beneath base path '/actuator'
+2025-10-22T17:07:00.129+09:00 DEBUG 5376 --- [mysite] [restartedMain] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2025-10-22T17:07:00.142+09:00 DEBUG 5376 --- [mysite] [restartedMain] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2025-10-22T17:07:00.244+09:00  INFO 5376 --- [mysite] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-10-22T17:07:00.261+09:00  INFO 5376 --- [mysite] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-10-22T17:07:00.268+09:00  INFO 5376 --- [mysite] [restartedMain] c.m.mysite.MovieReservationApplication   : Started MovieReservationApplication in 1.711 seconds (process running for 6556.988)
+2025-10-22T17:07:00.270+09:00  INFO 5376 --- [mysite] [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2025-10-22T17:07:04.529+09:00  INFO 5376 --- [mysite] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-10-22T17:07:04.529+09:00  INFO 5376 --- [mysite] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-10-22T17:07:04.529+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Detected StandardServletMultipartResolver
+2025-10-22T17:07:04.529+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Detected AcceptHeaderLocaleResolver
+2025-10-22T17:07:04.529+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Detected FixedThemeResolver
+2025-10-22T17:07:04.530+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Detected org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator@698d32c2
+2025-10-22T17:07:04.530+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Detected org.springframework.web.servlet.support.SessionFlashMapManager@5165397a
+2025-10-22T17:07:04.530+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
+2025-10-22T17:07:04.530+09:00  INFO 5376 --- [mysite] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2025-10-22T17:07:04.533+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : GET "/api/theaters", parameters={}
+2025-10-22T17:07:04.533+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-1] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.moviesite.mysite.controller.TheaterController#getAllTheaters(String, String, Pageable)
+2025-10-22T17:07:04.543+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/yaml]
+2025-10-22T17:07:04.544+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [ApiResponse(status=200, message=요청이 성공적으로 처리되었습니다., data=Page 1 of 1 containing com.moviesite.mysite (truncated)...]
+2025-10-22T17:07:04.546+09:00  WARN 5376 --- [mysite] [http-nio-8080-exec-1] ration$PageModule$WarningLoggingModifier : Serializing PageImpl instances as-is is not supported, meaning that there is no guarantee about the stability of the resulting JSON structure!
+	For a stable JSON structure, please use Spring Data's PagedModel (globally via @EnableSpringDataWebSupport(pageSerializationMode = VIA_DTO))
+	or Spring HATEOAS and Spring Data's PagedResourcesAssembler as documented in https://docs.spring.io/spring-data/commons/reference/repositories/core-extensions.html#core.web.pageables.
+
+2025-10-22T17:07:04.553+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-10-22T17:07:04.556+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : GET "/api/theaters", parameters={}
+2025-10-22T17:07:04.556+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-2] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.moviesite.mysite.controller.TheaterController#getAllTheaters(String, String, Pageable)
+2025-10-22T17:07:04.559+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-2] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/yaml]
+2025-10-22T17:07:04.559+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-2] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [ApiResponse(status=200, message=요청이 성공적으로 처리되었습니다., data=Page 1 of 1 containing com.moviesite.mysite (truncated)...]
+2025-10-22T17:07:04.560+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-10-22T17:07:55.045+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : GET "/api/theaters", parameters={}
+2025-10-22T17:07:55.045+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-3] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.moviesite.mysite.controller.TheaterController#getAllTheaters(String, String, Pageable)
+2025-10-22T17:07:55.051+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/yaml]
+2025-10-22T17:07:55.051+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [ApiResponse(status=200, message=요청이 성공적으로 처리되었습니다., data=Page 1 of 1 containing com.moviesite.mysite (truncated)...]
+2025-10-22T17:07:55.052+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-10-22T17:07:55.054+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-4] o.s.web.servlet.DispatcherServlet        : GET "/api/theaters", parameters={}
+2025-10-22T17:07:55.054+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-4] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.moviesite.mysite.controller.TheaterController#getAllTheaters(String, String, Pageable)
+2025-10-22T17:07:55.059+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-4] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/yaml]
+2025-10-22T17:07:55.059+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-4] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [ApiResponse(status=200, message=요청이 성공적으로 처리되었습니다., data=Page 1 of 1 containing com.moviesite.mysite (truncated)...]
+2025-10-22T17:07:55.060+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-4] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-10-22T17:08:00.727+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : GET "/api/theaters", parameters={}
+2025-10-22T17:08:00.727+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-5] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.moviesite.mysite.controller.TheaterController#getAllTheaters(String, String, Pageable)
+2025-10-22T17:08:00.733+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-5] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/yaml]
+2025-10-22T17:08:00.733+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-5] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [ApiResponse(status=200, message=요청이 성공적으로 처리되었습니다., data=Page 1 of 1 containing com.moviesite.mysite (truncated)...]
+2025-10-22T17:08:00.734+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-10-22T17:08:00.736+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-6] o.s.web.servlet.DispatcherServlet        : GET "/api/theaters", parameters={}
+2025-10-22T17:08:00.736+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-6] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.moviesite.mysite.controller.TheaterController#getAllTheaters(String, String, Pageable)
+2025-10-22T17:08:00.739+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-6] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/yaml]
+2025-10-22T17:08:00.739+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-6] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [ApiResponse(status=200, message=요청이 성공적으로 처리되었습니다., data=Page 1 of 1 containing com.moviesite.mysite (truncated)...]
+2025-10-22T17:08:00.740+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-6] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-10-22T17:10:15.224+09:00  INFO 5376 --- [mysite] [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+2025-10-22T17:10:15.225+09:00  INFO 5376 --- [mysite] [Thread-47] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-10-22T17:10:15.227+09:00  INFO 5376 --- [mysite] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-10-22T17:10:15.229+09:00  INFO 5376 --- [mysite] [Thread-47] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-10-22T17:10:15.230+09:00  INFO 5376 --- [mysite] [Thread-47] com.zaxxer.hikari.HikariDataSource       : HikariPool-12 - Shutdown initiated...
+2025-10-22T17:10:15.231+09:00  INFO 5376 --- [mysite] [Thread-47] com.zaxxer.hikari.HikariDataSource       : HikariPool-12 - Shutdown completed.
+2025-10-22T17:10:15.291+09:00  INFO 5376 --- [mysite] [restartedMain] c.m.mysite.MovieReservationApplication   : Starting MovieReservationApplication using Java 21.0.8 with PID 5376 (D:\my-project\myProject_movie\mysite\bin\main started by YONSAI in D:\my-project\myProject_movie\mysite)
+2025-10-22T17:10:15.291+09:00 DEBUG 5376 --- [mysite] [restartedMain] c.m.mysite.MovieReservationApplication   : Running with Spring Boot v3.5.6, Spring v6.2.11
+2025-10-22T17:10:15.291+09:00  INFO 5376 --- [mysite] [restartedMain] c.m.mysite.MovieReservationApplication   : No active profile set, falling back to 1 default profile: "default"
+2025-10-22T17:10:15.542+09:00  INFO 5376 --- [mysite] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-10-22T17:10:15.568+09:00  INFO 5376 --- [mysite] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 25 ms. Found 16 JPA repository interfaces.
+2025-10-22T17:10:15.668+09:00  INFO 5376 --- [mysite] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-10-22T17:10:15.669+09:00  INFO 5376 --- [mysite] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-10-22T17:10:15.669+09:00  INFO 5376 --- [mysite] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.46]
+2025-10-22T17:10:15.683+09:00  INFO 5376 --- [mysite] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-10-22T17:10:15.683+09:00  INFO 5376 --- [mysite] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 391 ms
+2025-10-22T17:10:15.739+09:00 DEBUG 5376 --- [mysite] [restartedMain] o.s.w.f.ServerHttpObservationFilter      : Filter 'webMvcObservationFilter' configured for use
+2025-10-22T17:10:15.740+09:00 DEBUG 5376 --- [mysite] [restartedMain] c.m.m.security.JwtAuthorizationFilter    : Filter 'jwtAuthorizationFilter' configured for use
+2025-10-22T17:10:15.772+09:00  INFO 5376 --- [mysite] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-10-22T17:10:15.774+09:00  INFO 5376 --- [mysite] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-10-22T17:10:15.781+09:00  INFO 5376 --- [mysite] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-10-22T17:10:15.782+09:00  INFO 5376 --- [mysite] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-13 - Starting...
+2025-10-22T17:10:15.785+09:00  INFO 5376 --- [mysite] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-13 - Added connection org.mariadb.jdbc.Connection@fd19a56
+2025-10-22T17:10:15.785+09:00  INFO 5376 --- [mysite] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-13 - Start completed.
+2025-10-22T17:10:15.786+09:00  WARN 5376 --- [mysite] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: MariaDBDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-10-22T17:10:15.786+09:00  INFO 5376 --- [mysite] [restartedMain] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-13)']
+	Database driver: undefined/unknown
+	Database version: 11.4.8
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-10-22T17:10:15.972+09:00  INFO 5376 --- [mysite] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-10-22T17:10:15.995+09:00  INFO 5376 --- [mysite] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-10-22T17:10:16.401+09:00  WARN 5376 --- [mysite] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-10-22T17:10:16.441+09:00 DEBUG 5376 --- [mysite] [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 119 mappings in 'requestMappingHandlerMapping'
+2025-10-22T17:10:16.483+09:00 DEBUG 5376 --- [mysite] [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**, /swagger-ui*/*swagger-initializer.js, /swagger-ui*/**] in 'resourceHandlerMapping'
+2025-10-22T17:10:16.529+09:00  INFO 5376 --- [mysite] [restartedMain] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint beneath base path '/actuator'
+2025-10-22T17:10:16.614+09:00 DEBUG 5376 --- [mysite] [restartedMain] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2025-10-22T17:10:16.627+09:00 DEBUG 5376 --- [mysite] [restartedMain] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2025-10-22T17:10:16.727+09:00  INFO 5376 --- [mysite] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-10-22T17:10:16.743+09:00  INFO 5376 --- [mysite] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-10-22T17:10:16.748+09:00  INFO 5376 --- [mysite] [restartedMain] c.m.mysite.MovieReservationApplication   : Started MovieReservationApplication in 1.473 seconds (process running for 6753.469)
+2025-10-22T17:10:16.749+09:00  INFO 5376 --- [mysite] [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2025-10-22T17:10:27.394+09:00  INFO 5376 --- [mysite] [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+2025-10-22T17:10:27.395+09:00  INFO 5376 --- [mysite] [Thread-51] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-10-22T17:10:27.397+09:00  INFO 5376 --- [mysite] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-10-22T17:10:27.399+09:00  INFO 5376 --- [mysite] [Thread-51] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-10-22T17:10:27.400+09:00  INFO 5376 --- [mysite] [Thread-51] com.zaxxer.hikari.HikariDataSource       : HikariPool-13 - Shutdown initiated...
+2025-10-22T17:10:27.400+09:00  INFO 5376 --- [mysite] [Thread-51] com.zaxxer.hikari.HikariDataSource       : HikariPool-13 - Shutdown completed.
+2025-10-22T17:10:27.463+09:00  INFO 5376 --- [mysite] [restartedMain] c.m.mysite.MovieReservationApplication   : Starting MovieReservationApplication using Java 21.0.8 with PID 5376 (D:\my-project\myProject_movie\mysite\bin\main started by YONSAI in D:\my-project\myProject_movie\mysite)
+2025-10-22T17:10:27.463+09:00 DEBUG 5376 --- [mysite] [restartedMain] c.m.mysite.MovieReservationApplication   : Running with Spring Boot v3.5.6, Spring v6.2.11
+2025-10-22T17:10:27.463+09:00  INFO 5376 --- [mysite] [restartedMain] c.m.mysite.MovieReservationApplication   : No active profile set, falling back to 1 default profile: "default"
+2025-10-22T17:10:27.702+09:00  INFO 5376 --- [mysite] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-10-22T17:10:27.727+09:00  INFO 5376 --- [mysite] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 25 ms. Found 16 JPA repository interfaces.
+2025-10-22T17:10:27.813+09:00  INFO 5376 --- [mysite] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-10-22T17:10:27.813+09:00  INFO 5376 --- [mysite] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-10-22T17:10:27.814+09:00  INFO 5376 --- [mysite] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.46]
+2025-10-22T17:10:27.827+09:00  INFO 5376 --- [mysite] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-10-22T17:10:27.827+09:00  INFO 5376 --- [mysite] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 363 ms
+2025-10-22T17:10:27.877+09:00 DEBUG 5376 --- [mysite] [restartedMain] o.s.w.f.ServerHttpObservationFilter      : Filter 'webMvcObservationFilter' configured for use
+2025-10-22T17:10:27.877+09:00 DEBUG 5376 --- [mysite] [restartedMain] c.m.m.security.JwtAuthorizationFilter    : Filter 'jwtAuthorizationFilter' configured for use
+2025-10-22T17:10:27.906+09:00  INFO 5376 --- [mysite] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-10-22T17:10:27.908+09:00  INFO 5376 --- [mysite] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-10-22T17:10:27.913+09:00  INFO 5376 --- [mysite] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-10-22T17:10:27.913+09:00  INFO 5376 --- [mysite] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-14 - Starting...
+2025-10-22T17:10:27.915+09:00  INFO 5376 --- [mysite] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-14 - Added connection org.mariadb.jdbc.Connection@351ad83
+2025-10-22T17:10:27.915+09:00  INFO 5376 --- [mysite] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-14 - Start completed.
+2025-10-22T17:10:27.916+09:00  WARN 5376 --- [mysite] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: MariaDBDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-10-22T17:10:27.916+09:00  INFO 5376 --- [mysite] [restartedMain] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-14)']
+	Database driver: undefined/unknown
+	Database version: 11.4.8
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-10-22T17:10:28.030+09:00  INFO 5376 --- [mysite] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-10-22T17:10:28.052+09:00  INFO 5376 --- [mysite] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-10-22T17:10:28.446+09:00  WARN 5376 --- [mysite] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-10-22T17:10:28.484+09:00 DEBUG 5376 --- [mysite] [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 119 mappings in 'requestMappingHandlerMapping'
+2025-10-22T17:10:28.524+09:00 DEBUG 5376 --- [mysite] [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**, /swagger-ui*/*swagger-initializer.js, /swagger-ui*/**] in 'resourceHandlerMapping'
+2025-10-22T17:10:28.565+09:00  INFO 5376 --- [mysite] [restartedMain] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint beneath base path '/actuator'
+2025-10-22T17:10:28.639+09:00 DEBUG 5376 --- [mysite] [restartedMain] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2025-10-22T17:10:28.653+09:00 DEBUG 5376 --- [mysite] [restartedMain] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2025-10-22T17:10:28.743+09:00  INFO 5376 --- [mysite] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-10-22T17:10:28.763+09:00  INFO 5376 --- [mysite] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-10-22T17:10:28.770+09:00  INFO 5376 --- [mysite] [restartedMain] c.m.mysite.MovieReservationApplication   : Started MovieReservationApplication in 1.321 seconds (process running for 6765.489)
+2025-10-22T17:10:28.771+09:00  INFO 5376 --- [mysite] [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2025-10-22T17:10:34.679+09:00  INFO 5376 --- [mysite] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-10-22T17:10:34.679+09:00  INFO 5376 --- [mysite] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-10-22T17:10:34.679+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Detected StandardServletMultipartResolver
+2025-10-22T17:10:34.679+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Detected AcceptHeaderLocaleResolver
+2025-10-22T17:10:34.679+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Detected FixedThemeResolver
+2025-10-22T17:10:34.680+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Detected org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator@398b8073
+2025-10-22T17:10:34.680+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Detected org.springframework.web.servlet.support.SessionFlashMapManager@50d0a392
+2025-10-22T17:10:34.680+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
+2025-10-22T17:10:34.680+09:00  INFO 5376 --- [mysite] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2025-10-22T17:10:34.685+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : GET "/api/theaters", parameters={}
+2025-10-22T17:10:34.685+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-1] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.moviesite.mysite.controller.TheaterController#getAllTheaters(String, String, Pageable)
+2025-10-22T17:10:34.704+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/yaml]
+2025-10-22T17:10:34.707+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [ApiResponse(status=200, message=요청이 성공적으로 처리되었습니다., data=Page 1 of 1 containing com.moviesite.mysite (truncated)...]
+2025-10-22T17:10:34.708+09:00  WARN 5376 --- [mysite] [http-nio-8080-exec-1] ration$PageModule$WarningLoggingModifier : Serializing PageImpl instances as-is is not supported, meaning that there is no guarantee about the stability of the resulting JSON structure!
+	For a stable JSON structure, please use Spring Data's PagedModel (globally via @EnableSpringDataWebSupport(pageSerializationMode = VIA_DTO))
+	or Spring HATEOAS and Spring Data's PagedResourcesAssembler as documented in https://docs.spring.io/spring-data/commons/reference/repositories/core-extensions.html#core.web.pageables.
+
+2025-10-22T17:10:34.721+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-10-22T17:10:34.723+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : GET "/api/theaters", parameters={}
+2025-10-22T17:10:34.724+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-2] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.moviesite.mysite.controller.TheaterController#getAllTheaters(String, String, Pageable)
+2025-10-22T17:10:34.728+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-2] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/yaml]
+2025-10-22T17:10:34.728+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-2] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [ApiResponse(status=200, message=요청이 성공적으로 처리되었습니다., data=Page 1 of 1 containing com.moviesite.mysite (truncated)...]
+2025-10-22T17:10:34.729+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-10-22T17:11:20.894+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : GET "/api/theaters", parameters={}
+2025-10-22T17:11:20.894+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-3] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.moviesite.mysite.controller.TheaterController#getAllTheaters(String, String, Pageable)
+2025-10-22T17:11:20.897+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/yaml]
+2025-10-22T17:11:20.897+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [ApiResponse(status=200, message=요청이 성공적으로 처리되었습니다., data=Page 1 of 1 containing com.moviesite.mysite (truncated)...]
+2025-10-22T17:11:20.898+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-10-22T17:11:20.902+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-4] o.s.web.servlet.DispatcherServlet        : GET "/api/theaters", parameters={}
+2025-10-22T17:11:20.903+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-4] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.moviesite.mysite.controller.TheaterController#getAllTheaters(String, String, Pageable)
+2025-10-22T17:11:20.910+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-4] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/yaml]
+2025-10-22T17:11:20.910+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-4] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [ApiResponse(status=200, message=요청이 성공적으로 처리되었습니다., data=Page 1 of 1 containing com.moviesite.mysite (truncated)...]
+2025-10-22T17:11:20.911+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-4] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-10-22T17:13:08.242+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : GET "/api/theaters", parameters={}
+2025-10-22T17:13:08.242+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-7] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.moviesite.mysite.controller.TheaterController#getAllTheaters(String, String, Pageable)
+2025-10-22T17:13:08.245+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-7] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/yaml]
+2025-10-22T17:13:08.245+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-7] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [ApiResponse(status=200, message=요청이 성공적으로 처리되었습니다., data=Page 1 of 1 containing com.moviesite.mysite (truncated)...]
+2025-10-22T17:13:08.246+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-10-22T17:13:08.249+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-8] o.s.web.servlet.DispatcherServlet        : GET "/api/theaters", parameters={}
+2025-10-22T17:13:08.249+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-8] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.moviesite.mysite.controller.TheaterController#getAllTheaters(String, String, Pageable)
+2025-10-22T17:13:08.252+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-8] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/yaml]
+2025-10-22T17:13:08.252+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-8] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [ApiResponse(status=200, message=요청이 성공적으로 처리되었습니다., data=Page 1 of 1 containing com.moviesite.mysite (truncated)...]
+2025-10-22T17:13:08.253+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-8] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-10-22T17:14:19.757+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : GET "/api/theaters/1", parameters={}
+2025-10-22T17:14:19.758+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-1] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.moviesite.mysite.controller.TheaterController#getTheaterById(Long)
+2025-10-22T17:14:19.759+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-1] o.s.web.method.HandlerMethod             : Could not resolve parameter [0] in public org.springframework.http.ResponseEntity<com.moviesite.mysite.model.dto.response.ApiResponse<com.moviesite.mysite.model.dto.response.TheaterResponse>> com.moviesite.mysite.controller.TheaterController.getTheaterById(java.lang.Long): Name for argument of type [java.lang.Long] not specified, and parameter name information not available via reflection. Ensure that the compiler uses the '-parameters' flag.
+2025-10-22T17:14:19.760+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Failed to complete request: java.lang.IllegalArgumentException: Name for argument of type [java.lang.Long] not specified, and parameter name information not available via reflection. Ensure that the compiler uses the '-parameters' flag.
+2025-10-22T17:14:19.761+09:00 ERROR 5376 --- [mysite] [http-nio-8080-exec-1] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: java.lang.IllegalArgumentException: Name for argument of type [java.lang.Long] not specified, and parameter name information not available via reflection. Ensure that the compiler uses the '-parameters' flag.] with root cause
+
+java.lang.IllegalArgumentException: Name for argument of type [java.lang.Long] not specified, and parameter name information not available via reflection. Ensure that the compiler uses the '-parameters' flag.
+	at org.springframework.web.method.annotation.AbstractNamedValueMethodArgumentResolver.updateNamedValueInfo(AbstractNamedValueMethodArgumentResolver.java:186) ~[spring-web-6.2.11.jar:6.2.11]
+	at org.springframework.web.method.annotation.AbstractNamedValueMethodArgumentResolver.getNamedValueInfo(AbstractNamedValueMethodArgumentResolver.java:161) ~[spring-web-6.2.11.jar:6.2.11]
+	at org.springframework.web.method.annotation.AbstractNamedValueMethodArgumentResolver.resolveArgument(AbstractNamedValueMethodArgumentResolver.java:107) ~[spring-web-6.2.11.jar:6.2.11]
+	at org.springframework.web.method.support.HandlerMethodArgumentResolverComposite.resolveArgument(HandlerMethodArgumentResolverComposite.java:122) ~[spring-web-6.2.11.jar:6.2.11]
+	at org.springframework.web.method.support.InvocableHandlerMethod.getMethodArgumentValues(InvocableHandlerMethod.java:227) ~[spring-web-6.2.11.jar:6.2.11]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:181) ~[spring-web-6.2.11.jar:6.2.11]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118) ~[spring-webmvc-6.2.11.jar:6.2.11]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:991) ~[spring-webmvc-6.2.11.jar:6.2.11]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:896) ~[spring-webmvc-6.2.11.jar:6.2.11]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) ~[spring-webmvc-6.2.11.jar:6.2.11]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089) ~[spring-webmvc-6.2.11.jar:6.2.11]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979) ~[spring-webmvc-6.2.11.jar:6.2.11]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014) ~[spring-webmvc-6.2.11.jar:6.2.11]
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:903) ~[spring-webmvc-6.2.11.jar:6.2.11]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:564) ~[tomcat-embed-core-10.1.46.jar:6.0]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885) ~[spring-webmvc-6.2.11.jar:6.2.11]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658) ~[tomcat-embed-core-10.1.46.jar:6.0]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:195) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51) ~[tomcat-embed-websocket-10.1.46.jar:10.1.46]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:101) ~[spring-web-6.2.11.jar:6.2.11]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:108) ~[spring-web-6.2.11.jar:6.2.11]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:108) ~[spring-web-6.2.11.jar:6.2.11]
+	at org.springframework.security.web.FilterChainProxy.lambda$doFilterInternal$3(FilterChainProxy.java:231) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.ObservationFilterChainDecorator$FilterObservation$SimpleFilterObservation.lambda$wrap$1(ObservationFilterChainDecorator.java:490) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.ObservationFilterChainDecorator$AroundFilterObservation$SimpleAroundFilterObservation.lambda$wrap$1(ObservationFilterChainDecorator.java:351) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.ObservationFilterChainDecorator.lambda$wrapSecured$0(ObservationFilterChainDecorator.java:83) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:129) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.access.intercept.AuthorizationFilter.doFilter(AuthorizationFilter.java:101) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:241) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:228) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:138) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:125) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:119) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:241) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:228) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:138) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:131) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:85) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:241) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:228) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:138) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:100) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:241) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:228) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:138) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:179) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:241) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:228) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:138) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:241) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:228) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:138) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:107) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:93) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:241) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:228) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:138) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:91) ~[spring-web-6.2.11.jar:6.2.11]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.11.jar:6.2.11]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:241) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:228) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:138) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.11.jar:6.2.11]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:241) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:228) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:138) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:241) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:228) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:138) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.11.jar:6.2.11]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:241) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:228) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:138) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.11.jar:6.2.11]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:241) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.ObservationFilterChainDecorator$AroundFilterObservation$SimpleAroundFilterObservation.lambda$wrap$0(ObservationFilterChainDecorator.java:334) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:225) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:138) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:233) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:191) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-6.2.11.jar:6.2.11]
+	at org.springframework.web.filter.ServletRequestPathFilter.doFilter(ServletRequestPathFilter.java:52) ~[spring-web-6.2.11.jar:6.2.11]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-6.2.11.jar:6.2.11]
+	at org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74) ~[spring-web-6.2.11.jar:6.2.11]
+	at org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebSecurityConfiguration.java:319) ~[spring-security-config-6.5.5.jar:6.5.5]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-6.2.11.jar:6.2.11]
+	at org.springframework.web.servlet.handler.HandlerMappingIntrospector.lambda$createCacheFilter$4(HandlerMappingIntrospector.java:267) ~[spring-webmvc-6.2.11.jar:6.2.11]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-6.2.11.jar:6.2.11]
+	at org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74) ~[spring-web-6.2.11.jar:6.2.11]
+	at org.springframework.security.config.annotation.web.configuration.WebMvcSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebMvcSecurityConfiguration.java:240) ~[spring-security-config-6.5.5.jar:6.5.5]
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:362) ~[spring-web-6.2.11.jar:6.2.11]
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:278) ~[spring-web-6.2.11.jar:6.2.11]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-6.2.11.jar:6.2.11]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.11.jar:6.2.11]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-6.2.11.jar:6.2.11]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.11.jar:6.2.11]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.springframework.web.filter.ServerHttpObservationFilter.doFilterInternal(ServerHttpObservationFilter.java:110) ~[spring-web-6.2.11.jar:6.2.11]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.11.jar:6.2.11]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) ~[spring-web-6.2.11.jar:6.2.11]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.11.jar:6.2.11]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:483) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:116) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:398) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1776) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:975) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:493) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at java.base/java.lang.Thread.run(Thread.java:1583) ~[na:na]
+
+2025-10-22T17:14:19.765+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : "ERROR" dispatch for GET "/error", parameters={}
+2025-10-22T17:14:19.765+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-1] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#errorHtml(HttpServletRequest, HttpServletResponse)
+2025-10-22T17:14:19.776+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-1] o.s.w.s.v.ContentNegotiatingViewResolver : Selected 'text/html' given [text/html, text/html;q=0.8]
+2025-10-22T17:14:19.779+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Exiting from "ERROR" dispatch, status 500
+2025-10-22T17:14:47.333+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : GET "/api/movies", parameters={}
+2025-10-22T17:14:47.333+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-2] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.moviesite.mysite.controller.MovieController#getAllMovies(String, String, Pageable)
+2025-10-22T17:14:47.340+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-2] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/yaml]
+2025-10-22T17:14:47.340+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-2] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [ApiResponse(status=200, message=요청이 성공적으로 처리되었습니다., data=Page 1 of 1 containing com.moviesite.mysite (truncated)...]
+2025-10-22T17:14:47.343+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-10-22T17:14:47.345+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : GET "/api/movies", parameters={}
+2025-10-22T17:14:47.345+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-3] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.moviesite.mysite.controller.MovieController#getAllMovies(String, String, Pageable)
+2025-10-22T17:14:47.348+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/yaml]
+2025-10-22T17:14:47.348+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [ApiResponse(status=200, message=요청이 성공적으로 처리되었습니다., data=Page 1 of 1 containing com.moviesite.mysite (truncated)...]
+2025-10-22T17:14:47.348+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-10-22T17:14:47.414+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-4] o.s.web.servlet.DispatcherServlet        : GET "/api/movies", parameters={}
+2025-10-22T17:14:47.414+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-4] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.moviesite.mysite.controller.MovieController#getAllMovies(String, String, Pageable)
+2025-10-22T17:14:47.417+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-4] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/yaml]
+2025-10-22T17:14:47.417+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-4] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [ApiResponse(status=200, message=요청이 성공적으로 처리되었습니다., data=Page 1 of 1 containing com.moviesite.mysite (truncated)...]
+2025-10-22T17:14:47.417+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-4] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-10-22T17:14:47.419+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : GET "/api/movies", parameters={}
+2025-10-22T17:14:47.419+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-5] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.moviesite.mysite.controller.MovieController#getAllMovies(String, String, Pageable)
+2025-10-22T17:14:47.421+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-5] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/yaml]
+2025-10-22T17:14:47.421+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-5] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [ApiResponse(status=200, message=요청이 성공적으로 처리되었습니다., data=Page 1 of 1 containing com.moviesite.mysite (truncated)...]
+2025-10-22T17:14:47.421+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-10-22T17:14:50.338+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-6] o.s.web.servlet.DispatcherServlet        : GET "/api/theaters", parameters={}
+2025-10-22T17:14:50.338+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-6] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.moviesite.mysite.controller.TheaterController#getAllTheaters(String, String, Pageable)
+2025-10-22T17:14:50.341+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-6] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/yaml]
+2025-10-22T17:14:50.341+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-6] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [ApiResponse(status=200, message=요청이 성공적으로 처리되었습니다., data=Page 1 of 1 containing com.moviesite.mysite (truncated)...]
+2025-10-22T17:14:50.341+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-6] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-10-22T17:14:50.343+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : GET "/api/theaters", parameters={}
+2025-10-22T17:14:50.343+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-7] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.moviesite.mysite.controller.TheaterController#getAllTheaters(String, String, Pageable)
+2025-10-22T17:14:50.345+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-7] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/yaml]
+2025-10-22T17:14:50.345+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-7] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [ApiResponse(status=200, message=요청이 성공적으로 처리되었습니다., data=Page 1 of 1 containing com.moviesite.mysite (truncated)...]
+2025-10-22T17:14:50.346+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-10-22T17:15:30.664+09:00  INFO 5376 --- [mysite] [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+2025-10-22T17:15:30.666+09:00  INFO 5376 --- [mysite] [Thread-55] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-10-22T17:15:30.667+09:00  INFO 5376 --- [mysite] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-10-22T17:15:30.670+09:00  INFO 5376 --- [mysite] [Thread-55] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-10-22T17:15:30.670+09:00  INFO 5376 --- [mysite] [Thread-55] com.zaxxer.hikari.HikariDataSource       : HikariPool-14 - Shutdown initiated...
+2025-10-22T17:15:30.671+09:00  INFO 5376 --- [mysite] [Thread-55] com.zaxxer.hikari.HikariDataSource       : HikariPool-14 - Shutdown completed.
+2025-10-22T17:15:30.733+09:00  INFO 5376 --- [mysite] [restartedMain] c.m.mysite.MovieReservationApplication   : Starting MovieReservationApplication using Java 21.0.8 with PID 5376 (D:\my-project\myProject_movie\mysite\bin\main started by YONSAI in D:\my-project\myProject_movie\mysite)
+2025-10-22T17:15:30.733+09:00 DEBUG 5376 --- [mysite] [restartedMain] c.m.mysite.MovieReservationApplication   : Running with Spring Boot v3.5.6, Spring v6.2.11
+2025-10-22T17:15:30.734+09:00  INFO 5376 --- [mysite] [restartedMain] c.m.mysite.MovieReservationApplication   : No active profile set, falling back to 1 default profile: "default"
+2025-10-22T17:15:30.979+09:00  INFO 5376 --- [mysite] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-10-22T17:15:31.004+09:00  INFO 5376 --- [mysite] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 24 ms. Found 16 JPA repository interfaces.
+2025-10-22T17:15:31.100+09:00  INFO 5376 --- [mysite] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-10-22T17:15:31.101+09:00  INFO 5376 --- [mysite] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-10-22T17:15:31.101+09:00  INFO 5376 --- [mysite] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.46]
+2025-10-22T17:15:31.118+09:00  INFO 5376 --- [mysite] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-10-22T17:15:31.119+09:00  INFO 5376 --- [mysite] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 384 ms
+2025-10-22T17:15:31.169+09:00 DEBUG 5376 --- [mysite] [restartedMain] o.s.w.f.ServerHttpObservationFilter      : Filter 'webMvcObservationFilter' configured for use
+2025-10-22T17:15:31.169+09:00 DEBUG 5376 --- [mysite] [restartedMain] c.m.m.security.JwtAuthorizationFilter    : Filter 'jwtAuthorizationFilter' configured for use
+2025-10-22T17:15:31.200+09:00  INFO 5376 --- [mysite] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-10-22T17:15:31.201+09:00  INFO 5376 --- [mysite] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-10-22T17:15:31.206+09:00  INFO 5376 --- [mysite] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-10-22T17:15:31.207+09:00  INFO 5376 --- [mysite] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-15 - Starting...
+2025-10-22T17:15:31.210+09:00  INFO 5376 --- [mysite] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-15 - Added connection org.mariadb.jdbc.Connection@2670bb3
+2025-10-22T17:15:31.210+09:00  INFO 5376 --- [mysite] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-15 - Start completed.
+2025-10-22T17:15:31.211+09:00  WARN 5376 --- [mysite] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: MariaDBDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-10-22T17:15:31.211+09:00  INFO 5376 --- [mysite] [restartedMain] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-15)']
+	Database driver: undefined/unknown
+	Database version: 11.4.8
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-10-22T17:15:31.321+09:00  INFO 5376 --- [mysite] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-10-22T17:15:31.342+09:00  INFO 5376 --- [mysite] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-10-22T17:15:31.728+09:00  WARN 5376 --- [mysite] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-10-22T17:15:31.767+09:00 DEBUG 5376 --- [mysite] [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 119 mappings in 'requestMappingHandlerMapping'
+2025-10-22T17:15:31.808+09:00 DEBUG 5376 --- [mysite] [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**, /swagger-ui*/*swagger-initializer.js, /swagger-ui*/**] in 'resourceHandlerMapping'
+2025-10-22T17:15:31.852+09:00  INFO 5376 --- [mysite] [restartedMain] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint beneath base path '/actuator'
+2025-10-22T17:15:31.929+09:00 DEBUG 5376 --- [mysite] [restartedMain] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2025-10-22T17:15:31.942+09:00 DEBUG 5376 --- [mysite] [restartedMain] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2025-10-22T17:15:32.054+09:00  INFO 5376 --- [mysite] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-10-22T17:15:32.070+09:00  INFO 5376 --- [mysite] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-10-22T17:15:32.075+09:00  INFO 5376 --- [mysite] [restartedMain] c.m.mysite.MovieReservationApplication   : Started MovieReservationApplication in 1.357 seconds (process running for 7068.795)
+2025-10-22T17:15:32.076+09:00  INFO 5376 --- [mysite] [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2025-10-22T17:15:35.557+09:00  INFO 5376 --- [mysite] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-10-22T17:15:35.557+09:00  INFO 5376 --- [mysite] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-10-22T17:15:35.557+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Detected StandardServletMultipartResolver
+2025-10-22T17:15:35.557+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Detected AcceptHeaderLocaleResolver
+2025-10-22T17:15:35.557+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Detected FixedThemeResolver
+2025-10-22T17:15:35.558+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Detected org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator@208d25f7
+2025-10-22T17:15:35.559+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Detected org.springframework.web.servlet.support.SessionFlashMapManager@2406edaa
+2025-10-22T17:15:35.559+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
+2025-10-22T17:15:35.559+09:00  INFO 5376 --- [mysite] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2025-10-22T17:15:35.561+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : GET "/api/theaters", parameters={}
+2025-10-22T17:15:35.561+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-1] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.moviesite.mysite.controller.TheaterController#getAllTheaters(String, String, Pageable)
+2025-10-22T17:15:35.569+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/yaml]
+2025-10-22T17:15:35.570+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [ApiResponse(status=200, message=요청이 성공적으로 처리되었습니다., data=Page 1 of 1 containing com.moviesite.mysite (truncated)...]
+2025-10-22T17:15:35.571+09:00  WARN 5376 --- [mysite] [http-nio-8080-exec-1] ration$PageModule$WarningLoggingModifier : Serializing PageImpl instances as-is is not supported, meaning that there is no guarantee about the stability of the resulting JSON structure!
+	For a stable JSON structure, please use Spring Data's PagedModel (globally via @EnableSpringDataWebSupport(pageSerializationMode = VIA_DTO))
+	or Spring HATEOAS and Spring Data's PagedResourcesAssembler as documented in https://docs.spring.io/spring-data/commons/reference/repositories/core-extensions.html#core.web.pageables.
+
+2025-10-22T17:15:35.575+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-10-22T17:15:35.577+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : GET "/api/theaters", parameters={}
+2025-10-22T17:15:35.578+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-2] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.moviesite.mysite.controller.TheaterController#getAllTheaters(String, String, Pageable)
+2025-10-22T17:15:35.580+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-2] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/yaml]
+2025-10-22T17:15:35.580+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-2] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [ApiResponse(status=200, message=요청이 성공적으로 처리되었습니다., data=Page 1 of 1 containing com.moviesite.mysite (truncated)...]
+2025-10-22T17:15:35.580+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-10-22T17:17:41.552+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : GET "/api/theaters", parameters={}
+2025-10-22T17:17:41.552+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-5] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.moviesite.mysite.controller.TheaterController#getAllTheaters(String, String, Pageable)
+2025-10-22T17:17:41.555+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-5] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/yaml]
+2025-10-22T17:17:41.555+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-5] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [ApiResponse(status=200, message=요청이 성공적으로 처리되었습니다., data=Page 1 of 1 containing com.moviesite.mysite (truncated)...]
+2025-10-22T17:17:41.555+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-10-22T17:17:41.558+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-6] o.s.web.servlet.DispatcherServlet        : GET "/api/theaters", parameters={}
+2025-10-22T17:17:41.558+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-6] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.moviesite.mysite.controller.TheaterController#getAllTheaters(String, String, Pageable)
+2025-10-22T17:17:41.569+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-6] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/yaml]
+2025-10-22T17:17:41.570+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-6] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [ApiResponse(status=200, message=요청이 성공적으로 처리되었습니다., data=Page 1 of 1 containing com.moviesite.mysite (truncated)...]
+2025-10-22T17:17:41.570+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-6] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-10-22T17:17:43.781+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : GET "/api/theaters", parameters={}
+2025-10-22T17:17:43.781+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-7] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.moviesite.mysite.controller.TheaterController#getAllTheaters(String, String, Pageable)
+2025-10-22T17:17:43.783+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-7] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/yaml]
+2025-10-22T17:17:43.783+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-7] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [ApiResponse(status=200, message=요청이 성공적으로 처리되었습니다., data=Page 1 of 1 containing com.moviesite.mysite (truncated)...]
+2025-10-22T17:17:43.784+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-10-22T17:17:43.785+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-8] o.s.web.servlet.DispatcherServlet        : GET "/api/theaters", parameters={}
+2025-10-22T17:17:43.785+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-8] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.moviesite.mysite.controller.TheaterController#getAllTheaters(String, String, Pageable)
+2025-10-22T17:17:43.787+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-8] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/yaml]
+2025-10-22T17:17:43.787+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-8] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [ApiResponse(status=200, message=요청이 성공적으로 처리되었습니다., data=Page 1 of 1 containing com.moviesite.mysite (truncated)...]
+2025-10-22T17:17:43.788+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-8] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-10-22T17:19:14.256+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : GET "/api/theaters", parameters={}
+2025-10-22T17:19:14.256+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-1] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.moviesite.mysite.controller.TheaterController#getAllTheaters(String, String, Pageable)
+2025-10-22T17:19:14.259+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/yaml]
+2025-10-22T17:19:14.259+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [ApiResponse(status=200, message=요청이 성공적으로 처리되었습니다., data=Page 1 of 1 containing com.moviesite.mysite (truncated)...]
+2025-10-22T17:19:14.260+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-10-22T17:19:14.261+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : GET "/api/theaters", parameters={}
+2025-10-22T17:19:14.261+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-2] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.moviesite.mysite.controller.TheaterController#getAllTheaters(String, String, Pageable)
+2025-10-22T17:19:14.264+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-2] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/yaml]
+2025-10-22T17:19:14.264+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-2] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [ApiResponse(status=200, message=요청이 성공적으로 처리되었습니다., data=Page 1 of 1 containing com.moviesite.mysite (truncated)...]
+2025-10-22T17:19:14.265+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-10-22T17:19:33.778+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : GET "/api/theaters/1", parameters={}
+2025-10-22T17:19:33.778+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-3] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.moviesite.mysite.controller.TheaterController#getTheaterById(Long)
+2025-10-22T17:19:33.778+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-3] o.s.web.method.HandlerMethod             : Could not resolve parameter [0] in public org.springframework.http.ResponseEntity<com.moviesite.mysite.model.dto.response.ApiResponse<com.moviesite.mysite.model.dto.response.TheaterResponse>> com.moviesite.mysite.controller.TheaterController.getTheaterById(java.lang.Long): Name for argument of type [java.lang.Long] not specified, and parameter name information not available via reflection. Ensure that the compiler uses the '-parameters' flag.
+2025-10-22T17:19:33.779+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : Failed to complete request: java.lang.IllegalArgumentException: Name for argument of type [java.lang.Long] not specified, and parameter name information not available via reflection. Ensure that the compiler uses the '-parameters' flag.
+2025-10-22T17:19:33.779+09:00 ERROR 5376 --- [mysite] [http-nio-8080-exec-3] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: java.lang.IllegalArgumentException: Name for argument of type [java.lang.Long] not specified, and parameter name information not available via reflection. Ensure that the compiler uses the '-parameters' flag.] with root cause
+
+java.lang.IllegalArgumentException: Name for argument of type [java.lang.Long] not specified, and parameter name information not available via reflection. Ensure that the compiler uses the '-parameters' flag.
+	at org.springframework.web.method.annotation.AbstractNamedValueMethodArgumentResolver.updateNamedValueInfo(AbstractNamedValueMethodArgumentResolver.java:186) ~[spring-web-6.2.11.jar:6.2.11]
+	at org.springframework.web.method.annotation.AbstractNamedValueMethodArgumentResolver.getNamedValueInfo(AbstractNamedValueMethodArgumentResolver.java:161) ~[spring-web-6.2.11.jar:6.2.11]
+	at org.springframework.web.method.annotation.AbstractNamedValueMethodArgumentResolver.resolveArgument(AbstractNamedValueMethodArgumentResolver.java:107) ~[spring-web-6.2.11.jar:6.2.11]
+	at org.springframework.web.method.support.HandlerMethodArgumentResolverComposite.resolveArgument(HandlerMethodArgumentResolverComposite.java:122) ~[spring-web-6.2.11.jar:6.2.11]
+	at org.springframework.web.method.support.InvocableHandlerMethod.getMethodArgumentValues(InvocableHandlerMethod.java:227) ~[spring-web-6.2.11.jar:6.2.11]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:181) ~[spring-web-6.2.11.jar:6.2.11]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118) ~[spring-webmvc-6.2.11.jar:6.2.11]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:991) ~[spring-webmvc-6.2.11.jar:6.2.11]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:896) ~[spring-webmvc-6.2.11.jar:6.2.11]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) ~[spring-webmvc-6.2.11.jar:6.2.11]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089) ~[spring-webmvc-6.2.11.jar:6.2.11]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979) ~[spring-webmvc-6.2.11.jar:6.2.11]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014) ~[spring-webmvc-6.2.11.jar:6.2.11]
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:903) ~[spring-webmvc-6.2.11.jar:6.2.11]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:564) ~[tomcat-embed-core-10.1.46.jar:6.0]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885) ~[spring-webmvc-6.2.11.jar:6.2.11]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658) ~[tomcat-embed-core-10.1.46.jar:6.0]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:195) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51) ~[tomcat-embed-websocket-10.1.46.jar:10.1.46]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:101) ~[spring-web-6.2.11.jar:6.2.11]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:108) ~[spring-web-6.2.11.jar:6.2.11]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:108) ~[spring-web-6.2.11.jar:6.2.11]
+	at org.springframework.security.web.FilterChainProxy.lambda$doFilterInternal$3(FilterChainProxy.java:231) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.ObservationFilterChainDecorator$FilterObservation$SimpleFilterObservation.lambda$wrap$1(ObservationFilterChainDecorator.java:490) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.ObservationFilterChainDecorator$AroundFilterObservation$SimpleAroundFilterObservation.lambda$wrap$1(ObservationFilterChainDecorator.java:351) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.ObservationFilterChainDecorator.lambda$wrapSecured$0(ObservationFilterChainDecorator.java:83) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:129) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.access.intercept.AuthorizationFilter.doFilter(AuthorizationFilter.java:101) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:241) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:228) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:138) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:125) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:119) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:241) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:228) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:138) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:131) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:85) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:241) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:228) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:138) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:100) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:241) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:228) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:138) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:179) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:241) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:228) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:138) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:241) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:228) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:138) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:107) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:93) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:241) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:228) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:138) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:91) ~[spring-web-6.2.11.jar:6.2.11]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.11.jar:6.2.11]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:241) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:228) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:138) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.11.jar:6.2.11]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:241) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:228) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:138) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:241) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:228) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:138) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.11.jar:6.2.11]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:241) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:228) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:138) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.11.jar:6.2.11]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:241) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.ObservationFilterChainDecorator$AroundFilterObservation$SimpleAroundFilterObservation.lambda$wrap$0(ObservationFilterChainDecorator.java:334) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:225) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:138) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:233) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:191) ~[spring-security-web-6.5.5.jar:6.5.5]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-6.2.11.jar:6.2.11]
+	at org.springframework.web.filter.ServletRequestPathFilter.doFilter(ServletRequestPathFilter.java:52) ~[spring-web-6.2.11.jar:6.2.11]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-6.2.11.jar:6.2.11]
+	at org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74) ~[spring-web-6.2.11.jar:6.2.11]
+	at org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebSecurityConfiguration.java:319) ~[spring-security-config-6.5.5.jar:6.5.5]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-6.2.11.jar:6.2.11]
+	at org.springframework.web.servlet.handler.HandlerMappingIntrospector.lambda$createCacheFilter$4(HandlerMappingIntrospector.java:267) ~[spring-webmvc-6.2.11.jar:6.2.11]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-6.2.11.jar:6.2.11]
+	at org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74) ~[spring-web-6.2.11.jar:6.2.11]
+	at org.springframework.security.config.annotation.web.configuration.WebMvcSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebMvcSecurityConfiguration.java:240) ~[spring-security-config-6.5.5.jar:6.5.5]
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:362) ~[spring-web-6.2.11.jar:6.2.11]
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:278) ~[spring-web-6.2.11.jar:6.2.11]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-6.2.11.jar:6.2.11]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.11.jar:6.2.11]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-6.2.11.jar:6.2.11]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.11.jar:6.2.11]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.springframework.web.filter.ServerHttpObservationFilter.doFilterInternal(ServerHttpObservationFilter.java:110) ~[spring-web-6.2.11.jar:6.2.11]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.11.jar:6.2.11]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) ~[spring-web-6.2.11.jar:6.2.11]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.11.jar:6.2.11]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:483) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:116) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:398) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1776) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:975) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:493) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at java.base/java.lang.Thread.run(Thread.java:1583) ~[na:na]
+
+2025-10-22T17:19:33.782+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : "ERROR" dispatch for GET "/error", parameters={}
+2025-10-22T17:19:33.782+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-3] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#errorHtml(HttpServletRequest, HttpServletResponse)
+2025-10-22T17:19:33.787+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-3] o.s.w.s.v.ContentNegotiatingViewResolver : Selected 'text/html' given [text/html, text/html;q=0.8]
+2025-10-22T17:19:33.789+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : Exiting from "ERROR" dispatch, status 500
+2025-10-22T17:22:47.910+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-6] o.s.web.servlet.DispatcherServlet        : GET "/api/theaters", parameters={}
+2025-10-22T17:22:47.910+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-6] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.moviesite.mysite.controller.TheaterController#getAllTheaters(String, String, Pageable)
+2025-10-22T17:22:47.914+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-6] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/yaml]
+2025-10-22T17:22:47.914+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-6] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [ApiResponse(status=200, message=요청이 성공적으로 처리되었습니다., data=Page 1 of 1 containing com.moviesite.mysite (truncated)...]
+2025-10-22T17:22:47.914+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-6] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-10-22T17:22:47.916+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : GET "/api/theaters", parameters={}
+2025-10-22T17:22:47.917+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-7] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.moviesite.mysite.controller.TheaterController#getAllTheaters(String, String, Pageable)
+2025-10-22T17:22:47.919+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-7] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/yaml]
+2025-10-22T17:22:47.920+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-7] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [ApiResponse(status=200, message=요청이 성공적으로 처리되었습니다., data=Page 1 of 1 containing com.moviesite.mysite (truncated)...]
+2025-10-22T17:22:47.920+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-10-22T17:23:04.236+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-8] o.s.web.servlet.DispatcherServlet        : GET "/api/theaters", parameters={}
+2025-10-22T17:23:04.236+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-8] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.moviesite.mysite.controller.TheaterController#getAllTheaters(String, String, Pageable)
+2025-10-22T17:23:04.238+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-8] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/yaml]
+2025-10-22T17:23:04.238+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-8] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [ApiResponse(status=200, message=요청이 성공적으로 처리되었습니다., data=Page 1 of 1 containing com.moviesite.mysite (truncated)...]
+2025-10-22T17:23:04.239+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-8] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-10-22T17:23:04.240+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-10] o.s.web.servlet.DispatcherServlet        : GET "/api/theaters", parameters={}
+2025-10-22T17:23:04.241+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-10] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.moviesite.mysite.controller.TheaterController#getAllTheaters(String, String, Pageable)
+2025-10-22T17:23:04.243+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-10] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/yaml]
+2025-10-22T17:23:04.243+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-10] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [ApiResponse(status=200, message=요청이 성공적으로 처리되었습니다., data=Page 1 of 1 containing com.moviesite.mysite (truncated)...]
+2025-10-22T17:23:04.244+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-10] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-10-22T17:23:25.979+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : GET "/api/theaters", parameters={}
+2025-10-22T17:23:25.979+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-9] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.moviesite.mysite.controller.TheaterController#getAllTheaters(String, String, Pageable)
+2025-10-22T17:23:25.981+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-9] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/yaml]
+2025-10-22T17:23:25.981+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-9] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [ApiResponse(status=200, message=요청이 성공적으로 처리되었습니다., data=Page 1 of 1 containing com.moviesite.mysite (truncated)...]
+2025-10-22T17:23:25.982+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-10-22T17:23:25.983+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : GET "/api/theaters", parameters={}
+2025-10-22T17:23:25.983+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-9] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.moviesite.mysite.controller.TheaterController#getAllTheaters(String, String, Pageable)
+2025-10-22T17:23:25.985+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-9] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/yaml]
+2025-10-22T17:23:25.985+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-9] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [ApiResponse(status=200, message=요청이 성공적으로 처리되었습니다., data=Page 1 of 1 containing com.moviesite.mysite (truncated)...]
+2025-10-22T17:23:25.986+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-10-22T17:24:40.584+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : GET "/api/theaters", parameters={}
+2025-10-22T17:24:40.584+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-5] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.moviesite.mysite.controller.TheaterController#getAllTheaters(String, String, Pageable)
+2025-10-22T17:24:40.586+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-5] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/yaml]
+2025-10-22T17:24:40.586+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-5] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [ApiResponse(status=200, message=요청이 성공적으로 처리되었습니다., data=Page 1 of 1 containing com.moviesite.mysite (truncated)...]
+2025-10-22T17:24:40.587+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-10-22T17:24:40.589+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-4] o.s.web.servlet.DispatcherServlet        : GET "/api/theaters", parameters={}
+2025-10-22T17:24:40.589+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-4] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.moviesite.mysite.controller.TheaterController#getAllTheaters(String, String, Pageable)
+2025-10-22T17:24:40.591+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-4] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/yaml]
+2025-10-22T17:24:40.591+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-4] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [ApiResponse(status=200, message=요청이 성공적으로 처리되었습니다., data=Page 1 of 1 containing com.moviesite.mysite (truncated)...]
+2025-10-22T17:24:40.591+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-4] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-10-22T17:26:42.812+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-8] o.s.web.servlet.DispatcherServlet        : GET "/api/theaters", parameters={}
+2025-10-22T17:26:42.813+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-8] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.moviesite.mysite.controller.TheaterController#getAllTheaters(String, String, Pageable)
+2025-10-22T17:26:42.815+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-8] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/yaml]
+2025-10-22T17:26:42.815+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-8] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [ApiResponse(status=200, message=요청이 성공적으로 처리되었습니다., data=Page 1 of 1 containing com.moviesite.mysite (truncated)...]
+2025-10-22T17:26:42.815+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-8] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-10-22T17:26:42.817+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-10] o.s.web.servlet.DispatcherServlet        : GET "/api/theaters", parameters={}
+2025-10-22T17:26:42.817+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-10] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.moviesite.mysite.controller.TheaterController#getAllTheaters(String, String, Pageable)
+2025-10-22T17:26:42.819+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-10] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/yaml]
+2025-10-22T17:26:42.819+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-10] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [ApiResponse(status=200, message=요청이 성공적으로 처리되었습니다., data=Page 1 of 1 containing com.moviesite.mysite (truncated)...]
+2025-10-22T17:26:42.820+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-10] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-10-22T17:26:47.695+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : GET "/api/theaters", parameters={}
+2025-10-22T17:26:47.695+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-1] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.moviesite.mysite.controller.TheaterController#getAllTheaters(String, String, Pageable)
+2025-10-22T17:26:47.698+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/yaml]
+2025-10-22T17:26:47.698+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [ApiResponse(status=200, message=요청이 성공적으로 처리되었습니다., data=Page 1 of 1 containing com.moviesite.mysite (truncated)...]
+2025-10-22T17:26:47.698+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-10-22T17:26:47.700+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : GET "/api/theaters", parameters={}
+2025-10-22T17:26:47.700+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-9] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.moviesite.mysite.controller.TheaterController#getAllTheaters(String, String, Pageable)
+2025-10-22T17:26:47.701+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-9] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/yaml]
+2025-10-22T17:26:47.702+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-9] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [ApiResponse(status=200, message=요청이 성공적으로 처리되었습니다., data=Page 1 of 1 containing com.moviesite.mysite (truncated)...]
+2025-10-22T17:26:47.702+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-10-22T17:31:42.740+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : GET "/api/theaters", parameters={}
+2025-10-22T17:31:42.740+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-5] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.moviesite.mysite.controller.TheaterController#getAllTheaters(String, String, Pageable)
+2025-10-22T17:31:42.744+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-5] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/yaml]
+2025-10-22T17:31:42.744+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-5] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [ApiResponse(status=200, message=요청이 성공적으로 처리되었습니다., data=Page 1 of 1 containing com.moviesite.mysite (truncated)...]
+2025-10-22T17:31:42.746+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-10-22T17:31:42.748+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-4] o.s.web.servlet.DispatcherServlet        : GET "/api/theaters", parameters={}
+2025-10-22T17:31:42.748+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-4] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.moviesite.mysite.controller.TheaterController#getAllTheaters(String, String, Pageable)
+2025-10-22T17:31:42.750+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-4] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/yaml]
+2025-10-22T17:31:42.751+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-4] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [ApiResponse(status=200, message=요청이 성공적으로 처리되었습니다., data=Page 1 of 1 containing com.moviesite.mysite (truncated)...]
+2025-10-22T17:31:42.751+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-4] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-10-22T17:31:49.184+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-6] o.s.web.servlet.DispatcherServlet        : GET "/api/theaters", parameters={}
+2025-10-22T17:31:49.184+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-6] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.moviesite.mysite.controller.TheaterController#getAllTheaters(String, String, Pageable)
+2025-10-22T17:31:49.187+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-6] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/yaml]
+2025-10-22T17:31:49.187+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-6] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [ApiResponse(status=200, message=요청이 성공적으로 처리되었습니다., data=Page 1 of 1 containing com.moviesite.mysite (truncated)...]
+2025-10-22T17:31:49.187+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-6] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-10-22T17:31:49.189+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : GET "/api/theaters", parameters={}
+2025-10-22T17:31:49.189+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-7] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.moviesite.mysite.controller.TheaterController#getAllTheaters(String, String, Pageable)
+2025-10-22T17:31:49.192+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-7] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/yaml]
+2025-10-22T17:31:49.192+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-7] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [ApiResponse(status=200, message=요청이 성공적으로 처리되었습니다., data=Page 1 of 1 containing com.moviesite.mysite (truncated)...]
+2025-10-22T17:31:49.193+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-10-22T17:33:31.041+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : GET "/api/theaters", parameters={}
+2025-10-22T17:33:31.041+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-1] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.moviesite.mysite.controller.TheaterController#getAllTheaters(String, String, Pageable)
+2025-10-22T17:33:31.043+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/yaml]
+2025-10-22T17:33:31.043+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [ApiResponse(status=200, message=요청이 성공적으로 처리되었습니다., data=Page 1 of 1 containing com.moviesite.mysite (truncated)...]
+2025-10-22T17:33:31.044+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-10-22T17:33:31.046+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : GET "/api/theaters", parameters={}
+2025-10-22T17:33:31.046+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-9] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.moviesite.mysite.controller.TheaterController#getAllTheaters(String, String, Pageable)
+2025-10-22T17:33:31.049+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-9] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/yaml]
+2025-10-22T17:33:31.050+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-9] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [ApiResponse(status=200, message=요청이 성공적으로 처리되었습니다., data=Page 1 of 1 containing com.moviesite.mysite (truncated)...]
+2025-10-22T17:33:31.052+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : Completed 200 OK

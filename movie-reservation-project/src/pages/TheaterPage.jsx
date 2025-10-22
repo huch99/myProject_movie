@@ -16,7 +16,7 @@ const TheaterPage = () => {
   useScrollToTop();
 
   const dispatch = useDispatch();
-  const { theaters, regions, selectedRegion, loading, error } = useSelector((state) => state.theaters);
+  const { theaters, location, selectedRegion, loading, error } = useSelector((state) => state.theaters);
   const [searchQuery, setSearchQuery] = useState('');
   const [filteredTheaters, setFilteredTheaters] = useState([]);
   const [viewMode, setViewMode] = useState('list'); // 'list' 또는 'map'
@@ -28,13 +28,14 @@ const TheaterPage = () => {
 
   // 검색어나 선택된 지역이 변경될 때 극장 목록 필터링
   useEffect(() => {
+
     if (!theaters) return;
 
     let filtered = [...theaters];
 
     // 지역으로 필터링
     if (selectedRegion && selectedRegion !== '전체') {
-      filtered = filtered.filter(theater => theater.region === selectedRegion);
+      filtered = filtered.filter(theater => theater.location === selectedRegion);
     }
 
     // 검색어로 필터링
@@ -45,13 +46,13 @@ const TheaterPage = () => {
         theater.address.toLowerCase().includes(query)
       );
     }
-
+    console.log('filtered',filtered);
     setFilteredTheaters(filtered);
   }, [theaters, selectedRegion, searchQuery]);
 
   // 지역 선택 핸들러
-  const handleRegionSelect = (region) => {
-    dispatch(selectRegion(region));
+  const handleRegionSelect = (location) => {
+    dispatch(selectRegion(location));
   };
 
   // 검색어 변경 핸들러
@@ -100,7 +101,7 @@ const TheaterPage = () => {
 
       <RegionSection>
         <RegionSelector
-          regions={['전체', ...regions]}
+          locations={['전체', ...location]}
           selectedRegion={selectedRegion || '전체'}
           onSelectRegion={handleRegionSelect}
         />
@@ -165,10 +166,10 @@ const FavoriteTheaters = () => {
   return (
     <HorizontalScroll>
       {favoriteTheaters.map(theater => (
-        <TheaterItem key={theater.id}>
-          <Link to={`/theaters/${theater.id}`}>
+        <TheaterItem key={theater.theaterId}>
+          <Link to={`/theaters/${theater.theaterId}`}>
             <TheaterName>{theater.name}</TheaterName>
-            <TheaterRegion>{theater.region}</TheaterRegion>
+            <TheaterRegion>{theater.location}</TheaterRegion>
           </Link>
         </TheaterItem>
       ))}
@@ -194,7 +195,7 @@ const RecentTheaters = () => {
         <TheaterItem key={theater.id}>
           <Link to={`/theaters/${theater.id}`}>
             <TheaterName>{theater.name}</TheaterName>
-            <TheaterRegion>{theater.region}</TheaterRegion>
+            <TheaterRegion>{theater.location}</TheaterRegion>
           </Link>
         </TheaterItem>
       ))}

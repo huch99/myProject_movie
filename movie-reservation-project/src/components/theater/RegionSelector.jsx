@@ -2,18 +2,18 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import styled from 'styled-components';
 
-const RegionSelector = ({ regions, selectedRegion, onSelectRegion }) => {
+const RegionSelector = ({ locations, selectedRegion, onSelectRegion }) => {
     return (
         <SelectorContainer>
             <SelectorTitle>지역 선택</SelectorTitle>
             <RegionList>
-                {regions.map((region) => (
+                {locations.map((location) => (
                     <RegionItem
-                        key={region}
-                        $isSelected={region === selectedRegion}
-                        onClick={() => onSelectRegion(region)}
+                        key={location}
+                        $isSelected={location === selectedRegion}
+                        onClick={() => onSelectRegion(location)}
                     >
-                        {region}
+                        {location}
                     </RegionItem>
                 ))}
             </RegionList>
@@ -22,7 +22,7 @@ const RegionSelector = ({ regions, selectedRegion, onSelectRegion }) => {
 };
 
 RegionSelector.propTypes = {
-  regions: PropTypes.arrayOf(PropTypes.string).isRequired,
+  locations: PropTypes.arrayOf(PropTypes.string).isRequired,
   selectedRegion: PropTypes.string.isRequired,
   onSelectRegion: PropTypes.func.isRequired
 };

@@ -19,7 +19,7 @@ const TheaterCard = ({ theater, compact = false }) => {
     // 간소화된 카드 렌더링
     if (compact) {
         return (
-            <CompactCardContainer to={ROUTE_PATHS.THEATER_DETAIL(theater.id)}>
+            <CompactCardContainer to={ROUTE_PATHS.THEATER_DETAIL(theater.theaterId)}>
                 <CompactCardHeader>
                     <CompactTheaterName>{theater.name}</CompactTheaterName>
                     <RegionBadge>{theater.region}</RegionBadge>
@@ -34,10 +34,10 @@ const TheaterCard = ({ theater, compact = false }) => {
 
     // 기본 카드 렌더링
     return (
-        <CardContainer to={ROUTE_PATHS.THEATER_DETAIL(theater.id)}>
+        <CardContainer to={ROUTE_PATHS.THEATER_DETAIL(theater.theaterId)}>
             <CardHeader>
                 <TheaterName>{theater.name}</TheaterName>
-                <RegionBadge>{theater.region}</RegionBadge>
+                <RegionBadge>{theater.location}</RegionBadge>
             </CardHeader>
 
             <CardContent>
@@ -48,23 +48,23 @@ const TheaterCard = ({ theater, compact = false }) => {
                     <InfoText>{theater.address}</InfoText>
                 </InfoItem>
 
-                {theater.phoneNumber && (
+                {theater.phone && (
                     <InfoItem>
                         <InfoIcon>
                             <FaPhone />
                         </InfoIcon>
-                        <InfoText>{theater.phoneNumber}</InfoText>
+                        <InfoText>{theater.phone}</InfoText>
                     </InfoItem>
                 )}
 
-                {theater.totalScreens && (
+                {/* {theater.totalScreens && (
                     <InfoItem>
                         <InfoIcon>
                             <FaFilm />
                         </InfoIcon>
                         <InfoText>{theater.totalScreens}개 상영관</InfoText>
                     </InfoItem>
-                )}
+                )} */}
             </CardContent>
 
             <CardFooter>
@@ -198,11 +198,11 @@ const CompactCardAddress = styled.div`
 
 TheaterCard.propTypes = {
     theater: PropTypes.shape({
-        id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+        theaterId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
         name: PropTypes.string.isRequired,
-        region: PropTypes.string.isRequired,
+        location: PropTypes.string.isRequired,
         address: PropTypes.string.isRequired,
-        phoneNumber: PropTypes.string,
+        phone: PropTypes.string,
         totalScreens: PropTypes.number
     }).isRequired,
     compact: PropTypes.bool

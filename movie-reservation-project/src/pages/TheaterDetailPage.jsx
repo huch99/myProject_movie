@@ -25,7 +25,7 @@ const TheaterDetailPage = () => {
     // 스크롤을 맨 위로 이동
     useScrollToTop();
 
-    const { id } = useParams();
+    const { theaterId } = useParams();
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
@@ -37,19 +37,21 @@ const TheaterDetailPage = () => {
 
     // 페이지 로드 시 극장 상세 정보 가져오기
     useEffect(() => {
-        if (id) {
-            dispatch(fetchTheaterDetails(id));
-            dispatch(fetchTheaterScreens(id));
+        console.log('fetch 시작');
+        if (theaterId) {
+            
+            dispatch(fetchTheaterDetails(theaterId));
+            dispatch(fetchTheaterScreens(theaterId));
         }
-    }, [dispatch, id]);
+    }, [dispatch, theaterId]);
 
     // 날짜 변경 시 상영 일정 가져오기
     useEffect(() => {
-        if (id && selectedDate) {
+        if (theaterId && selectedDate) {
             const formattedDate = dateUtils.formatDate(selectedDate);
-            dispatch(fetchTheaterSchedules({ theaterId: id, date: formattedDate }));
+            dispatch(fetchTheaterSchedules({ theaterId: theaterId, date: formattedDate }));
         }
-    }, [dispatch, id, selectedDate]);
+    }, [dispatch, theaterId, selectedDate]);
 
     // 상영 가능한 날짜 설정 (오늘부터 7일)
     useEffect(() => {
@@ -60,17 +62,17 @@ const TheaterDetailPage = () => {
     // 즐겨찾기 상태 확인
     useEffect(() => {
         if (currentTheater && favoriteTheaters) {
-            const isTheaterFavorite = favoriteTheaters.some(theater => theater.id === parseInt(id));
+            const isTheaterFavorite = favoriteTheaters.some(theater => theater.theaterId === parseInt(theaterId));
             setIsFavorite(isTheaterFavorite);
         }
-    }, [currentTheater, favoriteTheaters, id]);
+    }, [currentTheater, favoriteTheaters, theaterId]);
 
     // 즐겨찾기 토글 핸들러
     const handleFavoriteToggle = () => {
         if (!currentTheater) return;
 
         if (isFavorite) {
-            dispatch(removeFavoriteTheater(parseInt(id)));
+            dispatch(removeFavoriteTheater(parseInt(theaterId)));
         } else {
             dispatch(addFavoriteTheater(currentTheater));
         }

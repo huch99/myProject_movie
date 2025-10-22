@@ -17,23 +17,14 @@ const initialState = {
     searchResults: [],
     searchLoading: false,
     searchError: null,
-    regions: [],
+    lotation: [],
     selectedRegion: null,
 };
 
 // 모든 극장 목록 가져오기
 export const fetchTheaters = createAsyncThunk(
     'theaters/fetchTheaters',
-    async (_, { getState, rejectWithValue }) => {
-        // Redux 스토어에서 현재 theaters 상태를 가져옴
-        const { theaters } = getState().theaters;
-
-        // 이미 데이터가 존재하고 비어있지 않다면, 새로운 요청을 보내지 않음
-        if (theaters && theaters.length > 0) {
-            console.log('fetchTheaters: 이미 데이터 존재, 요청 생략');
-            return { content: theaters }; // 기존 데이터를 그대로 반환
-        }
-
+    async (_, { rejectWithValue }) => {
         try {
             const response = await api.get('/theaters');
             return response.data;

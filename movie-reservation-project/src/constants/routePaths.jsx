@@ -25,7 +25,7 @@ const ROUTE_PATHS = {
   
   // 극장 관련
   THEATERS: '/theaters',
-  THEATER_DETAIL: (theaterId = ':id') => `/theaters/${theaterId}`,
+  THEATER_DETAIL: (theaterId = ':theaterId') => `/theaters/${theaterId}`,
   
   // 예매 관련
   RESERVATION: (movieId = ':movieId') => `/reservation/${movieId}`,

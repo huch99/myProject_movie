@@ -41,9 +41,9 @@ public class TheaterController {
     }
 
     // 특정 극장 상세 정보 조회
-    @GetMapping("/{id}")
-    public ResponseEntity<ApiResponse<TheaterResponse>> getTheaterById(@PathVariable Long id) {
-        TheaterResponse theater = theaterService.getTheaterById(id);
+    @GetMapping("/{theaterId}")
+    public ResponseEntity<ApiResponse<TheaterResponse>> getTheaterById(@PathVariable Long theaterId) {
+        TheaterResponse theater = theaterService.getTheaterById(theaterId);
         return ResponseEntity.ok(ApiResponse.success(theater));
     }
 
