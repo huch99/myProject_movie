@@ -14,7 +14,7 @@ import TheaterInfo from '../components/theater/TheaterInfo';
 import TheaterSchedule from '../components/theater/TheaterSchedule';
 import TheaterMap from '../components/theater/TheaterMap';
 import TheaterFacilities from '../components/theater/TheaterFacilities';
-import DateSelector from '../components/common/DateSelector';
+// import DateSelector from '../components/common/DateSelector';
 import Button from '../components/common/Button';
 import Loading from '../components/common/Loading';
 import useScrollToTop from '../hooks/useScrollToTop';
@@ -122,7 +122,7 @@ const TheaterDetailPage = () => {
                         <TheaterAddress>{currentTheater.address}</TheaterAddress>
 
                         <TheaterMetaInfo>
-                            <span>{currentTheater.phoneNumber}</span>
+                            <span>{currentTheater.phone}</span>
                             <Divider>|</Divider>
                             <span>{currentTheater.totalScreens}개 상영관</span>
                             <Divider>|</Divider>

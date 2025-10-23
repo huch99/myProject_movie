@@ -8,7 +8,7 @@ import RegisterPage from './pages/RegisterPage';
 import MovieDetail from './components/movie/MovieDetail';
 import MoviePage from './pages/MoviePage';
 import TheaterPage from './pages/TheaterPage';
-import TheaterDetail from './components/theater/TheaterDetail';
+import TheaterDetailPage from './pages/TheaterDetailPage';
 import ReservationPage from './pages/ReservationPage';
 import PaymentPage from './pages/PaymentPage';
 import PaymentCompletePage from './pages/PaymentCompletePage';
@@ -49,7 +49,7 @@ const AppRouter = () => {
           
           {/* 극장 관련 페이지 */}
           <Route path={ROUTE_PATHS.THEATERS} element={<TheaterPage />} />
-          <Route path={ROUTE_PATHS.THEATER_DETAIL(':theaterId')} element={<TheaterDetail />} />
+          <Route path={ROUTE_PATHS.THEATER_DETAIL(':theaterId')} element={<TheaterDetailPage />} />
           
           {/* 예매 관련 페이지 */}
           <Route 

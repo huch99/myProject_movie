@@ -17,11 +17,11 @@ const theaterService = {
 
   /**
    * 특정 ID의 극장 상세 정보를 가져옵니다
-   * @param {number} id - 극장 ID
+   * @param {number} screenId - 극장 ID
    * @returns {Promise} 극장 상세 정보 응답
    */
-  getTheaterById: (id) => {
-    return api.theaters.getById(id);
+  getTheaterById: (screenId) => {
+    return api.theaters.getByScreenId(screenId);
   },
 
   /**
