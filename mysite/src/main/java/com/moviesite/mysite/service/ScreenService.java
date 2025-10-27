@@ -4,6 +4,7 @@ import com.moviesite.mysite.model.dto.request.ScreenRequest;
 import com.moviesite.mysite.exception.BadRequestException;
 import com.moviesite.mysite.exception.ResourceNotFoundException;
 import com.moviesite.mysite.model.dto.response.ScreenResponse;
+import com.moviesite.mysite.model.dto.response.TheaterResponse;
 import com.moviesite.mysite.model.entity.Screen;
 import com.moviesite.mysite.model.entity.Theater;
 import com.moviesite.mysite.model.entity.User;
@@ -11,6 +12,9 @@ import com.moviesite.mysite.repository.ScreenRepository;
 import com.moviesite.mysite.repository.TheaterRepository;
 import com.moviesite.mysite.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -141,4 +145,15 @@ public class ScreenService {
         return userRepository.findByEmail(email)
                 .orElseThrow(() -> new ResourceNotFoundException("User not found with email: " + email));
     }
+
+	public Page<ScreenResponse> getAllScreens(String name, Pageable pageable) {
+		Page<Screen> screens;
+		
+		if (name != null && !name.trim().isEmpty()) {
+			screens = screenRepository.findByNameContaining(name, pageable);
+		} else {
+			screens = screenRepository.findAll(pageable);
+		}
+		return screens.map(ScreenResponse::fromEntity);
+	}
 }

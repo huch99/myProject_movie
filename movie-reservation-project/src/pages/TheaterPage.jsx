@@ -46,7 +46,6 @@ const TheaterPage = () => {
         theater.address.toLowerCase().includes(query)
       );
     }
-    console.log('filtered',filtered);
     setFilteredTheaters(filtered);
   }, [theaters, selectedRegion, searchQuery]);
 

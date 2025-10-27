@@ -51,4 +51,6 @@ public interface ScreenRepository extends JpaRepository<Screen, Long> {
     // 특정 극장에서 가장 큰 좌석 수를 가진 상영관 조회
     @Query("SELECT s FROM Screen s WHERE s.theater.id = :theaterId ORDER BY s.seatsCount DESC")
     List<Screen> findLargestScreenByTheaterId(@Param("theaterId") Long theaterId, Pageable pageable);
+    
+    Page<Screen> findByNameContaining(String name, Pageable pageable);
 }

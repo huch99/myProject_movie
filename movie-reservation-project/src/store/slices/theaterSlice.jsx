@@ -2,7 +2,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import theaterService from '../../services/theaterService';
 import apiService, { api } from '../../services/api';
-// import api from '../../services/api';
 
 // 초기 상태 정의
 const initialState = {
@@ -17,7 +16,7 @@ const initialState = {
     searchResults: [],
     searchLoading: false,
     searchError: null,
-    lotation: [],
+    location: [],
     selectedRegion: null,
 };
 

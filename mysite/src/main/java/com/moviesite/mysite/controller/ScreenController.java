@@ -3,8 +3,12 @@ package com.moviesite.mysite.controller;
 import com.moviesite.mysite.model.dto.request.ScreenRequest;
 import com.moviesite.mysite.model.dto.response.ApiResponse;
 import com.moviesite.mysite.model.dto.response.ScreenResponse;
+import com.moviesite.mysite.model.dto.response.TheaterResponse;
 import com.moviesite.mysite.service.ScreenService;
 import lombok.RequiredArgsConstructor;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -19,6 +23,14 @@ import java.util.List;
 public class ScreenController {
 
     private final ScreenService screenService;
+    
+    @GetMapping
+    public ResponseEntity<ApiResponse<Page<ScreenResponse>>> getAllScreens(
+    		@RequestParam(name = "name", required = false) String name,
+            Pageable pageable) {
+        Page<ScreenResponse> screens = screenService.getAllScreens(name, pageable);
+        return ResponseEntity.ok(ApiResponse.success(screens));
+    }
 
     // 특정 극장의 모든 상영관 조회
     @GetMapping("/theater/{theaterId}")
@@ -28,7 +40,7 @@ public class ScreenController {
     }
 
     // 특정 상영관 상세 조회
-    @GetMapping("/{id}")
+    @GetMapping("/{theaterId}")
     public ResponseEntity<ApiResponse<ScreenResponse>> getScreenById(@PathVariable Long id) {
         ScreenResponse screen = screenService.getScreenById(id);
         return ResponseEntity.ok(ApiResponse.success(screen));
