@@ -19840,3 +19840,9 @@ java.lang.IllegalArgumentException: Name for argument of type [java.lang.Long] n
 2025-10-22T17:33:31.049+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-9] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/yaml]
 2025-10-22T17:33:31.050+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-9] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [ApiResponse(status=200, message=요청이 성공적으로 처리되었습니다., data=Page 1 of 1 containing com.moviesite.mysite (truncated)...]
 2025-10-22T17:33:31.052+09:00 DEBUG 5376 --- [mysite] [http-nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-10-22T17:40:33.783+09:00  INFO 5376 --- [mysite] [RMI TCP Connection(200)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
+2025-10-22T17:40:33.784+09:00  INFO 5376 --- [mysite] [RMI TCP Connection(200)-127.0.0.1] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-10-22T17:40:33.785+09:00  INFO 5376 --- [mysite] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-10-22T17:40:33.788+09:00  INFO 5376 --- [mysite] [RMI TCP Connection(200)-127.0.0.1] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-10-22T17:40:33.788+09:00  INFO 5376 --- [mysite] [RMI TCP Connection(200)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-15 - Shutdown initiated...
+2025-10-22T17:40:33.789+09:00  INFO 5376 --- [mysite] [RMI TCP Connection(200)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-15 - Shutdown completed.
