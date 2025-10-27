@@ -59,12 +59,21 @@ public class ScreeningService {
 
     // 특정 극장의 상영 정보 조회
     public List<ScreeningResponse> getScreeningsByTheater(Long theaterId, LocalDate date) {
-        List<Screening> screenings = screeningRepository.findByScreenTheaterIdAndStatusAndScreeningDateOrderByScreeningTimeAsc(
-                theaterId, Screening.ScreeningStatus.ACTIVE, date);
+        try {
+        	List<Screening> screenings = screeningRepository.findScreeningsByTheaterAndDate(
+                    theaterId, Screening.ScreeningStatus.ACTIVE, date);
 
-        return screenings.stream()
-                .map(ScreeningResponse::fromEntity)
-                .collect(Collectors.toList());
+            return screenings.stream()
+                    .map(ScreeningResponse::fromEntity)
+                    .collect(Collectors.toList());
+		} catch (Exception e) {
+			 System.out.println("=========================================");
+	            System.out.println("ScreenService.getScreeningsByTheater 오류 발생!");
+	            e.printStackTrace(); // 이 줄을 추가해서 콘솔에 스택 트레이스를 찍어봅니다.
+	            System.out.println("=========================================");
+	            throw new RuntimeException("극장 ID로 상영관 조회 중 서비스 오류 발생", e);
+		}
+    	
     }
 
     // 특정 스케줄의 상영 정보 조회

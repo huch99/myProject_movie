@@ -57,10 +57,10 @@ const MovieList = ({
     // 영화 데이터 및 필터링 처리
     useEffect(() => {
         try {
-            setFilteredMovies(movies.data.content);
-            // 페이지네이션 처리 (필요한 경우)
-            // const calculatedTotalPages = Math.ceil(movies.content.length / moviesPerPage);
-            // setTotalPages(calculatedTotalPages);
+            
+            if (movies.data) {
+                setFilteredMovies(movies.data.content);
+            } 
 
         } catch (error) {
             console.log('실행 실패', error);

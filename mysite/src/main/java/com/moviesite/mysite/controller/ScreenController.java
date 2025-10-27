@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
 import java.util.List;
 
@@ -33,15 +34,25 @@ public class ScreenController {
     }
 
     // 특정 극장의 모든 상영관 조회
-    @GetMapping("/theater/{theaterId}")
-    public ResponseEntity<ApiResponse<List<ScreenResponse>>> getScreensByTheaterId(@PathVariable Long theaterId) {
-        List<ScreenResponse> screens = screenService.getScreensByTheaterId(theaterId);
-        return ResponseEntity.ok(ApiResponse.success(screens));
+    @GetMapping("/theaters/{theaterId}")
+    public ResponseEntity<ApiResponse<List<ScreenResponse>>> getScreensByTheaterId(@PathVariable("theaterId") Long theaterId) {
+                
+        try {
+        	List<ScreenResponse> screens = screenService.getScreensByTheaterId(theaterId);
+            return ResponseEntity.ok(ApiResponse.success(screens));
+        } catch (EntityNotFoundException e) {
+        	return ResponseEntity.status(HttpStatus.NOT_FOUND)
+        			.body(ApiResponse.error(e.getMessage()));
+        } catch (Exception e) {
+        	return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+        			.body(ApiResponse.error("서버 내부 오류가 발생했습니다."));
+        }
+        
     }
 
     // 특정 상영관 상세 조회
-    @GetMapping("/{theaterId}")
-    public ResponseEntity<ApiResponse<ScreenResponse>> getScreenById(@PathVariable Long id) {
+    @GetMapping("/{screenId}")
+    public ResponseEntity<ApiResponse<ScreenResponse>> getScreenById(@PathVariable("screenId") Long id) {
         ScreenResponse screen = screenService.getScreenById(id);
         return ResponseEntity.ok(ApiResponse.success(screen));
     }

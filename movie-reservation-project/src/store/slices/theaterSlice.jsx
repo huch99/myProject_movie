@@ -52,12 +52,12 @@ export const fetchTheaterDetails = createAsyncThunk(
     async (theaterId, { rejectWithValue }) => {
         try {
             const response = await theaterService.getTheaterById(theaterId);
-
             // 최근 방문 극장에 추가
             theaterService.addRecentTheater(response.data);
 
             return response.data;
         } catch (error) {
+            console.log(error.message);
             return rejectWithValue(error.response?.data?.message || '극장 상세 정보를 불러오는데 실패했습니다.');
         }
     }
@@ -71,23 +71,26 @@ export const fetchTheaterScreens = createAsyncThunk(
             const response = await theaterService.getTheaterScreens(theaterId);
             return response.data;
         } catch (error) {
+            console.log(error.message);
             return rejectWithValue(error.response?.data?.message || '상영관 정보를 불러오는데 실패했습니다.');
         }
     }
 );
 
 // 극장 상영 일정 가져오기
-export const fetchTheaterSchedules = createAsyncThunk(
-    'theaters/fetchTheaterSchedules',
-    async ({ theaterId, date }, { rejectWithValue }) => {
-        try {
-            const response = await theaterService.getTheaterSchedules(theaterId, date);
-            return response.data;
-        } catch (error) {
-            return rejectWithValue(error.response?.data?.message || '상영 일정을 불러오는데 실패했습니다.');
-        }
-    }
-);
+// export const fetchTheaterSchedules = createAsyncThunk(
+//     'theaters/fetchTheaterSchedules',
+//     async ({ theaterId, date }, { rejectWithValue }) => {
+//         try {
+//             const response = await theaterService.getTheaterSchedules(theaterId, date);
+//             console.log(response.data);
+//             return response.data;
+//         } catch (error) {
+//             console.log(error.message);
+//             return rejectWithValue(error.response?.data?.message || '상영 일정을 불러오는데 실패했습니다.');
+//         }
+//     }
+// );
 
 // 극장 검색하기
 export const searchTheaters = createAsyncThunk(
@@ -225,18 +228,18 @@ const theaterSlice = createSlice({
             })
 
             // 극장 상영 일정 처리
-            .addCase(fetchTheaterSchedules.pending, (state) => {
-                state.loading = true;
-                state.error = null;
-            })
-            .addCase(fetchTheaterSchedules.fulfilled, (state, action) => {
-                state.loading = false;
-                state.schedules = action.payload;
-            })
-            .addCase(fetchTheaterSchedules.rejected, (state, action) => {
-                state.loading = false;
-                state.error = action.payload;
-            })
+            // .addCase(fetchTheaterSchedules.pending, (state) => {
+            //     state.loading = true;
+            //     state.error = null;
+            // })
+            // .addCase(fetchTheaterSchedules.fulfilled, (state, action) => {
+            //     state.loading = false;
+            //     state.schedules = action.payload;
+            // })
+            // .addCase(fetchTheaterSchedules.rejected, (state, action) => {
+            //     state.loading = false;
+            //     state.error = action.payload;
+            // })
 
             // 극장 검색 처리
             .addCase(searchTheaters.pending, (state) => {

@@ -1,6 +1,10 @@
 package com.moviesite.mysite.service;
 
 import lombok.RequiredArgsConstructor;
+
+import org.hibernate.service.spi.ServiceException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -13,6 +17,8 @@ import com.moviesite.mysite.model.dto.response.TheaterResponse;
 import com.moviesite.mysite.model.entity.Theater;
 import com.moviesite.mysite.repository.TheaterRepository;
 
+import jakarta.persistence.EntityNotFoundException;
+
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -24,6 +30,8 @@ public class TheaterService {
 
 	private final TheaterRepository theaterRepository;
     private final FileService fileService;
+    
+    private static final Logger log = LoggerFactory.getLogger(TheaterService.class);
 
     // 모든 극장 목록 조회 (페이징 처리)
     public Page<TheaterResponse> getAllTheaters(String name, String location, Pageable pageable) {
@@ -53,8 +61,17 @@ public class TheaterService {
 
     // 특정 극장 상세 정보 조회
     public TheaterResponse getTheaterById(Long theaterId) {
-        Theater theater = findTheaterById(theaterId);
-        return TheaterResponse.fromEntity(theater);
+    	try {
+    		Theater theater = findTheaterById(theaterId);
+    		if (theater == null) {
+    			throw new EntityNotFoundException("ID가 " + theaterId + "인 극장을 찾을 수 없습니다.");
+    		}
+    		return TheaterResponse.fromEntity(theater);
+    	} catch (Exception e) {
+    		throw new ServiceException("극장 정보를 조회하는 중 오류가 발생했습니다.", e);
+    	}
+//        Theater theater = findTheaterById(theaterId);
+//        return TheaterResponse.fromEntity(theater);
     }
 
     // 극장 검색
@@ -141,9 +158,9 @@ public class TheaterService {
     }
     
     // 극장 엔티티 조회 (내부 메서드)
-    private Theater findTheaterById(Long id) {
-        return theaterRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Theater not found with id: " + id));
+    private Theater findTheaterById(Long theaterId) {
+        return theaterRepository.findById(theaterId)
+                .orElseThrow(() -> new ResourceNotFoundException("Theater not found with id: " + theaterId));
     }
     
     // 극장 엔티티 업데이트 (내부 메서드)

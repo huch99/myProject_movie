@@ -70,7 +70,7 @@ public interface ScheduleRepository extends JpaRepository<Schedule, Long> {
 
 	// 특정 날짜, 특정 극장에서 상영하는 영화 목록 조회
 	@Query("SELECT DISTINCT s.movie FROM Schedule s JOIN s.screen scr WHERE scr.theater.id = :theaterId AND DATE(s.startTime) = :date")
-	List<Schedule> findMoviesByTheaterAndDate(@Param("theaterId") Long theaterId, @Param("date") LocalDate date);
+	List<Schedule> findMoviesByTheaterIdAndDate(@Param("theaterId") Long theaterId, @Param("date") LocalDate date);
 
 	// 특정 상영관의 향후 상영 일정 조회
 	List<Schedule> findByScreenIdAndStartTimeAfterOrderByStartTime(Long screenId, LocalDateTime startTime);

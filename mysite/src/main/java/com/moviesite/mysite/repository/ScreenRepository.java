@@ -15,10 +15,10 @@ import java.util.List;
 public interface ScreenRepository extends JpaRepository<Screen, Long> {
 
 	// 특정 극장의 모든 상영관 조회
-    List<Screen> findByTheaterId(Long theaterId);
+    List<Screen> findByTheater_Id(Long theaterId);
     
     // 특정 극장의 모든 상영관 조회 (페이징 처리)
-    Page<Screen> findByTheaterId(Long theaterId, Pageable pageable);
+    Page<Screen> findByTheater_Id(Long theaterId, Pageable pageable);
     
     // 특정 타입의 상영관 조회
     List<Screen> findByType(String type);

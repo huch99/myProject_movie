@@ -111,8 +111,8 @@ const apiService = {
   // 극장 관련 API
   theaters: {
     getAll: () => api.get('/theaters'),
-    getByScreenId: (screenId) => api.get(`/screens/${screenId}`),
-    getScreens: (theaterId) => api.get(`/screens/${theaterId}`),
+    getByTheaterId: (theaterId) => api.get(`/theaters/${theaterId}`),
+    getScreens: (theaterId) => api.get(`/screens/theaters/${theaterId}`),
     getAllScreens : () => api.get('/screens'),
     getSchedules: (theaterId, date) => api.get(`/theaters/${theaterId}/schedules`, { params: { date } }),
   },

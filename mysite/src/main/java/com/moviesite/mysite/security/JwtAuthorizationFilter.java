@@ -41,6 +41,7 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
     	        "/api/auth/refresh",
     	        "/api/movies",
     	        "/api/theaters",
+    	        "/api/screens",
     	        "/api/screenings",
     	        "/api/events",
     	        "/api/notices",

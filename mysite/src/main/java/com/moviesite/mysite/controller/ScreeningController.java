@@ -23,25 +23,16 @@ public class ScreeningController {
     private final ScreeningService screeningService;
 
     // 특정 영화의 상영 정보 조회
-    @GetMapping("/movie/{movieId}")
+    @GetMapping("/movies/{movieId}")
     public ResponseEntity<ApiResponse<List<ScreeningResponse>>> getScreeningsByMovie(@PathVariable Long movieId) {
         List<ScreeningResponse> screenings = screeningService.getScreeningsByMovie(movieId);
         return ResponseEntity.ok(ApiResponse.success(screenings));
     }
 
     // 특정 상영관의 상영 정보 조회
-    @GetMapping("/screen/{screenId}")
+    @GetMapping("/screens/{screenId}")
     public ResponseEntity<ApiResponse<List<ScreeningResponse>>> getScreeningsByScreen(@PathVariable Long screenId) {
         List<ScreeningResponse> screenings = screeningService.getScreeningsByScreen(screenId);
-        return ResponseEntity.ok(ApiResponse.success(screenings));
-    }
-
-    // 특정 극장의 상영 정보 조회
-    @GetMapping("/theater/{theaterId}")
-    public ResponseEntity<ApiResponse<List<ScreeningResponse>>> getScreeningsByTheater(
-            @PathVariable Long theaterId,
-            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
-        List<ScreeningResponse> screenings = screeningService.getScreeningsByTheater(theaterId, date);
         return ResponseEntity.ok(ApiResponse.success(screenings));
     }
 

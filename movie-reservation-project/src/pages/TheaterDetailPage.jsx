@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import {
     fetchTheaterDetails,
     fetchTheaterScreens,
-    fetchTheaterSchedules,
+    // fetchTheaterSchedules,
     addFavoriteTheater,
     removeFavoriteTheater
 } from '../store/slices/theaterSlice';
@@ -37,21 +37,19 @@ const TheaterDetailPage = () => {
 
     // 페이지 로드 시 극장 상세 정보 가져오기
     useEffect(() => {
-        console.log('fetch 시작');
         if (theaterId) {
-            
             dispatch(fetchTheaterDetails(theaterId));
             dispatch(fetchTheaterScreens(theaterId));
         }
     }, [dispatch, theaterId]);
 
     // 날짜 변경 시 상영 일정 가져오기
-    useEffect(() => {
-        if (theaterId && selectedDate) {
-            const formattedDate = dateUtils.formatDate(selectedDate);
-            dispatch(fetchTheaterSchedules({ theaterId: theaterId, date: formattedDate }));
-        }
-    }, [dispatch, theaterId, selectedDate]);
+    // useEffect(() => {
+    //     if (theaterId && selectedDate) {
+    //         const formattedDate = dateUtils.formatDate(selectedDate);
+    //         dispatch(fetchTheaterSchedules({ theaterId: theaterId, date: formattedDate }));
+    //     }
+    // }, [dispatch, theaterId, selectedDate]);
 
     // 상영 가능한 날짜 설정 (오늘부터 7일)
     useEffect(() => {
@@ -146,12 +144,12 @@ const TheaterDetailPage = () => {
             <ContentSection>
                 {/* 탭 네비게이션 */}
                 <TabsContainer>
-                    <Tab
+                    {/* <Tab
                         active={activeTab === 'schedule'}
                         onClick={() => handleTabSelect('schedule')}
                     >
                         상영시간표
-                    </Tab>
+                    </Tab> */}
                     <Tab
                         active={activeTab === 'info'}
                         onClick={() => handleTabSelect('info')}
@@ -170,11 +168,11 @@ const TheaterDetailPage = () => {
                 {activeTab === 'schedule' && (
                     <TabContent>
                         <DateSelectorWrapper>
-                            <DateSelector
+                            {/* <DateSelector
                                 dates={availableDates}
                                 selectedDate={selectedDate}
                                 onSelectDate={handleDateSelect}
-                            />
+                            /> */}
                         </DateSelectorWrapper>
 
                         <TheaterSchedule

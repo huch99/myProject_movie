@@ -26,9 +26,14 @@ public interface ScreeningRepository extends JpaRepository<Screening, Long> {
     List<Screening> findByScreenIdAndStatusAndScreeningDateAfterOrderByScreeningDateAscScreeningTimeAsc(
             Long screenId, Screening.ScreeningStatus status, LocalDate currentDate);
 
-    // 특정 극장의 특정 날짜 상영 정보 조회
-    List<Screening> findByScreenTheaterIdAndStatusAndScreeningDateOrderByScreeningTimeAsc(
-            Long theaterId, Screening.ScreeningStatus status, LocalDate screeningDate);
+//    // 특정 극장의 특정 날짜 상영 정보 조회
+//    List<Screening> findByScreenTheater_idAndStatusAndScreeningDateOrderByScreeningTimeAsc(
+//            Long theaterId, Screening.ScreeningStatus status, LocalDate screeningDate);
+    @Query("SELECT s FROM Screening s WHERE s.screen.theater.id = :theaterId AND s.status = :status AND s.screeningDate = :date ORDER BY s.screeningTime ASC")
+    List<Screening> findScreeningsByTheaterAndDate(
+            @Param("theaterId") Long theaterId, 
+            @Param("status") Screening.ScreeningStatus status, 
+            @Param("date") LocalDate date);
 
     // 특정 스케줄의 상영 정보 조회
     List<Screening> findByScheduleIdAndStatusOrderByScreeningDateAscScreeningTimeAsc(

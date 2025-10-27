@@ -29,7 +29,7 @@ public class ApiResponse<T> {
     private String errorCode;
     
     // 응답 시간
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime timestamp;
     
     // 성공 응답 생성 (데이터 포함)

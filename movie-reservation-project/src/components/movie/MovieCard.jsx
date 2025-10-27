@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Route } from 'react-router-dom';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { FaStar, FaHeart } from 'react-icons/fa';
@@ -45,7 +45,7 @@ const MovieCard = ({ movie, showRating = true, showReservation = true }) => {
                                 예매하기
                             </ReservationButton>
                         )}
-                        <DetailButton>상세보기</DetailButton>
+                        <DetailButton to={`${ROUTE_PATHS.MOVIE_DETAIL(movie.movieId)}`}>상세보기</DetailButton>
                     </OverlayContent>
                 </CardOverlay>
 
@@ -170,7 +170,7 @@ const ReservationButton = styled(Link)`
   }
 `;
 
-const DetailButton = styled.span`
+const DetailButton = styled(Link)`
   background-color: rgba(255, 255, 255, 0.2);
   color: white;
   padding: var(--spacing-sm) var(--spacing-md);
