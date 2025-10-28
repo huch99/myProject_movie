@@ -18,7 +18,7 @@ const ROUTE_PATHS = {
   
   // 영화 관련
   MOVIES: '/movies',
-  MOVIE_DETAIL: (movieId = ':id') => `/movies/${movieId}`,
+  MOVIE_DETAIL: (movieId = ':movieId') => `/movies/${movieId}`,
   NOW_PLAYING: '/movies/now-playing',
   COMING_SOON: '/movies/coming-soon',
   POPULAR_MOVIES: '/movies/popular',
@@ -28,7 +28,7 @@ const ROUTE_PATHS = {
   THEATER_DETAIL: (theaterId = ':theaterId') => `/theaters/${theaterId}`,
   
   // 예매 관련
-  RESERVATION: (movieId = ':movieId') => `/reservation/${movieId}`,
+  RESERVATION: (movieId = ':movieId') => `/${movieId}/reservations`,
   RESERVATION_DETAIL: (reservationId = ':id') => `/reservations/${reservationId}`,
   
   // 결제 관련

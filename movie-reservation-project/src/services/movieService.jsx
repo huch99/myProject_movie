@@ -43,11 +43,11 @@ const movieService = {
 
   /**
    * 특정 ID의 영화 상세 정보를 가져옵니다
-   * @param {number} id - 영화 ID
+   * @param {number} movieId - 영화 ID
    * @returns {Promise} 영화 상세 정보 응답
    */
-  getMovieById: (id) => {
-    return api.movies.getById(id);
+  getMovieById: (movieId) => {
+    return api.movies.getById(movieId);
   },
 
   /**

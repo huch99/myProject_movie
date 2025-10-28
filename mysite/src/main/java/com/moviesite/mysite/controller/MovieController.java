@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.moviesite.mysite.model.dto.request.MovieRequest;
 import com.moviesite.mysite.model.dto.response.ApiResponse;
 import com.moviesite.mysite.model.dto.response.MovieResponse;
+import com.moviesite.mysite.model.dto.response.ReservationResponse;
 import com.moviesite.mysite.service.MovieService;
 
 import jakarta.validation.Valid;
@@ -49,9 +50,9 @@ public class MovieController {
     }
 
     // 특정 영화 상세 정보 조회
-    @GetMapping("/{id}")
-    public ResponseEntity<ApiResponse<MovieResponse>> getMovieById(@PathVariable Long id) {
-        MovieResponse movie = movieService.getMovieById(id);
+    @GetMapping("/{movieId}")
+    public ResponseEntity<ApiResponse<MovieResponse>> getMovieById(@PathVariable("movieId") Long movieId) {
+        MovieResponse movie = movieService.getMovieById(movieId);
         return ResponseEntity.ok(ApiResponse.success(movie));
     }
 
@@ -61,6 +62,12 @@ public class MovieController {
         List<MovieResponse> movies = movieService.searchMovies(keyword);
         return ResponseEntity.ok(ApiResponse.success(movies));
     }
+    
+//    @GetMapping("/{movieId}/reservations")
+//    public ResponseEntity<ApiResponse<MovieResponse>> getReservations (@PathVariable("movieId") Long movieId) {
+//    	MovieResponse movie = movieService.getMovieById(movieId);
+//        return ResponseEntity.ok(ApiResponse.success(movie));
+//    }
 
     // 영화 등록 (관리자 권한 필요)
     @PostMapping

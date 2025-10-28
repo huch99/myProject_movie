@@ -42,9 +42,9 @@ public class ReservationController {
     }
 
     // 특정 예매 상세 정보 조회
-    @GetMapping("/{id}")
-    public ResponseEntity<ApiResponse<ReservationResponse>> getReservationById(@PathVariable Long id) {
-        ReservationResponse reservation = reservationService.getReservationById(id);
+    @GetMapping("/{reservationId}")
+    public ResponseEntity<ApiResponse<ReservationResponse>> getReservationById(@PathVariable("reservationId") Long reservationId) {
+        ReservationResponse reservation = reservationService.getReservationById(reservationId);
         return ResponseEntity.ok(ApiResponse.success(reservation));
     }
 

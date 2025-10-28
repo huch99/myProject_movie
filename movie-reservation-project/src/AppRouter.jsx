@@ -5,7 +5,7 @@ import MainLayout from './components/layout/MainLayout';
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
-import MovieDetail from './components/movie/MovieDetail';
+import MovieDetailPage from './pages/MovieDetailPage';
 import MoviePage from './pages/MoviePage';
 import TheaterPage from './pages/TheaterPage';
 import TheaterDetailPage from './pages/TheaterDetailPage';
@@ -45,7 +45,7 @@ const AppRouter = () => {
           
           {/* 영화 관련 페이지 */}
           <Route path={ROUTE_PATHS.MOVIES} element={<MoviePage />} />
-          <Route path={ROUTE_PATHS.MOVIE_DETAIL(':movieId')} element={<MovieDetail />} />
+          <Route path={ROUTE_PATHS.MOVIE_DETAIL(':movieId')} element={<MovieDetailPage />} />
           
           {/* 극장 관련 페이지 */}
           <Route path={ROUTE_PATHS.THEATERS} element={<TheaterPage />} />

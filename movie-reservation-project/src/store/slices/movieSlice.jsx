@@ -61,8 +61,10 @@ export const fetchMovieDetails = createAsyncThunk(
     'movies/fetchMovieDetails',
     async (movieId, { rejectWithValue }) => {
         try {
+            console.log('try fetch');
             const response = await movieService.getMovieById(movieId);
-
+            console.log(response.data);
+            
             // 최근 본 영화에 추가
             movieService.addRecentViewedMovie(response.data);
 

@@ -72,10 +72,10 @@ const MovieInfo = ({ movie, isFavorite, onToggleFavorite }) => {
                 </InfoGrid>
 
                 <ActionButtons>
-                    <ReservationButton to={ROUTE_PATHS.RESERVATION(movie.id)}>
+                    <ReservationButton to={ROUTE_PATHS.RESERVATION(movie.movieId)}>
                         예매하기
                     </ReservationButton>
-                    <DetailButton to={ROUTE_PATHS.MOVIE_DETAIL(movie.id)}>
+                    <DetailButton to={ROUTE_PATHS.MOVIE_DETAIL(movie.movieId)}>
                         상세정보
                     </DetailButton>
                 </ActionButtons>

@@ -100,7 +100,7 @@ const apiService = {
   // 영화 관련 API
   movies: {
     getAll: (params) => api.get('/movies', { params }),
-    getById: (id) => api.get(`/movies/${id}`),
+    getById: (movieId) => api.get(`/movies/${movieId}`),
     getScreenings: (movieId, date) => api.get(`/movies/${movieId}/screenings`, { params: { date } }),
     getReviews: (movieId, page = 0, size = 10) => api.get(`/movies/${movieId}/reviews`, { params: { page, size } }),
     addReview: (movieId, reviewData) => api.post(`/movies/${movieId}/reviews`, reviewData),

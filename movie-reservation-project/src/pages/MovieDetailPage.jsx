@@ -6,10 +6,10 @@ import styled from 'styled-components';
 import { fetchMovieDetails } from '../store/slices/movieSlice';
 import { selectScreening, selectDate } from '../store/slices/reservationSlice';
 import MovieInfo from '../components/movie/MovieInfo';
-import MovieRating from '../components/movie/MovieRating';
-import MovieSchedule from '../components/movie/MovieSchedule';
-import ReviewSection from '../components/movie/ReviewSection';
-import RelatedMovies from '../components/movie/RelatedMovies';
+// import MovieRating from '../components/movie/MovieRating';
+// import MovieSchedule from '../components/movie/MovieSchedule';
+// import ReviewSection from '../components/movie/ReviewSection';
+// import RelatedMovies from '../components/movie/RelatedMovies';
 import Loading from '../components/common/Loading';
 import Button from '../components/common/Button';
 import useScrollToTop from '../hooks/useScrollToTop';
@@ -19,7 +19,7 @@ const MovieDetailPage = () => {
     // 스크롤을 맨 위로 이동
     useScrollToTop();
 
-    const { id } = useParams();
+    const { movieId } = useParams();
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
@@ -30,10 +30,11 @@ const MovieDetailPage = () => {
 
     // 페이지 로드 시 영화 상세 정보 가져오기
     useEffect(() => {
-        if (id) {
-            dispatch(fetchMovieDetails(id));
+        if (movieId) {
+            
+            dispatch(fetchMovieDetails(movieId));
         }
-    }, [dispatch, id]);
+    }, [dispatch, movieId]);
 
     // 상영 가능한 날짜 설정 (오늘부터 7일)
     useEffect(() => {
@@ -116,10 +117,10 @@ const MovieDetailPage = () => {
                             ))}
                         </GenreList>
 
-                        <MovieRating
+                        {/* <MovieRating
                             averageRating={currentMovie.averageRating}
                             totalRatings={currentMovie.totalRatings}
-                        />
+                        /> */}
                     </MovieInfoContainer>
                 </HeroContent>
             </HeroSection>
@@ -141,7 +142,7 @@ const MovieDetailPage = () => {
                 {/* 상영 시간표 */}
                 <Section>
                     <SectionTitle>상영 시간표</SectionTitle>
-                    <MovieSchedule
+                    {/* <MovieSchedule
                         movieId={currentMovie.id}
                         availableDates={availableDates}
                         selectedDate={selectedDate}
@@ -149,19 +150,19 @@ const MovieDetailPage = () => {
                         onDateSelect={handleDateSelect}
                         onTheaterSelect={handleTheaterSelect}
                         onScreeningSelect={handleReservationClick}
-                    />
+                    /> */}
                 </Section>
 
                 {/* 관람평 섹션 */}
                 <Section>
                     <SectionTitle>관람평</SectionTitle>
-                    <ReviewSection movieId={currentMovie.id} />
+                    {/* <ReviewSection movieId={currentMovie.id} /> */}
                 </Section>
 
                 {/* 관련 영화 추천 */}
                 <Section>
                     <SectionTitle>비슷한 영화</SectionTitle>
-                    <RelatedMovies genres={currentMovie.genres} currentMovieId={currentMovie.id} />
+                    {/* <RelatedMovies genres={currentMovie.genres} currentMovieId={currentMovie.id} /> */}
                 </Section>
             </ContentSection>
         </DetailPageContainer>
