@@ -43,12 +43,13 @@ const MovieDetailPage = () => {
     }, []);
 
     // 예매 버튼 클릭 핸들러
-    const handleReservationClick = (screening) => {
-        if (!screening) return;
+    const handleReservationClick = (movieId) => {
+        console.log('hadle 실행');
+        if (!movieId) return;
 
-        dispatch(selectScreening(screening));
-        dispatch(selectDate(selectedDate));
-        navigate(`/reservation/${id}`);
+        // dispatch(selectScreening(screening));
+        // dispatch(selectDate(selectedDate));
+        navigate(`/reservations/${movieId}`);
     };
 
     // 날짜 선택 핸들러
@@ -93,7 +94,7 @@ const MovieDetailPage = () => {
                     <PosterContainer>
                         <MoviePoster src={currentMovie.data.posterUrl} alt={currentMovie.data.title} />
                         {currentMovie.isScreening && (
-                            <ReservationButton onClick={() => handleReservationClick()}>
+                            <ReservationButton onClick={() => handleReservationClick(movieId)}>
                                 예매하기
                             </ReservationButton>
                         )}

@@ -2,7 +2,9 @@ package com.moviesite.mysite.controller;
 
 import com.moviesite.mysite.model.dto.request.ReservationRequest;
 import com.moviesite.mysite.model.dto.response.ApiResponse;
+import com.moviesite.mysite.model.dto.response.MovieResponse;
 import com.moviesite.mysite.model.dto.response.ReservationResponse;
+import com.moviesite.mysite.service.MovieService;
 import com.moviesite.mysite.service.ReservationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -21,6 +23,7 @@ import java.util.Map;
 public class ReservationController {
 
     private final ReservationService reservationService;
+    private final MovieService movieService;
 
     // 현재 로그인한 사용자의 모든 예매 내역 조회
     @GetMapping("/me")
@@ -46,6 +49,12 @@ public class ReservationController {
     public ResponseEntity<ApiResponse<ReservationResponse>> getReservationById(@PathVariable("reservationId") Long reservationId) {
         ReservationResponse reservation = reservationService.getReservationById(reservationId);
         return ResponseEntity.ok(ApiResponse.success(reservation));
+    }
+    
+    @GetMapping("/{movieId}")
+    public ResponseEntity<ApiResponse<MovieResponse>> getReservations (@PathVariable("movieId") Long movieId) {
+    	MovieResponse movie = movieService.getMovieById(movieId);
+        return ResponseEntity.ok(ApiResponse.success(movie));
     }
 
     // 예매 생성

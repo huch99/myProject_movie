@@ -17,7 +17,6 @@ import ROUTE_PATHS from '../../constants/routePaths';
 const MovieCard = ({ movie, showRating = true, showReservation = true }) => {
     const dispatch = useDispatch();
     const { isAuthenticated } = useSelector(state => state.auth);
-
     // 찜하기 토글 핸들러
     const handleFavoriteToggle = (e) => {
         e.preventDefault(); // 링크 이벤트 중지

@@ -16,6 +16,8 @@ const AudienceCounter = ({ audienceCount, onAudienceChange, maxTotal = 8 }) => {
     // 현재 선택된 총 관람객 수
     const totalCount = Object.values(audienceCount).reduce((sum, count) => sum + count, 0);
 
+    console.log('[AudienceCounter] onAudienceChange prop 값:', onAudienceChange);
+    console.log('[AudienceCounter] onAudienceChange prop 타입:', typeof onAudienceChange);
     // 관람객 수 증가 핸들러
     const handleIncrement = (type) => {
         // 최대 인원 체크
@@ -26,7 +28,16 @@ const AudienceCounter = ({ audienceCount, onAudienceChange, maxTotal = 8 }) => {
             [type]: (audienceCount[type] || 0) + 1
         };
 
-        onAudienceChange(newCount);
+        // onAudienceChange(newCount);
+        if (typeof onAudienceChange === 'function') {
+            onAudienceChange(newCount); // ✨ 이 부분이 29번째 줄일 가능성이 높습니다.
+        } else {
+            console.error(
+                "오류: onAudienceChange prop이 함수가 아닙니다! 상위 컴포넌트를 확인하세요.",
+                onAudienceChange
+            );
+            // 함수가 아닐 경우 여기서 return 하거나 다른 오류 처리 로직을 넣을 수 있습니다.
+        }
     };
 
     // 관람객 수 감소 핸들러

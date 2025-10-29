@@ -72,7 +72,7 @@ const MovieInfo = ({ movie, isFavorite, onToggleFavorite }) => {
                 </InfoGrid>
 
                 <ActionButtons>
-                    <ReservationButton to={ROUTE_PATHS.RESERVATION(movie.movieId)}>
+                    <ReservationButton to={ROUTE_PATHS.RESERVATION(movie.data.movieId)} onClick={() => console.log('실행' + `${ROUTE_PATHS.RESERVATION(movie.data.movieId)}`)}>
                         예매하기
                     </ReservationButton>
                     {/* <DetailButton to={ROUTE_PATHS.MOVIE_DETAIL(movie.movieId)}>

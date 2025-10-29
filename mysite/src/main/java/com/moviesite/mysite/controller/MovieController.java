@@ -62,12 +62,6 @@ public class MovieController {
         List<MovieResponse> movies = movieService.searchMovies(keyword);
         return ResponseEntity.ok(ApiResponse.success(movies));
     }
-    
-//    @GetMapping("/{movieId}/reservations")
-//    public ResponseEntity<ApiResponse<MovieResponse>> getReservations (@PathVariable("movieId") Long movieId) {
-//    	MovieResponse movie = movieService.getMovieById(movieId);
-//        return ResponseEntity.ok(ApiResponse.success(movie));
-//    }
 
     // 영화 등록 (관리자 권한 필요)
     @PostMapping

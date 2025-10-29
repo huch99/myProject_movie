@@ -72,16 +72,17 @@ const ReservationPage = () => {
     useEffect(() => {
         if (!isAuthenticated) {
             alert('로그인이 필요한 서비스입니다.');
-            navigate('/login', { state: { from: `/reservation/${movieId}` } });
+            navigate('/login', { state: { from: `/reservations/${movieId}` } });
         }
     }, [isAuthenticated, navigate, movieId]);
 
     // 상영 정보 확인
-    useEffect(() => {
-        if (!selectedScreening && currentMovie) {
-            navigate(`/movies/${movieId}`);
-        }
-    }, [selectedScreening, currentMovie, navigate, movieId]);
+    // useEffect(() => {
+    //     if (!selectedScreening && currentMovie) {
+    //         console.log('*****************');
+    //         navigate(`/movies/${movieId}`);
+    //     }
+    // }, [selectedScreening, currentMovie, navigate, movieId]);
 
     // 예매 정보 초기화 (페이지 언마운트 시)
     useEffect(() => {
@@ -100,8 +101,11 @@ const ReservationPage = () => {
     };
 
     // 관객 수 변경 핸들러
-    const handleAudienceCountChange = (type, count) => {
-        dispatch(updateAudienceCount({ type, count }));
+    const handleAudienceCountChange = ( newCount ) => {
+        Object.keys(newCount).forEach(type => {
+            dispatch(updateAudienceCount({ type: type, count: newCount[type] }));
+        });
+        // dispatch(updateAudienceCount({ type, count }));
     };
 
     // 좌석 선택 핸들러
@@ -184,7 +188,7 @@ const ReservationPage = () => {
         );
     }
 
-    if (!currentMovie || !selectedScreening) {
+    if (!currentMovie ) { //|| !selectedScreening
         return (
             <ErrorContainer>
                 <h2>예매 정보를 찾을 수 없습니다.</h2>
@@ -242,12 +246,12 @@ const ReservationPage = () => {
 
                             <SeatSection>
                                 <SectionTitle>좌석 선택</SectionTitle>
-                                <SeatSelector
+                                {/* <SeatSelector
                                     screeningId={selectedScreening.id}
                                     selectedSeats={selectedSeats}
                                     onSeatSelect={handleSeatSelect}
                                     maxSeats={Object.values(audienceCount).reduce((sum, count) => sum + count, 0)}
-                                />
+                                /> */}
                             </SeatSection>
                         </SeatSelectionContainer>
 
