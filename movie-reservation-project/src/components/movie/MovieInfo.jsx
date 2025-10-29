@@ -75,9 +75,9 @@ const MovieInfo = ({ movie, isFavorite, onToggleFavorite }) => {
                     <ReservationButton to={ROUTE_PATHS.RESERVATION(movie.movieId)}>
                         예매하기
                     </ReservationButton>
-                    <DetailButton to={ROUTE_PATHS.MOVIE_DETAIL(movie.movieId)}>
+                    {/* <DetailButton to={ROUTE_PATHS.MOVIE_DETAIL(movie.movieId)}>
                         상세정보
-                    </DetailButton>
+                    </DetailButton> */}
                 </ActionButtons>
             </InfoSection>
         </InfoContainer>

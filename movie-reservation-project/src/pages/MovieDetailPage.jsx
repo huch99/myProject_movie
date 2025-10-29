@@ -31,7 +31,7 @@ const MovieDetailPage = () => {
     // 페이지 로드 시 영화 상세 정보 가져오기
     useEffect(() => {
         if (movieId) {
-            
+            console.log(currentMovie);
             dispatch(fetchMovieDetails(movieId));
         }
     }, [dispatch, movieId]);
@@ -87,11 +87,11 @@ const MovieDetailPage = () => {
     return (
         <DetailPageContainer>
             {/* 영화 상세 정보 상단 섹션 */}
-            <HeroSection backgroundImage={currentMovie.backdropPath}>
+            <HeroSection backgroundImage={currentMovie.data.backgroundUrl}>
                 <Overlay />
                 <HeroContent>
                     <PosterContainer>
-                        <MoviePoster src={currentMovie.posterPath} alt={currentMovie.title} />
+                        <MoviePoster src={currentMovie.data.posterUrl} alt={currentMovie.data.title} />
                         {currentMovie.isScreening && (
                             <ReservationButton onClick={() => handleReservationClick()}>
                                 예매하기
@@ -100,19 +100,19 @@ const MovieDetailPage = () => {
                     </PosterContainer>
 
                     <MovieInfoContainer>
-                        <MovieTitle>{currentMovie.title}</MovieTitle>
-                        <MovieOriginalTitle>{currentMovie.originalTitle}</MovieOriginalTitle>
+                        <MovieTitle>{currentMovie.data.title}</MovieTitle>
+                        <MovieOriginalTitle>{currentMovie.data.titleEn}</MovieOriginalTitle>
 
                         <MovieMetaInfo>
-                            <span>{currentMovie.releaseDate} 개봉</span>
+                            <span>{currentMovie.data.releaseDate} 개봉</span>
                             <Divider>|</Divider>
-                            <span>{currentMovie.runtime}분</span>
+                            <span>{currentMovie.data.runningTime}분</span>
                             <Divider>|</Divider>
-                            <span>{currentMovie.rating}</span>
+                            <span>{currentMovie.data.rating}</span>
                         </MovieMetaInfo>
 
                         <GenreList>
-                            {currentMovie.genres?.map((genre) => (
+                            {currentMovie.data.genres?.map((genre) => (
                                 <GenreTag key={genre.id}>{genre.name}</GenreTag>
                             ))}
                         </GenreList>
